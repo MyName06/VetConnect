@@ -69,7 +69,6 @@ h1{font-weight:600;letter-spacing:-.01em}
 button.p,button.s,button.blue{border-radius:10px}
 button.p{font-weight:600}
 .logo{width:64px;height:64px}
-/* ===== Design system: tokens e refinamentos globais ===== */
 :root{--sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:24px;--sp-6:32px;--r-sm:8px;--r-md:12px;--r-lg:16px;--bd-h:#c5cfda;--ring:0 0 0 3px rgba(44,177,153,.28);--sh-1:0 1px 2px rgba(26,32,41,.05),0 1px 1px rgba(26,32,41,.03);--sh-2:0 2px 4px rgba(26,32,41,.05),0 10px 24px rgba(26,32,41,.08);--sh-3:0 16px 48px rgba(26,32,41,.22);--ease:cubic-bezier(.2,.7,.2,1);--dur:.18s}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bd-h:#4a5a6d;--sh-1:0 1px 2px rgba(0,0,0,.35);--sh-2:0 10px 28px rgba(0,0,0,.38);--sh-3:0 18px 56px rgba(0,0,0,.65)}}
 :root[data-theme="dark"]{--bd-h:#4a5a6d;--sh-1:0 1px 2px rgba(0,0,0,.35);--sh-2:0 10px 28px rgba(0,0,0,.38);--sh-3:0 18px 56px rgba(0,0,0,.65)}
@@ -148,7 +147,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .paper td.pd{padding:5px 7px;height:auto;font-size:11.5px;color:#1A2029;vertical-align:top}
 .paper td.pd input{height:22px;padding:2px 4px;border-bottom:1px solid #9aa7b5;font-size:11.5px}
 .paper .pfoot{margin-top:auto;text-align:center;font-size:10px;color:#5A6A7A}
-
 .tabs{display:flex;gap:6px;margin:4px 0 12px;border-bottom:1px solid var(--bd)}
 .tabs button{border:0;background:none;padding:8px 14px;font:inherit;color:var(--mu);border-bottom:2px solid transparent;cursor:pointer;margin-bottom:-1px}
 .tabs button.on{color:var(--tx);font-weight:600;border-bottom-color:var(--ac)}
@@ -193,9 +191,9 @@ button:disabled{opacity:.5;cursor:not-allowed}
 <main id="vLogin" class="center">
   <svg class="logo"><use href="#lg"/></svg>
   <h1>Sua clínica organizada em um só lugar.</h1>
-  <p class="sub">Entre com usuário e senha.</p>
+  <p class="sub">Entre com e-mail e senha.</p>
   <div class="card" style="max-width:320px;margin:16px auto;text-align:left">
-    <label style="display:block;font-size:13px;color:var(--mu)">Usuário<input id="lUser" autocomplete="username"></label>
+    <label style="display:block;font-size:13px;color:var(--mu)">E-mail<input id="lUser" type="email" autocomplete="username"></label>
     <label class="lb">Senha<input id="lPass" type="password" autocomplete="current-password"></label>
     <div class="err" id="lErr"></div>
     <button class="p" id="bLogin" style="width:100%;padding:12px;font-size:16px;margin-top:6px">Entrar</button>
@@ -208,8 +206,9 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <p class="sub">Crie o acesso do seu negócio.</p>
   <div class="card" style="max-width:340px;margin:16px auto;text-align:left">
     <label style="display:block;font-size:13px;color:var(--mu)">Nome do negócio<input id="rNeg" autocomplete="organization"></label>
-    <label class="lb">Usuário<input id="rUser" autocomplete="username" autocapitalize="none"></label>
-    <label class="lb">Senha<input id="rPass" type="password" autocomplete="new-password"></label>
+    <label class="lb">E-mail de acesso<input id="rEmail" type="email" autocomplete="email" autocapitalize="none"></label>
+    <label class="lb">Usuário (opcional)<input id="rUser" autocomplete="username" autocapitalize="none"></label>
+    <label class="lb">Senha (mín. 6 caracteres)<input id="rPass" type="password" autocomplete="new-password"></label>
     <div class="err" id="rErr"></div>
     <button class="blue" id="rGo" style="width:100%;padding:12px;font-size:16px;margin-top:6px">Continuar</button>
     <button class="s" id="rBack" style="width:100%;margin-top:8px">Voltar ao login</button>
@@ -221,8 +220,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <p class="sub">Esses dados definem a sua agenda.</p>
   <div class="card">
     <div id="sLocW"></div>
-    
-    
     <div id="sEd"></div>
     <div class="err" id="sErr"></div>
     <button class="blue" id="sGo" style="width:100%;padding:12px;font-size:16px;margin-top:6px">Concluir cadastro</button>
@@ -232,7 +229,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
 <main id="vHub" hidden>
   <div class="top">
     <div style="width:100%;text-align:center"><h1>Dashboard</h1><p class="sub" style="margin:0;font-weight:500" id="hubNeg"></p></div>
-    
   </div>
   <button class="fn" id="fnAgenda"><span><b>Agendamento de consultas</b><small>Agenda por profissional e data</small></span><span class="tag on">Disponível</span></button>
   <button class="fn" id="fnProc"><span><b>Procedimentos e preços</b><small>Preço, duração e tipo de cada procedimento</small></span><span class="tag on">Disponível</span></button>
@@ -265,7 +261,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
     <div class="leg" id="leg"></div>
     <div class="note" id="status">Carregando agenda…</div>
   </div>
-  
 </main>
 
 <main id="vCfg" hidden>
@@ -275,7 +270,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <div class="card"><b>Dados da empresa</b>
     <label class="lb">Nome do negócio<input id="cNeg" autocomplete="organization"></label>
     <label class="lb">Telefone da empresa<input id="cTel" type="tel" autocomplete="tel"></label>
-    
     <div id="cLocW"></div>
     <div class="err" id="cdErr"></div>
     <div class="btns"><button class="p" id="cdOk">Salvar dados</button></div>
@@ -301,7 +295,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
     <label class="lb">Modo de cores<select id="cTema"><option value="auto">Automático (seguir o aparelho)</option><option value="light">Claro</option><option value="dark">Escuro</option></select></label>
   </div>
   <div class="card"><b>Alterar senha</b>
-    <label class="lb">Senha atual<input id="cpA" type="password" autocomplete="current-password"></label>
     <label class="lb">Nova senha<input id="cpN" type="password" autocomplete="new-password"></label>
     <div class="err" id="cpErr"></div>
     <div class="btns"><button class="p" id="cpOk">Alterar senha</button></div>
@@ -372,7 +365,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <div id="tpA">
   <label class="lb">Nome do animal<input id="paN" autocomplete="off"></label>
   <label class="lb">Espécie<select id="paEsp"></select></label>
-  <label class="lb">Sexo<select id="paSx"><option value="">Selecione</option><option value="M">Macho</option><option value="F">Fêmea</option></select></label>
+  <label class="lb">Sexo<select id="paSx"><option value="">Selecione</option><option value="macho">Macho</option><option value="femea">Fêmea</option></select></label>
   <label class="lb" style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="paCs" style="width:auto;margin:0"> Castrado(a)</label>
   <label class="lb">Registro do animal<input id="paR" autocomplete="off"></label>
   <label class="lb">Data de nascimento<input id="paD" type="date"></label>
@@ -434,7 +427,6 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <label class="lb">Buscar paciente (CPF do tutor, registro do animal ou nome)<input id="pbq" placeholder="CPF, registro ou nome" autocomplete="off"></label>
   <label class="lb">Paciente<select id="pselp" size="4"></select></label>
   <div class="note" id="pinfo"></div>
-  
   <div class="err" id="derr"></div>
   <div class="btns"><button class="s" id="dcancel">Fechar</button><button class="p" id="dok">Agendar</button></div>
 </dialog>
@@ -459,942 +451,51 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <div class="btns"><button class="s" id="d3close">Fechar</button><button class="p" id="d3ok">Salvar</button></div>
 </dialog>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-let profs={},colProf=null,editPf=null;
-const toMin=h=>+h.slice(0,2)*60+ +h.slice(3);
-const toH=m=>String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
-let cfg={ini:"08:00",fim:"18:00",pIni:"",pFim:"",dias:[0,1,2,3,4,5,6],var:false,porDia:{}};
+const SB_URL="https://sgpvsdavzkwugozdsmhw.supabase.co";
+const SB_KEY="sb_publishable_SHKN4la5jcucQVoXtfExFA_8ZiLDmdn";
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+
 const $=id=>document.getElementById(id);
 const SOL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',LUA='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
 const temaAtual=()=>document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
 function iconeTema(){const d=temaAtual()==="dark";$("bTema").innerHTML=d?SOL:LUA;$("bTema").title=d?"Mudar para modo claro":"Mudar para modo escuro";$("bTema").setAttribute("aria-label",$("bTema").title)}
 $("bTema").onclick=()=>{const t=temaAtual()==="dark"?"light":"dark";document.documentElement.dataset.theme=t;try{localStorage.setItem("vc-tema",t)}catch(e){}iconeTema()};
 iconeTema();
+
+const toMin=h=>+h.slice(0,2)*60+ +h.slice(3);
+const toH=m=>String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
 const brl=v=>Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const fmtDur=m=>{const h=m/60;return (Number.isInteger(h)?h:h.toLocaleString("pt-BR",{maximumFractionDigits:2}))+" h"};
 const okH=h=>/^\d{2}:\d{2}$/.test(h||"");
 const DIAS=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
 const CFG0={ini:"08:00",fim:"18:00",pIni:"",pFim:"",dias:[0,1,2,3,4,5,6],var:false,porDia:{}};
 const escapar=s=>{const e=document.createElement("div");e.textContent=s==null?"":s;return e.innerHTML};
-const key=(p,d,h)=>p+"_"+d+"_"+h.replace(":","");
+const aE=s=>escapar(s).replace(/"/g,"&quot;");
+const norm=s=>(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+const cpfDig=s=>(s||"").replace(/\D/g,"");
+const cpfFmt=s=>cpfDig(s).slice(0,11).replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+function cpfOk(s){const d=cpfDig(s);if(d.length!==11||/^(\d)\1{10}$/.test(d))return false;for(const n of[9,10]){let t=0;for(let i=0;i<n;i++)t+=+d[i]*(n+1-i);if((t*10%11)%10!==+d[n])return false}return true}
 const nSlots=dur=>Math.max(1,Math.ceil((dur||30)/30));
-let marcados={},procs={},colRef=null,colProc=null,cfgRef=null,DB=null,uns=[],sess=null,usersLocal={},sel=null,occ={},cancelKey=null,editId=null;
+const fmtData=d=>{if(!d)return"";const[a,m,dd]=d.slice(0,10).split("-");return dd+"/"+m+"/"+a};
+const mData=s=>{const d=s.replace(/\D/g,"").slice(0,8);return d.length>4?d.slice(0,2)+"/"+d.slice(2,4)+"/"+d.slice(4):d.length>2?d.slice(0,2)+"/"+d.slice(2):d};
+const confirma=(bt,txt,fn)=>{if(bt.dataset.c)fn();else{bt.dataset.c=1;bt.textContent="Confirmar?";setTimeout(()=>{delete bt.dataset.c;bt.textContent=txt},3000)}};
+
+const FORMA_DB_TO_UI={pix:"Pix",dinheiro:"Dinheiro",debito:"Cartão de débito",credito:"Cartão de crédito",credito_parcelado:"Crédito parcelado"};
+const FORMA_UI_TO_DB={"Pix":"pix","Dinheiro":"dinheiro","Cartão de débito":"debito","Cartão de crédito":"credito","Crédito parcelado":"credito_parcelado"};
+
+let sess=null,pollTimer=null;
+let cfg={...CFG0,dias:CFG0.dias.slice()};
+let profs={},profHorarios={},esps={},procs={},tutores={},pacs={},exs={},vacs={},cobs={},pronts={},marcados={};
+let sel=null,occ={},cancelKey=null,editId=null,editPac=null,exPac="",colProf=null,editPf=null,pgCtx=null;
+let vcSel="",vcTmp={},vcT=null,vcPend=null,vcCfgSujo=false;
+let prKey="",prA=null,prT=null,prPend=null,prCSujo=false;
 
 const hoje=new Date();hoje.setMinutes(hoje.getMinutes()-hoje.getTimezoneOffset());
 $("date").value=hoje.toISOString().slice(0,10);
 
-$("prof").onchange=render;$("date").onchange=render;
-const fmtData=d=>{const[a,m,dd]=d.split("-");return dd+"/"+m+"/"+a};
-const nomeProf=id=>{const p=profs[id];return p?p.nome+(p.cargo?" – "+p.cargo:""):id};
-const procList=()=>Object.entries(procs).map(([id,p])=>({id,...p})).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt-BR"));
-const corOk=c=>/^#[0-9a-f]{6}$/i.test(c||"")?c:"";
-const corDe=a=>corOk((procs[a.procId]||{}).cor)||corOk(a.cor);
-const PALETA=["#0f766e","#2563eb","#9333ea","#db2777","#ea580c","#ca8a04","#16a34a","#dc2626"];
-
-function calcOcc(){
-  occ={};
-  for(const[k,a]of Object.entries(marcados)){
-    for(let i=0;i<(a.slots||1);i++)occ[key(a.prof,a.data,toH(toMin(a.hora)+30*i))]={k,a,start:i===0};
-  }
-}
-function render(){
-  calcOcc();
-  const p=$("prof").value,d=$("date").value,g=$("grid"),H=horarioDe(p);
-  g.innerHTML="";
-  if(!d)return;
-  if(!p){g.innerHTML='<div class="note">Nenhum profissional cadastrado. Cadastre em Configurações e preferências.</div>';return}
-  if(!H.dias.includes(new Date(d+"T12:00:00").getDay())){g.innerHTML='<div class="note">Sem atendimento deste profissional neste dia da semana.</div>';return}
-  const agora=new Date();
-  horasDia(d,H).forEach(h=>{
-    const o=occ[key(p,d,h)];
-    const passado=new Date(d+"T"+h+":00")<agora;
-    const b=document.createElement("button");
-    const cor=o?corDe(o.a):"";
-    b.className="slot "+(o?"busy"+(cor?" cor":""):passado?"past free":"free");
-    if(cor)b.style.setProperty("--c",cor);
-    b.innerHTML="<b>"+h+"</b><span>"+(o?(o.start?(o.a.presenca==="sim"?"✓ ":o.a.presenca==="nao"?"✗ ":(new Date(o.a.data+"T"+o.a.hora+":00")-30*60000<=agora?"⏳ ":""))+escapar(o.a.nome)+(o.a.proc?" · "+escapar(o.a.proc):""):"↳ "+escapar(o.a.nome)):passado?"Encerrado":"Livre")+"</span>";
-    if(o)b.onclick=()=>abrirCancelar(o.k,o.a);
-    else if(!passado)b.onclick=()=>abrirNovo(h);
-    g.appendChild(b);
-  });
-  $("leg").innerHTML=procList().filter(p=>corOk(p.cor)).map(p=>'<span><i class="dot" style="--c:'+p.cor+'"></i>'+escapar(p.nome)+'</span>').join("");
-}
-
-function atualizaFim(){
-  const pr=procs[$("pproc").value],dur=pr?pr.dur:30;
-  $("dend").textContent="Ocupa "+fmtDur(nSlots(dur)*30)+" · término previsto às "+toH(toMin(sel.h)+nSlots(dur)*30);
-}
-function infoAg(){const p=pacs[$("pselp").value];$("pinfo").textContent=p?"Tutor: "+(p.tutor||"—")+(p.tel?" · "+p.tel:""):($("pbq").value.trim()?"Nenhum paciente encontrado.":(pacList().length?"Selecione o paciente na lista.":"Nenhum paciente cadastrado. Cadastre em Pacientes antes de agendar."))}
-function listaAg(sel){
-  const q=$("pbq").value,ms=pacList().filter(p=>!p.obito&&pacMatch(p,q)),s=$("pselp");
-  s.innerHTML=ms.map(p=>'<option value="'+p.id+'">'+escapar(pacLabel(p))+"</option>").join("");
-  s.value=sel&&ms.some(p=>p.id===sel)?sel:(q.trim()&&ms.length===1?ms[0].id:"");
-  infoAg();
-}
-$("pbq").oninput=()=>listaAg($("pselp").value);
-$("pselp").onchange=infoAg;
-function abrirNovo(h){
-  sel={h};
-  $("dtitle").textContent=nomeProf($("prof").value)+" · "+fmtData($("date").value)+" às "+h;
-  $("pproc").innerHTML='<option value="">Sem procedimento (0,5 h)</option>'+procList().map(p=>`<option value="${p.id}">${escapar(p.nome)} · ${fmtDur(p.dur)} · ${brl(p.preco)}</option>`).join("");
-  $("pbq").value="";listaAg();$("derr").textContent="";
-  atualizaFim();$("dlg").showModal();$("pbq").focus();
-}
-$("pproc").onchange=atualizaFim;
-$("dcancel").onclick=()=>$("dlg").close();
-$("dok").onclick=async()=>{
-  const pid=$("pselp").value,pc=pacs[pid];
-  if(!pc){$("derr").textContent=pacList().length?"Selecione um paciente da lista.":"Cadastre o paciente em Pacientes antes de agendar.";return}
-  const nome=pc.nome,tel=pc.tel||"";
-  
-  
-  
-  const p=$("prof").value,d=$("date").value,pr=procs[$("pproc").value];
-  const H=horarioDe(p),dur=pr?pr.dur:30,n=nSlots(dur),sc=schedDia(d,H),HD=horasDia(d,H);
-  for(let i=0;i<n;i++){
-    const th=toH(toMin(sel.h)+30*i),o=occ[key(p,d,th)];
-    if(o){$("derr").textContent="Conflito: "+th+" já está ocupado por "+o.a.nome+" (consulta às "+o.a.hora+").";return}
-    if(!HD.includes(th)){$("derr").textContent=toMin(th)>=toMin(sc.fim)?"O procedimento terminaria depois do fechamento ("+sc.fim+"). Escolha um horário mais cedo ou ajuste o horário de funcionamento.":"O procedimento atravessaria o intervalo ("+sc.pIni+" às "+sc.pFim+"). Escolha outro horário ou ajuste o horário de funcionamento.";return}
-  }
-  const k=key(p,d,sel.h);
-  const dado={prof:p,data:d,hora:sel.h,nome,tel,pacId:pid,tutor:pc.tutor||"",criado:Date.now(),proc:pr?pr.nome:"Consulta",procId:pr?$("pproc").value:"",cor:pr?corOk(pr.cor):"",tipo:pr?pr.tipo||"":"Consulta",dur,preco:pr?pr.preco:0,slots:n};
-  try{
-    if(colRef){
-      const ref=colRef.doc(k),s=await ref.get();
-      if(s.exists){$("derr").textContent="Este horário acabou de ser ocupado. Escolha outro.";return}
-      await ref.set(dado);
-    }else{marcados[k]=dado;render()}
-    $("dlg").close();
-  }catch(e){$("derr").textContent="Não foi possível salvar. Tente novamente."}
-};
-
-let cobs={},colCob=null,pgCtx=null;
-const lerValor=s=>{const t=String(s).trim();const n=t.includes(",")?parseFloat(t.replace(/\./g,"").replace(",",".")):parseFloat(t);return isNaN(n)?NaN:Math.round(n*100)/100};
-const iniAg=a=>new Date(a.data+"T"+a.hora+":00");
-const pacDe=a=>pacs[a.pacId]||pacList().find(p=>p.nome===a.nome)||{};
-const profNome=id=>(profs[id]||{}).nome||id;
-const formaTxt=c=>c.forma==="Cr\u00e9dito parcelado"?"Cr\u00e9dito parcelado em "+c.parcelas+"x de "+brl(c.valor/c.parcelas):c.forma;
-async function gravaCob(id,c){if(colCob)await colCob.doc(id).set(c);else{cobs[id]=c;renderFin()}}
-async function setPres(k,a,v){
-  const n={...a,presenca:v};if(v)n.presencaEm=Date.now();else delete n.presencaEm;
-  try{if(colRef)await colRef.doc(k).set(n);else{marcados[k]=n;render()}}catch(e){}
-  $("dlg2").close();
-}
-function renderPres(k,a){
-  const D=$("d2pres");D.innerHTML="";$("d2del").style.display=a.presenca==="sim"?"none":"";const pb=$("d2pr"),lib=iniAg(a)-30*60000<=Date.now();pb.disabled=!lib;pb.title=lib?"":"O prontuário só fica disponível a partir de 30 minutos antes da consulta.";
-  const mk=(t,cls,fn)=>{const b=document.createElement("button");b.type="button";b.className=cls;b.textContent=t;b.onclick=fn;return b};
-  const linha=(txt,bold)=>{const d=document.createElement("div");d.style.cssText="margin-top:12px;padding-top:10px;border-top:1px solid var(--bd);"+(bold?"font-weight:600":"color:var(--mu);font-size:13px");d.textContent=txt;D.appendChild(d)};
-  const bts=(...b)=>{const r=document.createElement("div");r.className="btns";r.style.cssText="justify-content:flex-start;margin-top:8px";b.forEach(x=>r.appendChild(x));D.appendChild(r)};
-  if(a.presenca==="sim"){linha("\u2713 Paciente compareceu. A cobran\u00e7a foi gerada no Financeiro.");bts(mk("Ver no Financeiro","s",()=>{$("dlg2").close();$("fnFin").click()}))}
-  else if(a.presenca==="nao"){linha("\u2717 Paciente n\u00e3o compareceu.");bts(mk("Desfazer","s",()=>setPres(k,a,"")))}
-  else if(iniAg(a)-30*60000<=Date.now()){linha("O paciente esteve presente?",true);bts(mk("Sim, compareceu","p",()=>{$("dlg2").close();abrirPg({k,a})}),mk("N\u00e3o compareceu","s",()=>setPres(k,a,"nao")))}
-  else{const t=new Date(iniAg(a)-30*60000),z=x=>String(x).padStart(2,"0");linha("A confirmação de presença fica disponível a partir de "+z(t.getDate())+"/"+z(t.getMonth()+1)+"/"+t.getFullYear()+" às "+z(t.getHours())+":"+z(t.getMinutes())+" (30 minutos antes da consulta).")}
-}
-function updPg(){
-  const par=$("pgForma").value==="Cr\u00e9dito parcelado";$("pgParW").hidden=!par;
-  const v=lerValor($("pgVal").value),n=+$("pgPar").value;
-  $("pgParNote").textContent=par&&!isNaN(v)?n+"x de "+brl(v/n):"";
-}
-function abrirPg(ctx){
-  pgCtx=ctx;const c=ctx.edit?ctx.c:null,a=ctx.a,p=a?pacDe(a):{};
-  const i=c?c:{paciente:a.nome,tutor:p.tutor||a.tutor||"",cpf:p.cpf||"",tel:p.tel||a.tel||"",proc:a.proc||"Consulta",prof:profNome(a.prof),data:a.data,hora:a.hora};
-  $("pgTitle").textContent=c?"Editar cobran\u00e7a":"Gerar cobran\u00e7a";
-  $("pgResumo").innerHTML="<b>"+escapar(i.paciente)+"</b><br>Tutor: "+escapar(i.tutor||"\u2014")+"<br>CPF: "+escapar(i.cpf||"\u2014")+" \u00b7 Tel: "+escapar(i.tel||"\u2014")+"<br>"+escapar(i.proc)+" \u00b7 "+escapar(i.prof)+"<br>"+fmtData(i.data)+" \u00e0s "+i.hora;
-  $("pgVal").value=Number(c?c.valor:(a.preco||0)).toFixed(2).replace(".",",");
-  $("pgForma").value=c?c.forma:"";
-  $("pgPar").value=c&&c.parcelas>1?String(c.parcelas):"2";
-  $("pgPago").checked=c?c.status==="pago":true;
-  $("pgErr").textContent="";$("pgOk").textContent=c?"Salvar":"Gerar cobran\u00e7a";$("pgOk").disabled=false;
-  updPg();$("dlgPg").showModal();
-}
-$("pgForma").onchange=updPg;$("pgPar").onchange=updPg;$("pgVal").oninput=updPg;
-$("pgClose").onclick=()=>$("dlgPg").close();
-$("pgOk").onclick=async()=>{
-  const E=m=>{$("pgErr").textContent=m},v=lerValor($("pgVal").value),forma=$("pgForma").value;
-  if(isNaN(v)||v<0)return E("Informe um valor v\u00e1lido.");
-  if(!forma)return E("Escolha a forma de pagamento.");
-  const par=forma==="Cr\u00e9dito parcelado"?+$("pgPar").value:1,pago=$("pgPago").checked,ctx=pgCtx;
-  $("pgOk").disabled=true;
-  try{
-    if(ctx.edit){
-      const c={...ctx.c};c.valor=v;c.forma=forma;c.parcelas=par;
-      if(pago){if(c.status!=="pago")c.pagoEm=Date.now()}else delete c.pagoEm;
-      c.status=pago?"pago":"pendente";
-      await gravaCob(ctx.edit,c);
-    }else{
-      const{k,a}=ctx,p=pacDe(a);
-      const c={agKey:k,pacId:a.pacId||"",paciente:a.nome,tutor:p.tutor||a.tutor||"",cpf:p.cpf||"",tel:p.tel||a.tel||"",proc:a.proc||"Consulta",prof:profNome(a.prof),data:a.data,hora:a.hora,valor:v,forma,parcelas:par,status:pago?"pago":"pendente",criado:Date.now()};
-      if(pago)c.pagoEm=Date.now();
-      await gravaCob(k,c);
-      const n={...a,presenca:"sim",presencaEm:Date.now()};
-      if(colRef)await colRef.doc(k).set(n);else{marcados[k]=n;render()}
-    }
-    $("dlgPg").close();
-  }catch(e){E("N\u00e3o foi poss\u00edvel salvar. Tente novamente.")}
-  $("pgOk").disabled=false;
-};
-async function setPago(id,pago){const c={...cobs[id]};if(pago){c.status="pago";c.pagoEm=Date.now()}else{c.status="pendente";delete c.pagoEm}try{await gravaCob(id,c)}catch(e){}}
-async function delCob(id){
-  const c=cobs[id];
-  try{
-    if(colCob)await colCob.doc(id).delete();else{delete cobs[id];renderFin()}
-    const a=c&&marcados[c.agKey];
-    if(a){const n={...a,presenca:""};delete n.presencaEm;if(colRef)await colRef.doc(c.agKey).set(n);else{marcados[c.agKey]=n;render()}}
-  }catch(e){}
-}
-function renderFin(){
-  const q=norm($("finBusca").value.trim()),qd=q.replace(/\D/g,""),per=$("finPer").value,st=$("finSt").value;
-  const n=new Date(),p2=x=>String(x).padStart(2,"0"),hj=n.getFullYear()+"-"+p2(n.getMonth()+1)+"-"+p2(n.getDate());
-  const base=Object.entries(cobs).map(([id,c])=>({id,...c})).filter(c=>(per==="todos"||(per==="hoje"?c.data===hj:(c.data||"").startsWith(hj.slice(0,7))))&&(!q||norm(c.paciente).includes(q)||norm(c.tutor).includes(q)||(qd.length>=3&&String(c.cpf||"").replace(/\D/g,"").includes(qd))));
-  const soma=a=>a.reduce((t,c)=>t+(+c.valor||0),0),pend=base.filter(c=>c.status!=="pago"),pagas=base.filter(c=>c.status==="pago");
-  const card=(t,v,sub)=>'<div class="card" style="margin:0"><small style="color:var(--mu)">'+t+'</small><div style="font-size:20px;font-weight:600">'+brl(v)+'</div><small style="color:var(--mu)">'+sub+"</small></div>";
-  $("finRes").innerHTML=card("A receber",soma(pend),pend.length+" cobran\u00e7a(s)")+card("Recebido",soma(pagas),pagas.length+" cobran\u00e7a(s)")+card("Total cobrado",soma(base),base.length+" cobran\u00e7a(s)");
-  const arr=base.filter(c=>!st||(st==="pago")===(c.status==="pago")).sort((a,b)=>((b.data||"")+(b.hora||"")).localeCompare((a.data||"")+(a.hora||"")));
-  const l=$("finl");l.innerHTML=arr.length?"":'<div class="card">Nenhuma cobran\u00e7a encontrada. As cobran\u00e7as s\u00e3o geradas ao confirmar a presen\u00e7a do paciente na agenda.</div>';
-  arr.forEach(c=>{
-    const pg=c.status==="pago",d=document.createElement("div");d.className="card";
-    d.innerHTML="<div style='display:flex;justify-content:space-between;gap:10px;align-items:flex-start'><div><b>"+escapar(c.paciente)+"</b><small style='display:block;color:var(--mu)'>Tutor: "+escapar(c.tutor||"\u2014")+(c.cpf?" \u00b7 CPF "+escapar(c.cpf):"")+(c.tel?" \u00b7 "+escapar(c.tel):"")+"</small><small style='display:block;color:var(--mu)'>"+escapar(c.proc)+" \u00b7 "+escapar(c.prof)+" \u00b7 "+fmtData(c.data)+" "+escapar(c.hora)+"</small><small style='display:block;color:var(--mu)'>"+escapar(formaTxt(c))+(pg&&c.pagoEm?" \u00b7 pago em "+new Date(c.pagoEm).toLocaleDateString("pt-BR"):"")+"</small></div><div style='text-align:right'><b>"+brl(c.valor)+"</b><br><span class='tag"+(pg?" on":"")+"'>"+(pg?"Pago":"Pendente")+"</span></div></div><div class='row' style='gap:6px;margin-top:10px'><button class='"+(pg?"s":"p")+"'>"+(pg?"Voltar para pendente":"Marcar como pago")+"</button><button class='s'>Editar</button><button class='s'>Excluir</button></div>";
-    const[b1,b2,b3]=d.querySelectorAll("button");
-    b1.onclick=()=>setPago(c.id,!pg);
-    b2.onclick=()=>abrirPg({edit:c.id,c:{...cobs[c.id]}});
-    b3.onclick=()=>confirma(b3,"Excluir",()=>delCob(c.id));
-    l.appendChild(d);
-  });
-}
-$("fnFin").onclick=()=>{ir("vFin");renderFin()};
-["finBusca"].forEach(i=>$(i).oninput=renderFin);["finPer","finSt"].forEach(i=>$(i).onchange=renderFin);
-let pronts={},colPr=null,prKey="",prA=null,prT=null,prPend=null,prCSujo=false;
-const prCfg=()=>pronts._clinica||(pronts._clinica={});
-const pad4=n=>String(n).padStart(4,"0");
-const prNext=()=>Math.max(0,...Object.entries(pronts).filter(([k,x])=>k!=="_clinica"&&x&&x.salvo).map(([k,x])=>+x.num||0))+1;
-function prRec(){
-  const r=pronts[prKey]||(pronts[prKey]={});
-  r.f=r.f||{};r.rx=r.rx||[];while(r.rx.length<7)r.rx.push({});
-  if(r.num===undefined)r.num=prNext();
-  return r;
-}
-function prDef(){
-  const a=prA||{},p=pacs[a.pacId]||pacList().find(x=>x.nome===a.nome)||{},e=p.esp||"";
-  const vr=vacs[a.pacId]||{},ult=l=>[...(l||[])].reverse().find(x=>x&&Object.values(x).some(Boolean));
-  const vl=ult(vr.vac),ml=ult(vr.verm),pl=[...(vr.verm||[])].reverse().find(x=>x&&x.p);
-  const t=norm((a.proc||"")+" "+(a.tipo||""));
-  return{
-    data:a.data?fmtData(a.data):"",hora:a.hora||"",
-    mod:/vacin/.test(t)?"vac":/cirurg|internac/.test(t)?"cir":/retorno/.test(t)?"ret":/emerg/.test(t)?"eme":/consulta/.test(t)?"cons":"",
-    tutor:p.tutor||a.tutor||"",cpf:p.cpf||"",cpfAss:p.cpf||"",end:p.end||"",tel:p.tel||a.tel||"",email:p.email||"",
-    nome:p.nome||a.nome||"",esp:e==="Caninos"?"can":e==="Felinos"?"fel":e?"out":"",outra:e&&e!=="Caninos"&&e!=="Felinos"?e:"",
-    reg:p.reg||"",raca:p.raca||"",sexo:p.sexo==="M"||p.sexo==="F"?p.sexo:"",repro:p.cast?"cas":"",pel:p.pel||"",
-    nasc:p.nasc?fmtData(p.nasc)+(idadeDe(p.nasc)?" ("+idadeDe(p.nasc)+")":""):"",
-    peso:pl?pl.p:"",ultDose:vl?[vl.d,vl.v].filter(Boolean).join(" \u2014 "):"",vermif:ml?[ml.pr,ml.d].filter(Boolean).join(" \u2014 "):"",
-    vet:profNome(a.prof||"")
-  };
-}
-function prVal(k){const r=prRec(),d=prDef();d.ficha=pad4(r.num);return r.f[k]!==undefined?r.f[k]:(d[k]??"")}
-function prCur(path){const a=path.split(".");if(a[0]==="rx")return prRec().rx[+a[1]][a[2]]||"";return prVal(a[1])}
-function prPut(path,val){
-  const a=path.split("."),r=prRec();
-  if(a[0]==="rx")r.rx[+a[1]][a[2]]=val;else if(a[0]==="c"){prCfg()[a[1]]=val;prCSujo=true}else r.f[a[1]]=val;
-  if(a[0]!=="c")r.salvo=true;
-  prSalva();
-}
-function prSalva(){
-  if(prPend!==null&&prPend!==prKey)prGrava();
-  prPend=prKey;clearTimeout(prT);$("prSt").textContent="Salvando\u2026";prT=setTimeout(prGrava,700);
-}
-function prGrava(){
-  clearTimeout(prT);prT=null;const id=prPend;prPend=null;if(id===null)return;
-  const jobs=[];
-  if(colPr){
-    if(id&&pronts[id]&&pronts[id].salvo)jobs.push(colPr.doc(id).set(pronts[id]));
-    if(prCSujo&&pronts._clinica){prCSujo=false;jobs.push(colPr.doc("_clinica").set(pronts._clinica))}
-  }
-  Promise.all(jobs).then(()=>{if(prPend===null)$("prSt").textContent=colPr?"Altera\u00e7\u00f5es salvas.":"Altera\u00e7\u00f5es mantidas apenas nesta sess\u00e3o."}).catch(()=>{$("prSt").textContent="N\u00e3o foi poss\u00edvel salvar. Tente novamente."});
-}
-const SIS=[
- ["dig","Digest\u00f3rio",[["n","Normal"],["hip","Hiporexia/Anorexia"],["vom","V\u00f4mito"],["dia","Diarreia"],["mel","Melena/Hematoquezia"],["dis","Disfagia"]]],
- ["car","Cardiorrespirat\u00f3rio",[["n","Normal"],["tos","Tosse"],["esp","Espirros"],["sec","Secre\u00e7\u00e3o nasal"],["dsp","Dispneia"],["int","Intoler\u00e2ncia ao exerc\u00edcio"]]],
- ["gen","Geniturin\u00e1rio",[["n","Normal"],["pol","Poli\u00faria/Polidipsia"],["dis","Dis\u00faria"],["hem","Hemat\u00faria"],["sec","Secre\u00e7\u00e3o vaginal/prepucial"]]],
- ["neu","Neurol\u00f3gico / Locomotor",[["n","Normal"],["cla","Claudica\u00e7\u00e3o"],["dor","Dor \u00e0 manipula\u00e7\u00e3o"],["con","Convuls\u00f5es"],["ata","Ataxia"],["apa","Apatia"]]],
- ["teg","Tegumentar / Otol\u00f3gico / Oftalmol\u00f3gico",[["n","Normal"],["pru","Prurido"],["alo","Alopecia/Les\u00f5es"],["oti","Otite"],["sec","Secre\u00e7\u00e3o ocular"],["ble","Blefaroespasmo"]]]
-];
-function renderPr(){
-  const r=prRec(),d=prDef();d.ficha=pad4(r.num);
-  const v=k=>r.f[k]!==undefined?r.f[k]:(d[k]??""),vm=k=>{const x=v(k);return Array.isArray(x)?x:(x?[x]:[])};
-  const cf=prCfg(),cv=(k,def)=>cf[k]!==undefined?cf[k]:def;
-  const raw=(path,val,st)=>'<input data-k="'+path+'" value="'+aE(val)+'" placeholder=" "'+(st?' style="'+st+'"':"")+">";
-  const RI=(k,st)=>raw("f."+k,v(k),st);
-  const pfi=(l,path,val)=>'<div class="pf"><small>'+l+"</small>"+raw(path,val)+"</div>";
-  const F=(l,k)=>pfi(l,"f."+k,v(k));
-  const LG=(l,h)=>'<div class="pf"><small>'+l+"</small>"+h+"</div>";
-  const ckb=(path,val,label,on,multi)=>'<span class="ck" data-ck="'+path+"|"+val+'" data-multi="'+(multi?1:0)+'"><span class="bx'+(on?" on":"")+'"></span>'+label+"</span>";
-  const grp=(path,opts,cur,multi,vert)=>'<div class="cks'+(vert?" v":"")+'">'+opts.map(([val,label])=>ckb(path,val,label,multi?(Array.isArray(cur)?cur:[]).includes(val):cur===val,multi)).join("")+"</div>";
-  const G=(k,opts,multi,vert)=>grp("f."+k,opts,multi?vm(k):v(k),multi,vert);
-  const TA=(l,k,h)=>'<div class="pf" style="border:1px solid #b8c2cc;border-radius:4px;padding:5px 7px;height:'+h+'px"><small>'+l+'</small><textarea data-k="f.'+k+'" placeholder=" " style="font-size:12px;height:'+(h-26)+'px">'+escapar(v(k))+"</textarea></div>";
-  const S=t=>'<div class="sec">'+t+"</div>";
-  const BX=(t,h)=>'<div style="border:1px solid #b8c2cc;border-radius:4px;padding:6px 8px;display:flex;flex-direction:column;gap:6px"><div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:#1d7f6e">'+t+"</div>"+h+"</div>";
-  const foot=n=>'<div class="pfoot">Prontu\u00e1rio de Atendimento Veterin\u00e1rio \u2014 Documento Cl\u00ednico \u00b7 P\u00e1gina '+n+" de 4</div>";
-  const TI=k=>raw("f."+k,v(k));
-  const sisRows=SIS.map(([k,nm,op])=>'<tr><td class="pd" style="font-weight:600">'+nm+'</td><td class="pd">'+G("sis_"+k,op,true)+'<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;margin-top:3px">Obs.: '+RI("obs_"+k)+"</div></td></tr>").join("");
-  const rxRows=Array.from({length:7},(_,i)=>{const g=x=>raw("rx."+i+"."+x,r.rx[i][x]||"");return "<tr><td>"+g("f")+"</td><td>"+g("d")+"</td><td>"+g("v")+"</td><td>"+g("q")+"</td><td>"+g("t")+'</td><td class="pd">'+grp("rx."+i+".l",[["amb","Ambulatorial"],["casa","Casa"]],r.rx[i].l||"",false,true)+"</td></tr>"}).join("");
-  const p1=`<div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #2CB199;padding-bottom:6px"><h2 style="text-align:left;font-size:18px">PRONTU\u00c1RIO DE ATENDIMENTO VETERIN\u00c1RIO</h2><div style="font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:6px">FICHA N\u00ba <input data-k="f.ficha" value="${aE(v("ficha"))}" placeholder=" " style="width:70px;border-bottom:1px solid #9aa7b5"></div></div>
-<div class="pg" style="grid-template-columns:2fr 1.2fr 1.2fr">${pfi("Estabelecimento","c.nome",cv("nome",sess&&sess.neg||""))}${pfi("CNPJ","c.cnpj",cv("cnpj",""))}${pfi("Telefone","c.tel",cv("tel",sess&&sess.info&&sess.info.tel||""))}</div>
-<div class="pg" style="grid-template-columns:1fr .6fr 3fr">${F("Data","data")}${F("Hora","hora")}${LG("Modalidade",G("mod",[["cons","Consulta Cl\u00ednica"],["ret","Retorno"],["eme","Emerg\u00eancia"],["vac","Vacina\u00e7\u00e3o"],["cir","Cirurgia/Interna\u00e7\u00e3o"]],false))}</div>
-${S("1. Identifica\u00e7\u00e3o do respons\u00e1vel (tutor)")}
-<div class="pg" style="grid-template-columns:1.4fr 1fr">${F("Nome completo","tutor")}${F("CPF / RG","cpf")}</div>
-<div class="pg" style="grid-template-columns:1.4fr 1fr">${F("Endere\u00e7o completo (rua, n\u00ba, bairro, cidade/UF, CEP)","end")}${LG("Telefone / WhatsApp e e-mail",'<div style="display:flex;gap:8px">'+RI("tel")+RI("email")+"</div>")}</div>
-${S("2. Identifica\u00e7\u00e3o do paciente")}
-<div class="pg" style="grid-template-columns:1fr 1.2fr 1fr">
-${F("Nome do animal","nome")}${LG("Esp\u00e9cie",G("esp",[["can","Canina"],["fel","Felina"],["out","Outra:"]],false)+RI("outra"))}${F("N\u00ba do microchip / registro","reg")}
-${F("Ra\u00e7a","raca")}${LG("Sexo",G("sexo",[["M","Macho"],["F","F\u00eamea"]],false))}${LG("Condi\u00e7\u00e3o reprodutiva",G("repro",[["int","Inteiro(a)"],["cas","Castrado(a)"]],false))}
-${F("Pelagem / cor / sinais particulares","pel")}${F("Idade / data de nascimento","nasc")}${LG("Peso atual (kg) / escore corporal (1\u20139)",'<div style="display:flex;gap:8px">'+RI("peso")+RI("escore")+"</div>")}
-</div>
-${S("3. Hist\u00f3rico sanit\u00e1rio e manejo")}
-<div class="pg" style="grid-template-columns:1fr 1fr 1fr">
-${BX("Profilaxia",LG("Vacina\u00e7\u00e3o atualizada",G("vacOk",[["s","Sim"],["n","N\u00e3o"],["x","N\u00e3o informado"]],false))+F("\u00daltima dose / protocolo","ultDose")+F("Vermifuga\u00e7\u00e3o e ectoparasiticidas \u2014 produto / data da \u00faltima aplica\u00e7\u00e3o","vermif"))}
-${BX("Nutri\u00e7\u00e3o e ambiente",LG("Alimenta\u00e7\u00e3o principal",G("alim",[["seca","Ra\u00e7\u00e3o seca"],["umida","\u00damida"],["nat","Natural"],["mista","Mista"]],false))+F("Marca / frequ\u00eancia / apetite","alimMarca")+LG("Ambiente e contactantes",G("amb",[["dom","Domiciliado"],["rua","Acesso \u00e0 rua"],["rur","Rural"]],true))+F("Outros animais na resid\u00eancia","outros"))}
-${BX("Antecedentes cl\u00ednicos",TA("Alergias conhecidas (f\u00e1rmacos / alimentos)","alerg",120)+TA("Doen\u00e7as pr\u00e9vias, cirurgias e medica\u00e7\u00f5es em uso","doencas",250))}
-</div>${foot(1)}`;
-  const p2=`${S("4. Anamnese e queixa principal")}
-${TA("Queixa principal (motivo do atendimento e dura\u00e7\u00e3o)","queixa",120)}
-<div style="font-size:11px;font-weight:600;color:#5A6A7A;text-transform:uppercase;letter-spacing:.04em">Anamnese dirigida por sistemas</div>
-<table><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead><tr><th>Sistema</th><th>Altera\u00e7\u00f5es relatadas pelo tutor (in\u00edcio, evolu\u00e7\u00e3o, frequ\u00eancia e intensidade)</th></tr></thead><tbody>${sisRows}</tbody></table>
-${S("5. Exame f\u00edsico geral e par\u00e2metros vitais")}
-<table><colgroup><col style="width:22%"><col style="width:18%"><col style="width:22%"><col style="width:38%"></colgroup><thead><tr><th>Par\u00e2metro</th><th>Valor aferido</th><th>Par\u00e2metro</th><th>Avalia\u00e7\u00e3o cl\u00ednica</th></tr></thead><tbody>
-<tr><td class="pd">Temperatura retal (\u00b0C)</td><td>${TI("temp")}</td><td class="pd">Estado mental / n\u00edvel de consci\u00eancia</td><td class="pd">${G("mental",[["al","Alerta"],["ap","Ap\u00e1tico"],["es","Estupor/Coma"]],false)}</td></tr>
-<tr><td class="pd">Frequ\u00eancia card\u00edaca (bpm)</td><td>${TI("fc")}</td><td class="pd">Hidrata\u00e7\u00e3o (turgor cut\u00e2neo)</td><td class="pd">${G("hid",[["n","Normohidratado"],["d","Desidratado"]],false)}<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;margin-top:3px">Desidrata\u00e7\u00e3o (%): ${RI("desid","width:60px")}</div></td></tr>
-<tr><td class="pd">Frequ\u00eancia respirat\u00f3ria (mpm)</td><td>${TI("fr")}</td><td class="pd">Mucosas aparentes</td><td class="pd">${G("muc",[["nc","Normocoradas"],["pa","P\u00e1lidas"],["ic","Ict\u00e9ricas"],["ci","Cian\u00f3ticas"]],true)}</td></tr>
-<tr><td class="pd">TPC (segundos)</td><td>${TI("tpc")}</td><td class="pd">Linfonodos palp\u00e1veis</td><td class="pd">${G("linfo",[["n","Normais"],["r","Reativos"]],false)}<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;margin-top:3px">Quais: ${RI("linfoq")}</div></td></tr>
-<tr><td class="pd">Press\u00e3o arterial sist\u00f3lica (mmHg)</td><td>${TI("pa")}</td><td class="pd">Pulso femoral</td><td class="pd">${G("pulso",[["f","Forte/Sincr\u00f4nico"],["fr","Fraco"]],false)}</td></tr>
-</tbody></table>
-${TA("Achados do exame f\u00edsico espec\u00edfico (palpa\u00e7\u00e3o abdominal, ausculta cardiopulmonar, cavidade oral, pele, olhos e ouvidos)","achados",190)}${foot(2)}`;
-  const p3=`${S("6. Diagn\u00f3stico e exames complementares")}
-<div class="pg" style="grid-template-columns:1fr 1fr">${TA("Suspeitas diagn\u00f3sticas / diagn\u00f3stico diferencial","susp",150)}${TA("Diagn\u00f3stico definitivo e progn\u00f3stico","diag",150)}</div>
-<div class="pg" style="grid-template-columns:1fr 1fr">${LG("Exames solicitados / realizados",G("exm",[["hemo","Hemograma completo"],["bio","Bioqu\u00edmico (renal / hep\u00e1tico)"],["uri","Urin\u00e1lise / coproparasitol\u00f3gico"],["us","Ultrassonografia abdominal"],["rx","Radiografia"],["cit","Citologia / histopatol\u00f3gico"],["sor","Teste r\u00e1pido / sorologia / PCR"],["out","Outros"]],true,true)+F("Radiografia \u2014 regi\u00e3o","radReg")+F("Outros exames","exOutros"))}${TA("Principais resultados e laudos","laudos",340)}</div>
-${S("7. Conduta terap\u00eautica, procedimentos e prescri\u00e7\u00e3o")}
-<table><colgroup><col style="width:28%"><col style="width:15%"><col style="width:9%"><col style="width:14%"><col style="width:16%"><col style="width:18%"></colgroup><thead><tr><th>F\u00e1rmaco / princ\u00edpio ativo</th><th>Dose / conc.</th><th>Via</th><th>Frequ\u00eancia</th><th>Dura\u00e7\u00e3o / uso</th><th>Local</th></tr></thead><tbody>${rxRows}</tbody></table>${foot(3)}`;
-  const p4=`${TA("Procedimentos realizados no atendimento (fluidoterapia, curativos, coletas, imobiliza\u00e7\u00f5es)","proc",200)}
-${S("8. Orienta\u00e7\u00f5es gerais, retorno e encerramento")}
-<div class="pg" style="grid-template-columns:1.4fr 1fr">${TA("Orienta\u00e7\u00f5es ao tutor e sinais de alerta","orient",330)}<div style="display:flex;flex-direction:column;gap:8px">${LG("Desfecho",G("desf",[["alta","Alta cl\u00ednica com prescri\u00e7\u00e3o"],["int","Encaminhamento para interna\u00e7\u00e3o"],["esp","Encaminhamento para especialista"],["obi","\u00d3bito / eutan\u00e1sia (termo anexo)"]],false,true))}${F("Data de retorno","retorno")}</div></div>
-<div style="border:1px solid #b8c2cc;border-radius:4px;padding:8px 10px;font-size:11px;line-height:1.45;color:#3a4654"><b>Declara\u00e7\u00e3o de ci\u00eancia:</b> Declaro que as informa\u00e7\u00f5es prestadas neste prontu\u00e1rio s\u00e3o ver\u00eddicas e que fui devidamente esclarecido(a) pelo(a) m\u00e9dico(a) veterin\u00e1rio(a) respons\u00e1vel sobre o estado cl\u00ednico do paciente, as suspeitas diagn\u00f3sticas, os exames recomendados, o plano terap\u00eautico proposto e os eventuais riscos envolvidos.</div>
-<div class="pg" style="grid-template-columns:1fr 1fr;gap:40px;margin-top:24px"><div><div style="height:46px"></div><div style="border-top:1px solid #1A2029;padding-top:4px;text-align:center;font-size:11px">Assinatura do tutor / respons\u00e1vel legal</div>${F("CPF","cpfAss")}</div><div><div style="height:46px"></div><div style="border-top:1px solid #1A2029;padding-top:4px;text-align:center;font-size:11px">M\u00e9dico(a) veterin\u00e1rio(a) respons\u00e1vel</div>${F("Nome","vet")}${F("CRMV-UF n\u00ba","crmv")}</div></div>${foot(4)}`;
-  $("prPages").innerHTML=[p1,p2,p3,p4].map(h=>'<div class="paper">'+h+"</div>").join("");
-  $("prTit").textContent="Prontu\u00e1rio \u2014 "+(prA.nome||"")+" \u00b7 "+fmtData(prA.data)+" "+prA.hora;
-}
-$("prPages").addEventListener("input",e=>{
-  const t=e.target,k=t.dataset&&t.dataset.k;if(!k)return;
-  if(k==="f.retorno"||k==="f.data")t.value=mData(t.value);
-  prPut(k,t.value);
-});
-$("prPages").addEventListener("click",e=>{
-  const c=e.target.closest("[data-ck]");if(!c)return;
-  const[g,val]=c.dataset.ck.split("|"),multi=c.dataset.multi==="1",cur=prCur(g);
-  let nv;
-  if(multi){const a=Array.isArray(cur)?cur.slice():[],i=a.indexOf(val);if(i>=0)a.splice(i,1);else a.push(val);nv=a}
-  else nv=cur===val?"":val;
-  prPut(g,nv);
-  document.querySelectorAll('#prPages [data-ck^="'+g+'|"]').forEach(x=>{const w=x.dataset.ck.split("|")[1];x.querySelector(".bx").classList.toggle("on",multi?nv.includes(w):nv===w)});
-});
-function abrirPr(k){
-  const a=marcados[k];if(!a)return;if(iniAg(a)-30*60000>Date.now())return;
-  prKey=k;prA=a;$("prSt").textContent="";$("prMsg").textContent="";
-  ir("vPront");renderPr();
-}
-function renderPrL(){
-  const q=norm($("prBusca").value.trim()),qd=q.replace(/\D/g,""),per=$("prPer").value;
-  const n=new Date(),z=x=>String(x).padStart(2,"0"),hj=n.getFullYear()+"-"+z(n.getMonth()+1)+"-"+z(n.getDate());
-  const arr=Object.entries(marcados).map(([k,a])=>({k,a})).filter(({a})=>{
-    if(per==="hoje"&&a.data!==hj)return false;
-    if(per==="mes"&&!(a.data||"").startsWith(hj.slice(0,7)))return false;
-    if(!q)return true;
-    const pc=pacDe(a);
-    return norm(a.nome).includes(q)||norm(a.tutor||pc.tutor||"").includes(q)||(qd.length>=3&&String(pc.cpf||"").replace(/\D/g,"").includes(qd));
-  }).sort((x,y)=>(y.a.data+y.a.hora).localeCompare(x.a.data+x.a.hora));
-  const l=$("prLista");l.innerHTML=arr.length?"":'<div class="card">Nenhum atendimento encontrado neste per\u00edodo. Os prontu\u00e1rios s\u00e3o criados a partir dos agendamentos.</div>';
-  arr.forEach(({k,a})=>{
-    const feito=!!(pronts[k]&&pronts[k].salvo),c=document.createElement("div");c.className="card pi";
-    c.innerHTML="<div><b>"+escapar(a.nome)+"</b><small>"+fmtData(a.data)+" "+escapar(a.hora)+" \u00b7 "+escapar(a.proc||"Consulta")+" \u00b7 "+escapar(profNome(a.prof))+"</small><small>Tutor: "+escapar(a.tutor||pacDe(a).tutor||"\u2014")+"</small></div><div class='row' style='gap:8px;align-items:center'><span class='tag"+(feito?" on":"")+"'>"+(feito?"Preenchido":"Sem prontu\u00e1rio")+"</span><button class='p'>"+(feito?"Abrir":"Preencher")+"</button></div>";
-    if(iniAg(a)-30*60000>Date.now()){const t=new Date(iniAg(a)-30*60000),z2=x=>String(x).padStart(2,"0"),bt=c.querySelector("button"),tg=c.querySelector(".tag");bt.disabled=true;bt.textContent="Indisponível";tg.className="tag";tg.textContent="Libera em "+z2(t.getDate())+"/"+z2(t.getMonth()+1)+" às "+z2(t.getHours())+":"+z2(t.getMinutes())}
-    c.querySelector("button").onclick=()=>abrirPr(k);
-    l.appendChild(c);
-  });
-}
-$("fnPr").onclick=()=>{ir("vPrL");renderPrL()};
-$("prBusca").oninput=renderPrL;$("prPer").onchange=renderPrL;
-$("prBack").onclick=()=>{ir("vPrL");renderPrL()};
-$("d2pr").onclick=()=>{const k=cancelKey;$("dlg2").close();if(k)abrirPr(k)};
-$("prPdf").onclick=async()=>{
-  const bt=$("prPdf"),M=$("prMsg"),pages=[...document.querySelectorAll("#prPages .paper")];M.textContent="";bt.disabled=true;
-  try{
-    if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
-    const dl=window.claude?await window.claude.use("downloads"):null;
-    if(!dl){try{window.print()}catch(e){M.textContent="N\u00e3o foi poss\u00edvel abrir a impress\u00e3o neste ambiente."}return}
-    M.textContent="Gerando PDF\u2026";
-    if(!window.html2canvas)await libJs("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
-    if(!(window.jspdf&&window.jspdf.jsPDF))await libJs("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
-    const doc=new window.jspdf.jsPDF({unit:"mm",format:"a4",orientation:"portrait",compress:true});
-    for(let i=0;i<pages.length;i++){
-      const P=pages[i];P.classList.add("pdfmode");
-      try{
-        const cv=await window.html2canvas(P,{scale:2,backgroundColor:"#ffffff",width:794,height:1123,windowWidth:794,scrollX:-window.scrollX,scrollY:-window.scrollY,onclone:d=>{const w=d.querySelector("#vPront .vcWrap");if(w)w.style.overflow="visible";d.querySelectorAll("#prPages .paper").forEach(x=>x.style.margin="0")}});
-        if(i)doc.addPage();
-        doc.addImage(cv.toDataURL("image/jpeg",0.95),"JPEG",0,0,210,297,undefined,"FAST");
-      }finally{P.classList.remove("pdfmode")}
-    }
-    const nm=norm(prVal("nome")).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-    await dl.save({filename:"prontuario"+(nm?"-"+nm:"")+".pdf",data:doc.output("arraybuffer")});
-    M.textContent="";
-  }catch(e){M.textContent=e&&e.code==="declined"?"":"N\u00e3o foi poss\u00edvel gerar o PDF. Tente novamente."}
-  finally{bt.disabled=false}
-};
-function abrirCancelar(k,a){
-  cancelKey=k;
-  const fim=toH(toMin(a.hora)+(a.slots||1)*30);
-  $("d2info").innerHTML="<b>"+escapar(a.nome)+"</b><br>"+nomeProf(a.prof)+"<br>"+fmtData(a.data)+" das "+a.hora+" às "+fim+"<br>"+escapar(a.proc||"Consulta")+(a.tipo?" ("+escapar(a.tipo)+")":"")+" · "+brl(a.preco)+(a.tel?"<br>Tel: "+escapar(a.tel):"");
-  renderPres(k,a);$("dlg2").showModal();
-}
-$("d2close").onclick=()=>$("dlg2").close();
-$("d2del").onclick=async()=>{
-  try{if(colRef)await colRef.doc(cancelKey).delete();else{delete marcados[cancelKey];render()}}catch(e){}
-  $("dlg2").close();
-};
-
-function renderProcs(){
-  const l=$("plist"),arr=procList();
-  l.innerHTML=arr.length?"":'<div class="card">Nenhum procedimento cadastrado. Toque em “+ Novo procedimento”.</div>';
-  arr.forEach(p=>{
-    const c=document.createElement("div");c.className="card pi";
-    c.innerHTML="<div><b>"+(corOk(p.cor)?'<i class="dot" style="--c:'+p.cor+'"></i>':"")+escapar(p.nome)+"</b><small>"+escapar(p.tipo||"Sem tipo")+" · "+fmtDur(p.dur)+" · "+brl(p.preco)+"</small></div><div class='row' style='gap:6px'><button class='s'>Editar</button><button class='s'>Excluir</button></div>";
-    const[be,bd]=c.querySelectorAll("button");
-    be.onclick=()=>abrirProc(p.id);
-    bd.onclick=()=>{
-      if(bd.dataset.c){delProc(p.id)}
-      else{bd.dataset.c=1;bd.textContent="Confirmar?";setTimeout(()=>{delete bd.dataset.c;bd.textContent="Excluir"},3000)}
-    };
-    l.appendChild(c);
-  });
-}
-function abrirProc(id){
-  editId=id||null;const p=id?procs[id]:{};
-  $("d3title").textContent=id?"Editar procedimento":"Novo procedimento";
-  $("fNome").value=p.nome||"";$("fTipo").value=p.tipo||"";$("fDur").value=p.dur?p.dur/60:1;$("fPreco").value=p.preco!=null?p.preco:"";$("fCor").value=corOk(p.cor)||PALETA[procList().length%PALETA.length];$("d3err").textContent="";
-  $("dlg3").showModal();
-}
-$("bNewProc").onclick=()=>abrirProc();
-$("d3close").onclick=()=>$("dlg3").close();
-$("d3ok").onclick=async()=>{
-  const nome=$("fNome").value.trim(),horas=parseFloat($("fDur").value),preco=parseFloat($("fPreco").value),dur=Math.round(horas*2)*30;
-  if(!nome){$("d3err").textContent="Informe o nome.";return}
-  if(!(horas>=0.5)){$("d3err").textContent="Informe a duração em horas (mínimo 0,5; use meias horas: 1, 1,5, 2…).";return}
-  if(!(preco>=0)){$("d3err").textContent="Informe o preço.";return}
-  const dado={nome,tipo:$("fTipo").value.trim(),dur,preco:Math.round(preco*100)/100,cor:$("fCor").value};
-  const id=editId||"p"+Date.now();
-  try{
-    if(colProc)await colProc.doc(id).set(dado);else{procs[id]=dado;renderProcs()}
-    $("dlg3").close();
-  }catch(e){$("d3err").textContent="Não foi possível salvar. Tente novamente."}
-};
-async function delProc(id){
-  try{if(colProc)await colProc.doc(id).delete();else{delete procs[id];renderProcs()}}catch(e){}
-}
-
-let pacs={},exs={},colPac=null,colEx=null,ASSETS=null,editPac=null,exPac="";
-const pacList=()=>Object.entries(pacs).map(([id,p])=>({id,...p})).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt-BR"));
-const exList=()=>Object.entries(exs).map(([id,x])=>({id,...x})).sort((a,b)=>(b.data||"").localeCompare(a.data||""));
-const confirma=(bt,txt,fn)=>{if(bt.dataset.c)fn();else{bt.dataset.c=1;bt.textContent="Confirmar?";setTimeout(()=>{delete bt.dataset.c;bt.textContent=txt},3000)}};
-function renderPac(){
-  const q=$("pbusca").value.trim().toLowerCase(),l=$("pacl"),arr=pacList().filter(p=>(!!p.obito===($("pFil").value==="obito"))&&(!q||(p.nome||"").toLowerCase().includes(q)||(p.tel||"").includes(q)||(p.reg||"").toLowerCase().includes(q)||(p.esp||"").toLowerCase().includes(q)||(p.tutor||"").toLowerCase().includes(q)||(p.cpf||"").includes(q)));
-  l.innerHTML=arr.length?"":'<div class="card">'+($("pFil").value==="obito"?"Nenhum óbito registrado.":"Nenhum paciente encontrado. Toque em “+ Novo paciente”.")+"</div>";
-  arr.forEach(p=>{
-    const n=exList().filter(x=>x.pacId===p.id).length;
-    const c=document.createElement("div");c.className="card pi";
-    c.innerHTML="<div><b>"+escapar(p.nome)+"</b>"+(p.obito?" <span class='tag'>Óbito</span>":"")+"<small>"+(p.esp?escapar(p.esp)+" · ":"")+"Registro: "+escapar(p.reg||"—")+(p.nasc?" · Nasc.: "+fmtData(p.nasc):"")+"</small><small>Tutor: "+escapar(p.tutor||"—")+(p.cpf?" · CPF "+escapar(p.cpf):"")+(p.tel?" · "+escapar(p.tel):"")+"</small>"+(()=>{const t=[p.sexo==="M"?"Macho":p.sexo==="F"?"Fêmea":"",p.cast?(p.sexo==="F"?"Castrada":p.sexo==="M"?"Castrado":"Castrado(a)"):"",p.raca,p.pel].filter(Boolean);return t.length?"<small>"+escapar(t.join(" · "))+"</small>":""})()+"</div><div class='row' style='gap:6px'><button class='s'>Exames ("+n+")</button><button class='s'>Vacinas</button><button class='s'>Editar</button><button class='s'>Excluir</button></div>";
-    const[bx,bv,be,bd]=c.querySelectorAll("button");bv.onclick=()=>abrirVac(p.id);
-    bx.onclick=()=>{exPac=p.id;$("exBusca").value="";ir("vExam");renderEx()};
-    be.onclick=()=>abrirPac(p.id);
-    bd.onclick=()=>confirma(bd,"Excluir",()=>delPac(p.id));
-    l.appendChild(c);
-  });
-}
-const cpfDig=s=>(s||"").replace(/\D/g,"");
-const cpfFmt=s=>cpfDig(s).slice(0,11).replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d)/,"$1.$2").replace(/(\d{3})(\d{1,2})$/,"$1-$2");
-function cpfOk(s){const d=cpfDig(s);if(d.length!==11||/^(\d)\1{10}$/.test(d))return false;for(const n of[9,10]){let t=0;for(let i=0;i<n;i++)t+=+d[i]*(n+1-i);if((t*10%11)%10!==+d[n])return false}return true}
-function aba(t){$("tpA").hidden=t!=="A";$("tpT").hidden=t!=="T";$("tbA").className=t==="A"?"p":"s";$("tbT").className=t==="T"?"p":"s"}
-$("tbA").onclick=()=>aba("A");$("tbT").onclick=()=>aba("T");
-$("paC").oninput=e=>{e.target.value=cpfFmt(e.target.value)};
-function abrirPac(id){
-  editPac=id||null;const p=id?pacs[id]:{};
-  $("paTitle").textContent=id?"Editar paciente":"Novo paciente";
-  $("paN").value=p.nome||"";espSel(p.esp);$("paR").value=p.reg||"";$("paTN").value=p.tutor||"";$("paC").value=p.cpf||"";$("paT").value=p.tel||"";$("paD").value=p.nasc||"";$("paE").value=p.email||"";$("paRc").value=p.raca||"";$("paPl").value=p.pel||"";$("paSx").value=p.sexo||"";$("paCs").checked=!!p.cast;$("paEnd").value=p.end||"";$("paOb").checked=!!p.obito;$("paErr").textContent="";aba("A");
-  $("dlgPac").showModal();
-}
-$("bNewPac").onclick=()=>abrirPac();
-$("paClose").onclick=()=>$("dlgPac").close();
-$("pbusca").oninput=renderPac;
-$("paOk").onclick=async()=>{
-  const nome=$("paN").value.trim(),reg=$("paR").value.trim(),esp=$("paEsp").value,tutor=$("paTN").value.trim(),cpf=cpfFmt($("paC").value),tel=$("paT").value.trim(),E=m=>{$("paErr").textContent=m};
-  if(!nome){aba("A");return E("Informe o nome do animal.")}
-  if(!esp){aba("A");return E(espList().length?"Selecione a espécie do animal.":"Cadastre as espécies em Configurações e preferências.")}
-  if(!reg){aba("A");return E("Informe o registro do animal.")}
-  if(!tutor){aba("T");return E("Informe o nome do tutor.")}
-  if(/\d/.test(tutor)){aba("T");return E("O nome do tutor não pode conter números.")}
-  if(!cpfOk(cpf)){aba("T");return E("CPF do tutor inválido.")}
-  if(tel&&(/[^\d\s()+\-]/.test(tel)||tel.replace(/\D/g,"").length<8)){aba("T");return E("Telefone inválido: use apenas números (mínimo 8 dígitos).")}
-  const dado={...(editPac?pacs[editPac]:{criado:Date.now()}),nome,esp,reg,tutor,cpf,tel,nasc:$("paD").value,email:$("paE").value.trim(),raca:$("paRc").value.trim(),pel:$("paPl").value.trim(),sexo:$("paSx").value,cast:$("paCs").checked,end:$("paEnd").value.trim(),obito:$("paOb").checked};
-  const id=editPac||"c"+Date.now();
-  try{if(colPac)await colPac.doc(id).set(dado);else{pacs[id]=dado;renderPac()}$("dlgPac").close()}catch(e){E("Não foi possível salvar. Tente novamente.")}
-};
-async function delPac(id){
-  for(const x of exList().filter(x=>x.pacId===id))await delEx(x.id);
-  try{if(colPac)await colPac.doc(id).delete();else{delete pacs[id];renderPac()}}catch(e){}
-}
-function renderEx(){
-  const f=$("exFil");
-  const q=$("exBusca").value,ms=pacList().filter(p=>pacMatch(p,q)),ids=new Set(ms.map(p=>p.id));f.innerHTML='<option value="">'+(q.trim()?"Todos os resultados ("+ms.length+")":"Todos os pacientes")+"</option>"+ms.map(p=>'<option value="'+p.id+'">'+escapar(pacLabel(p))+"</option>").join("");
-  f.value=exPac;if(f.value!==exPac)exPac=f.value;
-  $("exInfo").textContent=exPac&&pacs[exPac]?pacLabel(pacs[exPac]):(q.trim()&&!ms.length?"Nenhum paciente encontrado.":"");const l=$("exl"),arr=exList().filter(x=>exPac?x.pacId===exPac:(!q.trim()||ids.has(x.pacId)));
-  l.innerHTML=arr.length?"":'<div class="card">Nenhum exame anexado. Toque em “+ Anexar exame”.</div>';
-  arr.forEach(x=>{
-    const c=document.createElement("div");c.className="card pi";
-    c.innerHTML="<div><b>"+escapar(x.tipo)+"</b><small>"+escapar((pacs[x.pacId]||{nome:"Paciente removido"}).nome)+(x.data?" · "+fmtData(x.data):"")+"</small><small>"+escapar(x.arq||"")+(x.obs?" · "+escapar(x.obs):"")+"</small></div><div class='row' style='gap:6px'><a class='s' style='padding:9px 14px;border-radius:8px;border:1px solid var(--bd);color:var(--tx);text-decoration:none' target='_blank' rel='noopener' href='/_blob/"+encodeURIComponent(x.asset||"")+"'>Abrir</a><button class='s'>Excluir</button></div>";
-    const bd=c.querySelector("button");
-    bd.onclick=()=>confirma(bd,"Excluir",()=>delEx(x.id));
-    l.appendChild(c);
-  });
-}
-$("exFil").onchange=()=>{exPac=$("exFil").value;renderEx()};
-const norm=s=>(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-const pacLabel=p=>p.nome+" · Reg. "+(p.reg||"—")+" · Tutor: "+(p.tutor||"—")+(p.cpf?" · CPF "+p.cpf:"");
-function pacMatch(p,q){q=norm(q.trim());if(!q)return true;const qd=q.replace(/\D/g,"");return norm(p.nome).includes(q)||norm(p.reg).includes(q)||norm(p.tutor).includes(q)||(qd.length>=3&&cpfDig(p.cpf).includes(qd))}
-function exSelInfo(){const p=pacs[$("exP").value];$("exSel").textContent=p?"Selecionado: "+pacLabel(p):($("exQ").value.trim()?"Nenhum paciente encontrado.":"Selecione o paciente na lista.")}
-function listaExP(sel){
-  const q=$("exQ").value,ms=pacList().filter(p=>pacMatch(p,q)),s=$("exP");
-  s.innerHTML=ms.map(p=>'<option value="'+p.id+'">'+escapar(pacLabel(p))+"</option>").join("");
-  s.value=sel&&ms.some(p=>p.id===sel)?sel:(q.trim()&&ms.length===1?ms[0].id:"");
-  exSelInfo();
-}
-$("exQ").oninput=()=>listaExP($("exP").value);
-$("exP").onchange=exSelInfo;
-$("exBusca").oninput=()=>{const q=$("exBusca").value,m=pacList().filter(p=>pacMatch(p,q));exPac=q.trim()&&m.length===1?m[0].id:"";renderEx()};
-function abrirEx(){
-  const arr=pacList();
-  $("exQ").value="";listaExP(exPac);
-  
-  $("exT").value="";$("exD").value=$("date").value;$("exF").value="";$("exN").value="";
-  $("exErr").textContent=arr.length?"":"Cadastre um paciente antes de anexar exames.";
-  $("dlgEx").showModal();
-}
-$("bNewEx").onclick=abrirEx;
-$("exClose").onclick=()=>$("dlgEx").close();
-$("exOk").onclick=async()=>{
-  const E=m=>{$("exErr").textContent=m},pac=$("exP").value,f=$("exF").files[0];
-  if(!pac)return E("Pesquise e selecione o paciente.");
-  if(!f)return E("Selecione o arquivo do exame.");
-  if(!ASSETS)return E("Anexos exigem permissão de edição nesta página.");
-  if(f.size>20*1048576)return E("Arquivo acima de 20 MB.");
-  $("exOk").disabled=true;E("Enviando…");
-  try{
-    const r=await ASSETS.upload(f),id="e"+Date.now();
-    const dado={pacId:pac,tipo:$("exT").value.trim()||"Exame",data:$("exD").value,obs:$("exN").value.trim(),asset:r.id,arq:f.name,mime:f.type,criado:Date.now()};
-    if(colEx)await colEx.doc(id).set(dado);else{exs[id]=dado}
-    exPac=pac;renderEx();$("dlgEx").close();
-  }catch(e){E("Não foi possível anexar. Tente novamente.")}
-  $("exOk").disabled=false;
-};
-async function delEx(id){
-  const x=exs[id];
-  try{if(x&&x.asset&&ASSETS)await ASSETS.delete(x.asset)}catch(e){}
-  try{if(colEx)await colEx.doc(id).delete();else{delete exs[id];renderEx()}}catch(e){}
-}
-$("fnPac").onclick=()=>{$("pFil").value="vivos";ir("vPac");renderPac()};
-$("pFil").onchange=renderPac;
-$("fnEx").onclick=()=>{exPac="";$("exBusca").value="";ir("vExam");renderEx()};
-const UFS=["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
-const MSG0="Informe o CEP para preencher o endereço automaticamente.";
-function montaLoc(px){
-  $(px+"LocW").innerHTML='<label class="lb">CEP<div class="row" style="gap:8px;flex-wrap:nowrap"><input id="'+px+'cep" inputmode="numeric" maxlength="9" placeholder="00000-000" autocomplete="postal-code" style="flex:1;min-width:0"><button type="button" class="s" id="'+px+'busca" style="margin-top:4px;white-space:nowrap">Buscar CEP</button></div></label>'
-  +'<div class="note"><span id="'+px+'lmsg">'+MSG0+'</span> <button type="button" class="s" id="'+px+'man" style="padding:3px 8px;font-size:12px">Digitar manualmente</button></div>'
-  +'<div id="'+px+'lcampos" hidden><div class="dg">'
-  +'<label class="lb">Estado<select id="'+px+'uf"><option value="">UF</option>'+UFS.map(u=>"<option>"+u+"</option>").join("")+"</select></label>"
-  +'<label class="lb">Cidade<input id="'+px+'cid" autocomplete="address-level2"></label>'
-  +'<label class="lb">Bairro<input id="'+px+'bai" autocomplete="off"></label>'
-  +'<label class="lb">Rua<input id="'+px+'rua" autocomplete="address-line1"></label>'
-  +'<label class="lb">Número<input id="'+px+'num" autocomplete="off" placeholder="Ex.: 120 ou S/N"></label>'
-  +"</div></div>";
-  $(px+"cep").oninput=e=>{const d=e.target.value.replace(/\D/g,"").slice(0,8);e.target.value=d.length>5?d.slice(0,5)+"-"+d.slice(5):d};
-  $(px+"cep").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();$(px+"busca").click()}};
-  $(px+"man").onclick=()=>{$(px+"lcampos").hidden=false;$(px+"uf").focus()};
-  $(px+"busca").onclick=()=>buscaCep(px);
-}
-async function buscaCep(px){
-  const d=$(px+"cep").value.replace(/\D/g,""),m=$(px+"lmsg"),campos=$(px+"lcampos");
-  const manual=t=>{m.textContent=t;campos.hidden=false;$(px+"uf").focus()};
-  const ORD=" Digite o endereço manualmente, na ordem: estado, cidade, bairro, rua e número.";
-  if(d.length!==8)return manual("CEP inválido."+ORD);
-  m.textContent="Buscando CEP…";
-  try{
-    const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),6000);
-    const r=await fetch("https://viacep.com.br/ws/"+d+"/json/",{signal:ctl.signal});clearTimeout(t);
-    const j=await r.json();
-    if(!r.ok||j.erro)throw 0;
-    $(px+"uf").value=j.uf||"";$(px+"cid").value=j.localidade||"";$(px+"bai").value=j.bairro||"";$(px+"rua").value=j.logradouro||"";$(px+"num").value="";
-    campos.hidden=false;m.textContent="Endereço encontrado. Confira e informe o número.";$(px+"num").focus();
-  }catch(e){manual("CEP não encontrado."+ORD)}
-}
-function lerLoc(px){
-  const v=id=>$(px+id).value.trim(),cep=v("cep"),uf=v("uf"),cid=v("cid"),bai=v("bai"),rua=v("rua"),num=v("num");
-  if(!uf||!cid||!bai||!rua||!num){$(px+"lcampos").hidden=false;return{erro:"Informe o endereço: busque pelo CEP ou digite estado, cidade, bairro, rua e número."}}
-  if(cep&&cep.replace(/\D/g,"").length!==8)return{erro:"CEP inválido."};
-  return{end:{cep,uf,cidade:cid,bairro:bai,rua,num},local:rua+", "+num+" - "+bai+", "+cid+"/"+uf+(cep?" - CEP "+cep:"")};
-}
-function escreveLoc(px,i){
-  const e=(i&&i.end)||{},leg=!!(i&&i.local&&!i.end);
-  $(px+"cep").value=e.cep||"";$(px+"uf").value=e.uf||"";$(px+"cid").value=e.cidade||"";$(px+"bai").value=e.bairro||"";$(px+"rua").value=e.rua||"";$(px+"num").value=e.num||"";
-  $(px+"lcampos").hidden=!(i&&i.end)&&!leg;
-  $(px+"lmsg").textContent=leg?"Endereço atual: "+i.local+". Atualize abaixo, na ordem: estado, cidade, bairro, rua e número.":MSG0;
-}
-montaLoc("s");montaLoc("c");
-const profList=()=>Object.entries(profs).map(([id,p])=>({id,...p})).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt-BR"));
-function horarioDe(id){const p=profs[id];if(p&&!p.usaEmpresa&&p.horario&&p.horario.ini&&p.horario.fim)return p.horario;return cfg}
-function renderProfSel(){
-  const s=$("prof"),cur=s.value,arr=profList();
-  s.innerHTML=arr.map(p=>'<option value="'+p.id+'">'+escapar(p.nome+(p.cargo?" – "+p.cargo:""))+"</option>").join("");
-  if(arr.some(p=>p.id===cur))s.value=cur;
-  render();
-}
-function resumoHor(p){if(p.usaEmpresa||!p.horario)return"Horário da empresa";const h=p.horario;return(h.dias||[]).map(i=>DIAS[i]).join(", ")+(h.var?" · horários por dia":" · "+h.ini+"–"+h.fim)}
-function renderPfl(){
-  const l=$("pfl"),arr=profList();
-  l.innerHTML=arr.length?"":'<div class="note">Nenhum profissional cadastrado.</div>';
-  arr.forEach(p=>{
-    const c=document.createElement("div");c.className="card pi";c.style.margin="0 0 8px";
-    c.innerHTML="<div><b>"+escapar(p.nome)+"</b><small>"+escapar(p.cargo||"Sem cargo")+" · "+escapar(resumoHor(p))+"</small></div><div class='row' style='gap:6px'><button class='s'>Editar</button><button class='s'>Excluir</button></div>";
-    const[be,bd]=c.querySelectorAll("button");
-    be.onclick=()=>abrirPf(p.id);
-    bd.onclick=()=>confirma(bd,"Excluir",()=>delPf(p.id));
-    l.appendChild(c);
-  });
-  if(!arr.length){const b=document.createElement("button");b.className="s";b.textContent="Restaurar profissionais anteriores (Dra. Ana, Dr. Bruno, Dra. Carla)";b.onclick=restauraPf;l.appendChild(b)}
-}
-async function restauraPf(){
-  const ant={clinico:["Dra. Ana","Clínica geral"],pediatra:["Dr. Bruno","Pediatria"],derma:["Dra. Carla","Dermatologia"]};
-  for(const[id,[nome,cargo]]of Object.entries(ant)){
-    const dado={nome,cargo,usaEmpresa:true};
-    try{if(colProf)await colProf.doc(id).set(dado);else profs[id]=dado}catch(e){}
-  }
-  renderProfSel();renderPfl();
-}
-function abrirPf(id){
-  editPf=id||null;const p=id?profs[id]:{},usa=!id||p.usaEmpresa!==false;
-  $("pfTitle").textContent=id?"Editar profissional":"Novo profissional";
-  $("pfN").value=p.nome||"";$("pfC").value=p.cargo||"";
-  escreveEditor("pf",p.horario||{...cfg,dias:cfg.dias.slice()});
-  $("pfUsa").checked=usa;$("pfEd").hidden=usa;$("pfErr").textContent="";
-  $("dlgPf").showModal();
-}
-$("bNewPf").onclick=()=>abrirPf();
-$("pfClose").onclick=()=>$("dlgPf").close();
-$("pfUsa").onchange=()=>{$("pfEd").hidden=$("pfUsa").checked};
-$("pfOk").onclick=async()=>{
-  const nome=$("pfN").value.trim(),cargo=$("pfC").value.trim(),usa=$("pfUsa").checked,E=m=>{$("pfErr").textContent=m};
-  if(!nome)return E("Informe o nome do profissional.");
-  if(!cargo)return E("Informe o cargo.");
-  const dado={nome,cargo,usaEmpresa:usa};
-  if(!usa){const r=lerEditor("pf");if(r.erro)return E(r.erro);dado.horario=r.c}
-  const id=editPf||"f"+Date.now();
-  try{if(colProf)await colProf.doc(id).set(dado);else{profs[id]=dado;renderProfSel();renderPfl()}$("dlgPf").close()}catch(e){E("Não foi possível salvar. Tente novamente.")}
-};
-async function delPf(id,forca){
-  const h=hoje.toISOString().slice(0,10),M=$("pfMsg"),fut=Object.entries(marcados).filter(([k,a])=>a.prof===id&&a.data>=h);M.textContent="";
-  if(fut.length&&!forca){
-    M.textContent="Este profissional tem "+fut.length+" consulta(s) futura(s) agendada(s). ";
-    const b=document.createElement("button");b.className="s";b.textContent="Cancelar as consultas e excluir";b.onclick=()=>delPf(id,true);M.appendChild(b);
-    M.scrollIntoView({block:"nearest"});return;
-  }
-  try{
-    if(forca)for(const[k]of fut){if(colRef)await colRef.doc(k).delete();else delete marcados[k]}
-    if(colProf)await colProf.doc(id).delete();else{delete profs[id];renderProfSel();renderPfl()}
-    M.textContent="Profissional excluído.";
-  }catch(e){M.textContent="Não foi possível excluir. Tente novamente."}
-}
-montaEditor("pf");
-let esps={},colEsp=null;
-const espList=()=>Object.values(esps).map(e=>e.nome).sort((a,b)=>a.localeCompare(b,"pt-BR"));
-function espSel(atual){
-  const l=espList();if(atual&&!l.includes(atual))l.push(atual);
-  l.sort((a,b)=>a.localeCompare(b,"pt-BR"));
-  $("paEsp").innerHTML='<option value="">'+(l.length?"Selecione":"Nenhuma espécie cadastrada")+"</option>"+l.map(n=>"<option>"+escapar(n)+"</option>").join("");
-  $("paEsp").value=atual||"";
-}
-const espId=n=>norm(n).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
-function renderEsp(){
-  const l=$("espl"),arr=espList();
-  l.innerHTML=arr.length?"":'<div class="note">Nenhuma espécie cadastrada.</div>';
-  arr.forEach(n=>{
-    const c=document.createElement("span");c.style.cssText="display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--bd);border-radius:999px;background:var(--bg)";
-    c.append(n);
-    const x=document.createElement("button");x.type="button";x.textContent="×";x.title="Remover "+n;x.setAttribute("aria-label","Remover "+n);x.style.cssText="border:0;background:none;color:var(--mu);cursor:pointer;font-size:16px;line-height:1;padding:0 2px";
-    x.onclick=()=>delEsp(n);
-    c.appendChild(x);l.appendChild(c);
-  });
-  if(!arr.length){const b=document.createElement("button");b.className="s";b.type="button";b.textContent="Adicionar espécies padrão (Aves, Caninos, Felinos, Répteis)";b.onclick=()=>["Aves","Caninos","Felinos","Répteis"].forEach(addEsp);l.appendChild(b)}
-}
-async function addEsp(nome){
-  const M=$("espMsg");M.textContent="";
-  nome=nome.trim().replace(/\s+/g," ");
-  if(nome.length<2){M.textContent="Informe o nome da espécie.";return}
-  if(/\d/.test(nome)){M.textContent="O nome da espécie não pode conter números.";return}
-  nome=nome[0].toUpperCase()+nome.slice(1);
-  if(espList().some(e=>norm(e)===norm(nome))){M.textContent="Esta espécie já está cadastrada.";return}
-  const id=espId(nome),dado={nome};
-  try{if(colEsp)await colEsp.doc(id).set(dado);else{esps[id]=dado;renderEsp()}$("espN").value=""}catch(e){M.textContent="Não foi possível salvar. Tente novamente."}
-}
-async function delEsp(n){
-  const M=$("espMsg"),q=pacList().filter(p=>p.esp===n).length;M.textContent="";
-  if(q){M.textContent="Há "+q+" paciente(s) cadastrado(s) como "+n+". Altere a espécie deles antes de remover.";return}
-  const par=Object.entries(esps).find(([k,e])=>e.nome===n);if(!par)return;
-  try{if(colEsp)await colEsp.doc(par[0]).delete();else{delete esps[par[0]];renderEsp()}}catch(e){M.textContent="Não foi possível remover. Tente novamente."}
-}
-$("espAdd").onclick=()=>addEsp($("espN").value);
-$("espN").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();addEsp($("espN").value)}};
-let vacs={},colVac=null,vcSel="",vcTmp={},vcT=null,vcPend=null,vcCfgSujo=false;
-const aE=s=>escapar(s).replace(/"/g,"&quot;");
-const mData=s=>{const d=s.replace(/\D/g,"").slice(0,8);return d.length>4?d.slice(0,2)+"/"+d.slice(2,4)+"/"+d.slice(4):d.length>2?d.slice(0,2)+"/"+d.slice(2):d};
-function idadeDe(n){const d=new Date(n+"T12:00:00"),h=new Date();let m=(h.getFullYear()-d.getFullYear())*12+h.getMonth()-d.getMonth();if(h.getDate()<d.getDate())m--;if(isNaN(m)||m<0)return"";return m>=12?Math.floor(m/12)+" ano(s)":m+" mes(es)"}
-const vcCfg=()=>vacs._clinica||(vacs._clinica={});
-function vcRec(){
-  const r=vcSel?(vacs[vcSel]||(vacs[vcSel]={})):vcTmp;
-  r.f=r.f||{};r.vac=r.vac||Array.from({length:7},()=>({}));r.verm=r.verm||Array.from({length:4},()=>({}));
-  return r;
-}
-function vcPadrao(p){
-  const e=p.esp||"",out=e&&e!=="Caninos"&&e!=="Felinos";
-  return{nome:p.nome||"",sexo:p.sexo||"",cast:p.cast?"1":"",end:p.end||"",raca:p.raca||"",pel:p.pel||"",reg:p.reg||"",tutor:p.tutor||"",tel:p.tel||"",nasc:p.nasc?fmtData(p.nasc)+(idadeDe(p.nasc)?" ("+idadeDe(p.nasc)+")":""):"",esp:e==="Caninos"?"Canina":e==="Felinos"?"Felina":e?"Outra":"",outra:out?e:""};
-}
-function vcVal(k){const r=vcRec(),d=vcPadrao(pacs[vcSel]||{});return r.f[k]!==undefined?r.f[k]:(d[k]||"")}
-function vcSet(k,val){
-  const a=k.split(".");
-  if(a[0]==="c"){vcCfg()[a[1]]=val;vcCfgSujo=true}
-  else{const r=vcRec();if(a[0]==="f")r.f[a[1]]=val;else if(a[0]==="obs")r.obs=val;else r[a[0]][+a[1]][a[2]]=val}
-  vcSalva();
-}
-function vcSalva(){
-  if(!vcSel&&!vcCfgSujo){$("vcSt").textContent="Cart\u00e3o em branco: o que voc\u00ea preencher serve s\u00f3 para imprimir e n\u00e3o \u00e9 salvo.";return}
-  const id=vcSel;
-  if(vcPend!==null&&vcPend!==id)vcGrava();
-  vcPend=id;clearTimeout(vcT);$("vcSt").textContent="Salvando\u2026";vcT=setTimeout(vcGrava,700);
-}
-function vcGrava(){
-  clearTimeout(vcT);vcT=null;
-  const id=vcPend;vcPend=null;if(id===null)return;
-  const jobs=[];
-  if(colVac){
-    if(id&&vacs[id])jobs.push(colVac.doc(id).set(vacs[id]));
-    if(vcCfgSujo&&vacs._clinica){vcCfgSujo=false;jobs.push(colVac.doc("_clinica").set(vacs._clinica))}
-  }
-  Promise.all(jobs).then(()=>{if(vcPend===null)$("vcSt").textContent=colVac?"Altera\u00e7\u00f5es salvas.":"Altera\u00e7\u00f5es mantidas apenas nesta sess\u00e3o."}).catch(()=>{$("vcSt").textContent="N\u00e3o foi poss\u00edvel salvar. Tente novamente."});
-}
-function vcOpts(){
-  const q=$("vcBusca").value,ms=pacList().filter(p=>pacMatch(p,q)),f=$("vcPac");
-  f.innerHTML='<option value="">'+(q.trim()?"Todos os resultados ("+ms.length+")":"Cart\u00e3o em branco (selecione um paciente)")+"</option>"+ms.map(p=>'<option value="'+p.id+'">'+escapar(pacLabel(p))+"</option>").join("");
-  f.value=vcSel;if(f.value!==vcSel)vcSel=f.value;
-}
-function renderVac(){
-  vcOpts();
-  const r=vcRec(),v=vcVal,cf=vcCfg(),esp=v("esp"),sexo=v("sexo"),cast=v("cast");
-  const fl=(l,k,val)=>'<div class="pf"><small>'+l+'</small><input data-k="'+k+'" value="'+aE(val)+'" placeholder=" "></div>';
-  const ck=(g,val,on,t)=>'<span class="ck" data-ck="'+g+":"+val+'" style="margin-right:12px;white-space:nowrap"><span class="bx'+(on?" on":"")+'"></span>'+t+"</span>";
-  const dtI=(g,i,k)=>'<input data-k="'+g+"."+i+"."+k+'" value="'+aE(r[g][i][k]||"")+'" placeholder="dd/mm/aaaa">';
-  const txI=(g,i,k,h)=>'<input data-k="'+g+"."+i+"."+k+'" value="'+aE(r[g][i][k]||"")+'" placeholder=" ">'+(h?'<span class="hint">'+h+"</span>":"");
-  const rows=(g,n,fn)=>Array.from({length:n},(_,i)=>"<tr>"+fn(g,i).map(x=>"<td>"+x+"</td>").join("")+"</tr>").join("");
-  $("vcPaper").innerHTML=`<h2>Cart\u00e3o de Vacina\u00e7\u00e3o e Controle Sanit\u00e1rio</h2>
-<div class="sub2">Registro Cl\u00ednico de Imuniza\u00e7\u00e3o e Profilaxia Antiparasit\u00e1ria</div>
-<div class="pg" style="grid-template-columns:1.5fr 1fr">${fl("Cl\u00ednica / Hospital","c.nome",cf.nome!==undefined?cf.nome:(sess&&sess.neg||""))}${fl("Telefone / Registro","c.tel",cf.tel!==undefined?cf.tel:(sess&&sess.info&&sess.info.tel||""))}</div>
-<div class="sec">1. Identifica\u00e7\u00e3o do paciente e do tutor</div>
-<div class="pg" style="grid-template-columns:1fr 1.1fr">${fl("Nome do animal","f.nome",v("nome"))}<div class="pf"><small>Esp\u00e9cie</small><div style="display:flex;align-items:center;padding-top:3px">${ck("esp","Canina",esp==="Canina","Canina")}${ck("esp","Felina",esp==="Felina","Felina")}${ck("esp","Outra",esp==="Outra","Outra:")}<input data-k="f.outra" value="${aE(v("outra"))}" placeholder=" " style="flex:1;min-width:0"></div></div></div>
-<div class="pg"><div class="pf"><small>Sexo / Estado reprodutivo</small><div style="padding-top:3px">${ck("sexo","M",sexo==="M","M")}${ck("sexo","F",sexo==="F","F")}${ck("cast","1",!!cast,"Castrado(a)")}</div></div></div>
-<div class="pg" style="grid-template-columns:1fr 1fr 1.2fr">${fl("Ra\u00e7a","f.raca",v("raca"))}${fl("Pelagem / Cor","f.pel",v("pel"))}${fl("Data de nascimento / Idade","f.nasc",v("nasc"))}</div>
-<div class="pg" style="grid-template-columns:1fr 1.3fr">${fl("N\u00ba do microchip / RGA","f.reg",v("reg"))}${fl("Nome completo do tutor(a)","f.tutor",v("tutor"))}</div>
-<div class="pg" style="grid-template-columns:1fr 1.3fr">${fl("Telefone / WhatsApp","f.tel",v("tel"))}${fl("Endere\u00e7o / Cidade","f.end",v("end"))}</div>
-<div class="sec">2. Registro de imuniza\u00e7\u00f5es (vacinas)</div>
-<table><colgroup><col style="width:15%"><col style="width:27%"><col style="width:24%"><col style="width:15%"><col style="width:19%"></colgroup><thead><tr><th>Data</th><th>Vacina / Protocolo</th><th>Etiqueta / Lote e validade</th><th>Revacinar em</th><th>Carimbo e CRMV</th></tr></thead><tbody>${rows("vac",7,(g,i)=>[dtI(g,i,"d"),txI(g,i,"v"),txI(g,i,"l","Colar etiqueta do frasco"),dtI(g,i,"r"),txI(g,i,"c")])}</tbody></table>
-<div class="sec">3. Controle de vermifuga\u00e7\u00e3o e ectoparasitas</div>
-<table><colgroup><col style="width:15%"><col style="width:12%"><col style="width:33%"><col style="width:15%"><col style="width:25%"></colgroup><thead><tr><th>Data</th><th>Peso (kg)</th><th>Produto / Princ\u00edpio ativo e dose</th><th>Pr\u00f3xima dose</th><th>Veterin\u00e1rio / CRMV</th></tr></thead><tbody>${rows("verm",4,(g,i)=>[dtI(g,i,"d"),txI(g,i,"p"),txI(g,i,"pr"),dtI(g,i,"n"),txI(g,i,"vt")])}</tbody></table>
-<div class="pf" style="border:1px solid #b8c2cc;border-radius:4px;padding:6px 8px;height:84px"><small>Observa\u00e7\u00f5es cl\u00ednicas / Alergias ou rea\u00e7\u00f5es adversas</small><textarea data-k="obs" rows="3" placeholder=" " style="font-size:12px;height:60px">${escapar(r.obs||"")}</textarea></div>
-<div style="margin-top:auto;text-align:center;font-size:10px;color:#5A6A7A">Documento de controle sanit\u00e1rio veterin\u00e1rio \u2014 Apresentar em todas as consultas e viagens. P\u00e1gina 1 de 1</div>`;
-}
-$("vcPaper").addEventListener("input",e=>{
-  const t=e.target,k=t.dataset&&t.dataset.k;if(!k)return;
-  if(/^(vac|verm)\.\d+\.(d|r|n)$/.test(k))t.value=mData(t.value);
-  vcSet(k,t.value);
-});
-$("vcPaper").addEventListener("click",e=>{
-  const c=e.target.closest("[data-ck]");if(!c)return;
-  const[g,val]=c.dataset.ck.split(":"),cur=vcVal(g),nv=g==="cast"?(cur?"":"1"):(cur===val?"":val);
-  vcSet("f."+g,nv);
-  document.querySelectorAll('#vcPaper [data-ck^="'+g+':"]').forEach(x=>x.querySelector(".bx").classList.toggle("on",g==="cast"?!!nv:x.dataset.ck===g+":"+nv));
-});
-function abrirVac(id){vcSel=typeof id==="string"?id:"";vcTmp={};$("vcBusca").value="";$("vcMsg").textContent="";$("vcSt").textContent="";ir("vVac");renderVac()}
-$("vcBusca").oninput=()=>{const q=$("vcBusca").value,m=pacList().filter(p=>pacMatch(p,q));vcSel=q.trim()&&m.length===1?m[0].id:"";renderVac()};
-$("vcPac").onchange=()=>{vcSel=$("vcPac").value;renderVac()};
-const TABS=[["vPac","Pacientes",()=>$("fnPac").click()],["vExam","Exames",()=>$("fnEx").click()],["vVac","Vacinas",()=>abrirVac()]];
-function montaTabs(v){document.querySelectorAll(".tabs").forEach(t=>t.replaceChildren(...TABS.map(([id,n,f])=>{const b=document.createElement("button");b.type="button";b.textContent=n;if(id===v)b.className="on";b.onclick=()=>{if(id!==v)f()};return b})))}
-const libJs=u=>new Promise((ok,er)=>{const s=document.createElement("script");s.src=u;s.onload=ok;s.onerror=er;document.head.appendChild(s)});
-$("vcPdf").onclick=async()=>{
-  const bt=$("vcPdf"),M=$("vcMsg"),P=$("vcPaper");M.textContent="";bt.disabled=true;
-  try{
-    if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
-    const dl=window.claude?await window.claude.use("downloads"):null;
-    if(!dl){try{window.print()}catch(e){M.textContent="N\u00e3o foi poss\u00edvel abrir a impress\u00e3o neste ambiente."}return}
-    M.textContent="Gerando PDF\u2026";
-    if(!window.html2canvas)await libJs("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
-    if(!(window.jspdf&&window.jspdf.jsPDF))await libJs("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
-    const doc=new window.jspdf.jsPDF({unit:"mm",format:"a4",orientation:"portrait",compress:true});
-    P.classList.add("pdfmode");
-    try{const cv=await window.html2canvas(P,{scale:2,backgroundColor:"#ffffff",width:794,height:1123,windowWidth:794,scrollX:-window.scrollX,scrollY:-window.scrollY,onclone:d=>{const w=d.querySelector(".vcWrap"),p=d.getElementById("vcPaper");if(w)w.style.overflow="visible";if(p)p.style.margin="0"}});doc.addImage(cv.toDataURL("image/jpeg",0.95),"JPEG",0,0,210,297,undefined,"FAST")}finally{P.classList.remove("pdfmode")}
-    const nome=vcVal("nome"),nm=nome?"-"+norm(nome).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""):"";
-    await dl.save({filename:"cartao-vacinacao"+nm+".pdf",data:doc.output("arraybuffer")});
-    M.textContent="";
-  }catch(e){M.textContent=e&&e.code==="declined"?"":"N\u00e3o foi poss\u00edvel gerar o PDF. Tente novamente."}
-  finally{bt.disabled=false}
-};
-function abrirCfg(){
-  const i=sess.info||{};
-  $("cNeg").value=sess.neg||"";$("cTel").value=i.tel||"";escreveLoc("c",i);
-  ["cdErr","cErr","cpErr"].forEach(x=>$(x).textContent="");$("cpA").value="";$("cpN").value="";
-  let s="";try{s=localStorage.getItem("vc-tema")||""}catch(e){}
-  $("cTema").value=s==="light"||s==="dark"?s:"auto";
-  ir("vCfg");
-}
-$("fnCfg").onclick=abrirCfg;
-$("cTema").onchange=()=>{
-  const v=$("cTema").value;
-  if(v==="auto"){delete document.documentElement.dataset.theme;try{localStorage.removeItem("vc-tema")}catch(e){}}
-  else{document.documentElement.dataset.theme=v;try{localStorage.setItem("vc-tema",v)}catch(e){}}
-  iconeTema();
-};
-$("cdOk").onclick=async()=>{
-  const nome=$("cNeg").value.trim(),tel=$("cTel").value.trim(),E=m=>{$("cdErr").textContent=m};
-  if(nome.length<2)return E("Informe o nome do negócio.");
-  if(tel&&(/[^\d\s()+\-]/.test(tel)||tel.replace(/\D/g,"").length<8))return E("Telefone inválido: use apenas números (mínimo 8 dígitos).");
-  const L=lerLoc("c");
-  if(L.erro)return E(L.erro);
-  try{
-    if(DB){
-      const r=DB.doc("negocios/"+sess.u),x=await r.get();
-      await r.set({...(x.exists?x.data():{criado:Date.now()}),nome,tel,local:L.local,end:L.end});
-      const ur=DB.doc("usuarios/"+sess.u),ux=await ur.get();
-      if(ux.exists)await ur.set({...ux.data(),negocio:nome});
-    }else if(usersLocal[sess.u])usersLocal[sess.u].negocio=nome;
-    sess.neg=nome;sess.info={local:L.local,end:L.end,tel};$("hubNeg").textContent=nome;E("Dados salvos.");
-  }catch(e){E("Não foi possível salvar. Tente novamente.")}
-};
-$("cpOk").onclick=async()=>{
-  const a=$("cpA").value,n=$("cpN").value,E=m=>{$("cpErr").textContent=m};
-  if(sess.u==="123")return E("A conta de teste não pode alterar a senha.");
-  if(n.length<3)return E("A nova senha precisa ter pelo menos 3 caracteres.");
-  try{
-    const d=await getUser(sess.u);
-    if(!d||await hashSenha(a,d.salt)!==d.hash)return E("Senha atual incorreta.");
-    const salt=novoSalt(),dado={...d,salt,hash:await hashSenha(n,salt)};
-    if(DB)await DB.doc("usuarios/"+sess.u).set(dado);else usersLocal[sess.u]=dado;
-    $("cpA").value="";$("cpN").value="";E("Senha alterada.");
-  }catch(e){E("Não foi possível alterar a senha.")}
-};
-const NAVIT=[["vHub","Dashboard",null],["vAgenda","Agendamento de consultas","fnAgenda"],["vProc","Procedimentos e preços","fnProc"],["vPac","Pacientes","fnPac"],["vExam","Exames","fnEx"],["vFin","Financeiro","fnFin"],["vPrL","Prontuários","fnPr"],["vCfg","Configurações e preferências","fnCfg",1]];
-let pin=false;try{pin=localStorage.getItem("vc-pin")==="1"}catch(e){}
-const larga=()=>matchMedia("(min-width:900px)").matches;
-function setSide(a){document.body.classList.toggle("side-open",a);$("side").setAttribute("aria-hidden",a?"false":"true");$("sideTg").textContent=a?"›":"‹";$("sideTg").title=a?"Recolher menu":"Abrir menu"}
-function montaNav(atual){
-  const bt=(v,t,f)=>{const b=document.createElement("button");b.type="button";b.className="navi"+((v===atual||(v==="vPac"&&atual==="vVac")||(v==="vPrL"&&atual==="vPront"))?" on":"");b.textContent=t;b.onclick=()=>{if(v!==atual){if(f===null)ir("vHub");else $(f).click()}if(!(larga()&&pin))setSide(false)};return b};
-  $("navTop").replaceChildren(...NAVIT.filter(x=>!x[3]).map(x=>bt(x[0],x[1],x[2])));
-  $("navBot").replaceChildren(...NAVIT.filter(x=>x[3]).map(x=>bt(x[0],x[1],x[2])));
-}
-function atualizaSide(v){
-  const on=!["vLogin","vReg","vReg2","vHub"].includes(v);
-  document.body.classList.toggle("side-on",on);
-  if(!on){setSide(false);return}
-  document.documentElement.style.setProperty("--barh",$("bar").offsetHeight+"px");
-  montaNav(v);
-  aplicaPin();
-  setSide(larga()&&pin);
-}
-function aplicaPin(){document.body.classList.toggle("side-pin",pin);$("pinBtn").classList.toggle("on",pin);$("pinBtn").title=pin?"Desafixar menu":"Fixar menu"}
-$("sideTg").onclick=()=>setSide(!document.body.classList.contains("side-open"));
-$("pinBtn").onclick=()=>{pin=!pin;try{localStorage.setItem("vc-pin",pin?"1":"0")}catch(e){}aplicaPin();setSide(true)};
-document.addEventListener("click",e=>{if(document.body.classList.contains("side-open")&&!(larga()&&pin)&&!e.target.closest("#side,#sideTg"))setSide(false)});
-function ir(v){["vLogin","vReg","vReg2","vHub","vProc","vAgenda","vPac","vExam","vVac","vFin","vPrL","vPront","vCfg"].forEach(x=>$(x).hidden=x!==v);window.scrollTo(0,0);atualizaSide(v);montaTabs(v)}
-const enc=new TextEncoder();
-const bytesHex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
-async function hashSenha(sn,salt){
-  const k=await crypto.subtle.importKey("raw",enc.encode(sn),"PBKDF2",false,["deriveBits"]);
-  return bytesHex(await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt:enc.encode(salt),iterations:100000},k,256));
-}
-const novoSalt=()=>bytesHex(crypto.getRandomValues(new Uint8Array(16)));
-async function getUser(u){await dbPronto;if(DB){const x=await DB.doc("usuarios/"+u).get();return x.exists?x.data():null}return usersLocal[u]||null}
-function diasHtml(id,sel){$(id).innerHTML=DIAS.map((n,i)=>'<label style="display:flex;align-items:center;gap:4px"><input type="checkbox" value="'+i+'" style="width:auto;margin:0"'+(sel.includes(i)?" checked":"")+"> "+n+"</label>").join("")}
-function diasSel(id){return [...$(id).querySelectorAll("input:checked")].map(x=>+x.value)}
-async function entrar(){
-  const u=$("lUser").value.trim().toLowerCase(),sn=$("lPass").value;
-  const falha=()=>{$("lErr").textContent="Usuário ou senha inválidos.";$("lPass").value=""};
-  try{
-    let neg=null;
-    if(u==="123"&&sn==="123")neg="Clínica";
-    else{const d=await getUser(u);if(d&&typeof d.salt==="string"&&await hashSenha(sn,d.salt)===d.hash)neg=d.negocio||u}
-    if(neg===null)return falha();
-    $("lErr").textContent="";$("lUser").value="";$("lPass").value="";
-    await abrirSessao(u,neg);ir("vHub");
-  }catch(e){falha()}
-}
-$("bReg").onclick=()=>{["rNeg","rUser","rPass"].forEach(i=>{$(i).value=""});$("rErr").textContent="";ir("vReg")};
-$("rBack").onclick=()=>ir("vLogin");
-["rNeg","rUser","rPass"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key==="Enter")$("rGo").click()}));
-$("rGo").onclick=async()=>{
-  const neg=$("rNeg").value.trim(),u=$("rUser").value.trim().toLowerCase(),sn=$("rPass").value;
-  const E=m=>{$("rErr").textContent=m};
-  if(neg.length<2)return E("Informe o nome do negócio.");
-  if(!/^[a-z0-9._-]{3,30}$/.test(u))return E("Usuário: de 3 a 30 caracteres, só letras minúsculas, números, ponto, hífen ou sublinhado (sem espaços nem acentos).");
-  if(sn.length<3)return E("A senha precisa ter pelo menos 3 caracteres.");
-  try{
-    if(u==="123"||await getUser(u))return E("Este usuário já existe. Escolha outro.");
-    const salt=novoSalt(),dado={negocio:neg,salt,hash:await hashSenha(sn,salt),criado:Date.now()};
-    if(DB)await DB.doc("usuarios/"+u).set(dado);else usersLocal[u]=dado;
-    E("");
-    await abrirSessao(u,neg);
-    escreveLoc("s",null);$("sErr").textContent="";
-    escreveEditor("s",{...CFG0,dias:[1,2,3,4,5]});
-    ir("vReg2");
-  }catch(e){E("Não foi possível criar o acesso. Para registrar, você precisa ter permissão de edição nesta página.")}
-};
-$("sGo").onclick=async()=>{
-  const L=lerLoc("s");
-  const E=m=>{$("sErr").textContent=m};
-  if(L.erro)return E(L.erro);
-  const r=lerEditor("s");
-  if(r.erro)return E(r.erro);
-  const c=r.c;
-  try{
-    if(DB){await DB.doc("negocios/"+sess.u).set({nome:sess.neg,local:L.local,end:L.end,dias:c.dias,criado:Date.now()});await cfgRef.set(c)}
-    else{cfg=c;aplicaCfg()}
-    sess.info={local:L.local,end:L.end};$("hubNeg").textContent=sess.neg;
-    ir("vHub");
-  }catch(e){E("Não foi possível salvar. Tente novamente.")}
-};
-$("bLogin").onclick=entrar;
-["lUser","lPass"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key==="Enter")entrar()}));
-$("bLogout").onclick=()=>{desconectar();sess=null;marcados={};procs={};pacs={};exs={};profs={};esps={};vacs={};cobs={};pronts={};$("lErr").textContent="";ir("vLogin")};
-$("fnAgenda").onclick=()=>{ir("vAgenda");render()};
-$("fnProc").onclick=()=>{ir("vProc");renderProcs()};
-document.querySelectorAll("[data-back]").forEach(b=>{b.textContent="← Dashboard";b.onclick=()=>ir("vHub")});
-
-function filtro(el,re){
-  el.addEventListener("input",()=>{
-    const v=el.value,n=v.replace(re,"");
-    if(n!==v){const pos=Math.max(0,(el.selectionStart||0)-(v.length-n.length));el.value=n;try{el.setSelectionRange(pos,pos)}catch(e){}}
-  });
-}
-
-
-
+function okDias(a){return Array.isArray(a)?a.filter(x=>Number.isInteger(x)&&x>=0&&x<=6):CFG0.dias.slice()}
 function okPorDia(o){const r={};if(o&&typeof o==="object")for(let i=0;i<7;i++){const c=o[i];if(c&&okH(c.ini)&&okH(c.fim)&&toMin(c.fim)>toMin(c.ini))r[i]={ini:c.ini,fim:c.fim,pIni:okH(c.pIni)?c.pIni:"",pFim:okH(c.pFim)?c.pFim:""}}return r}
 function schedDia(d,c){c=c||cfg;const dw=new Date(d+"T12:00:00").getDay();return c.var&&c.porDia&&c.porDia[dw]?c.porDia[dw]:c}
 function horasDia(d,s){
@@ -1443,55 +544,1161 @@ function lerEditor(px){
   return{c:{ini:b.ini,fim:b.fim,pIni:b.pIni,pFim:b.pFim,dias,var:true,porDia}};
 }
 function aplicaCfg(){escreveEditor("c",cfg);render()}
+function diasHtml(id,sel){$(id).innerHTML=DIAS.map((n,i)=>'<label style="display:flex;align-items:center;gap:4px"><input type="checkbox" value="'+i+'" style="width:auto;margin:0"'+(sel.includes(i)?" checked":"")+"> "+n+"</label>").join("")}
+function diasSel(id){return [...$(id).querySelectorAll("input:checked")].map(x=>+x.value)}
+montaEditor("c");montaEditor("s");montaEditor("pf");
+
+const UFS=["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"];
+const MSG0="Informe o CEP para preencher o endereço automaticamente.";
+function montaLoc(px){
+  $(px+"LocW").innerHTML='<label class="lb">CEP<div class="row" style="gap:8px;flex-wrap:nowrap"><input id="'+px+'cep" inputmode="numeric" maxlength="9" placeholder="00000-000" autocomplete="postal-code" style="flex:1;min-width:0"><button type="button" class="s" id="'+px+'busca" style="margin-top:4px;white-space:nowrap">Buscar CEP</button></div></label>'
+  +'<div class="note"><span id="'+px+'lmsg">'+MSG0+'</span> <button type="button" class="s" id="'+px+'man" style="padding:3px 8px;font-size:12px">Digitar manualmente</button></div>'
+  +'<div id="'+px+'lcampos" hidden><div class="dg">'
+  +'<label class="lb">Estado<select id="'+px+'uf"><option value="">UF</option>'+UFS.map(u=>"<option>"+u+"</option>").join("")+"</select></label>"
+  +'<label class="lb">Cidade<input id="'+px+'cid" autocomplete="address-level2"></label>'
+  +'<label class="lb">Bairro<input id="'+px+'bai" autocomplete="off"></label>'
+  +'<label class="lb">Rua<input id="'+px+'rua" autocomplete="address-line1"></label>'
+  +'<label class="lb">Número<input id="'+px+'num" autocomplete="off" placeholder="Ex.: 120 ou S/N"></label>'
+  +"</div></div>";
+  $(px+"cep").oninput=e=>{const d=e.target.value.replace(/\D/g,"").slice(0,8);e.target.value=d.length>5?d.slice(0,5)+"-"+d.slice(5):d};
+  $(px+"cep").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();$(px+"busca").click()}};
+  $(px+"man").onclick=()=>{$(px+"lcampos").hidden=false;$(px+"uf").focus()};
+  $(px+"busca").onclick=()=>buscaCep(px);
+}
+async function buscaCep(px){
+  const d=$(px+"cep").value.replace(/\D/g,""),m=$(px+"lmsg"),campos=$(px+"lcampos");
+  const manual=t=>{m.textContent=t;campos.hidden=false;$(px+"uf").focus()};
+  const ORD=" Digite o endereço manualmente, na ordem: estado, cidade, bairro, rua e número.";
+  if(d.length!==8)return manual("CEP inválido."+ORD);
+  m.textContent="Buscando CEP…";
+  try{
+    const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),6000);
+    const r=await fetch("https://viacep.com.br/ws/"+d+"/json/",{signal:ctl.signal});clearTimeout(t);
+    const j=await r.json();
+    if(!r.ok||j.erro)throw 0;
+    $(px+"uf").value=j.uf||"";$(px+"cid").value=j.localidade||"";$(px+"bai").value=j.bairro||"";$(px+"rua").value=j.logradouro||"";$(px+"num").value="";
+    campos.hidden=false;m.textContent="Endereço encontrado. Confira e informe o número.";$(px+"num").focus();
+  }catch(e){manual("CEP não encontrado."+ORD)}
+}
+function lerLoc(px){
+  const v=id=>$(px+id).value.trim(),cep=v("cep"),uf=v("uf"),cid=v("cid"),bai=v("bai"),rua=v("rua"),num=v("num");
+  if(!uf||!cid||!bai||!rua||!num){$(px+"lcampos").hidden=false;return{erro:"Informe o endereço: busque pelo CEP ou digite estado, cidade, bairro, rua e número."}}
+  if(cep&&cep.replace(/\D/g,"").length!==8)return{erro:"CEP inválido."};
+  return{end:{cep,uf,cidade:cid,bairro:bai,rua,num},local:rua+", "+num+" - "+bai+", "+cid+"/"+uf+(cep?" - CEP "+cep:"")};
+}
+function escreveLoc(px,i){
+  const e=(i&&i.end)||{},leg=!!(i&&i.local&&!i.end);
+  $(px+"cep").value=e.cep||"";$(px+"uf").value=e.uf||"";$(px+"cid").value=e.cidade||"";$(px+"bai").value=e.bairro||"";$(px+"rua").value=e.rua||"";$(px+"num").value=e.num||"";
+  $(px+"lcampos").hidden=!(i&&i.end)&&!leg;
+  $(px+"lmsg").textContent=leg?"Endereço atual: "+i.local+". Atualize abaixo, na ordem: estado, cidade, bairro, rua e número.":MSG0;
+}
+montaLoc("s");montaLoc("c");
+
+const NAVIT=[["vHub","Dashboard",null],["vAgenda","Agendamento de consultas","fnAgenda"],["vProc","Procedimentos e preços","fnProc"],["vPac","Pacientes","fnPac"],["vExam","Exames","fnEx"],["vFin","Financeiro","fnFin"],["vPrL","Prontuários","fnPr"],["vCfg","Configurações e preferências","fnCfg",1]];
+let pin=false;try{pin=localStorage.getItem("vc-pin")==="1"}catch(e){}
+const larga=()=>matchMedia("(min-width:900px)").matches;
+function setSide(a){document.body.classList.toggle("side-open",a);$("side").setAttribute("aria-hidden",a?"false":"true");$("sideTg").textContent=a?"›":"‹";$("sideTg").title=a?"Recolher menu":"Abrir menu"}
+function montaNav(atual){
+  const bt=(v,t,f)=>{const b=document.createElement("button");b.type="button";b.className="navi"+((v===atual||(v==="vPac"&&atual==="vVac")||(v==="vPrL"&&atual==="vPront"))?" on":"");b.textContent=t;b.onclick=()=>{if(v!==atual){if(f===null)ir("vHub");else $(f).click()}if(!(larga()&&pin))setSide(false)};return b};
+  $("navTop").replaceChildren(...NAVIT.filter(x=>!x[3]).map(x=>bt(x[0],x[1],x[2])));
+  $("navBot").replaceChildren(...NAVIT.filter(x=>x[3]).map(x=>bt(x[0],x[1],x[2])));
+}
+function atualizaSide(v){
+  const on=!["vLogin","vReg","vReg2","vHub"].includes(v);
+  document.body.classList.toggle("side-on",on);
+  if(!on){setSide(false);return}
+  document.documentElement.style.setProperty("--barh",$("bar").offsetHeight+"px");
+  montaNav(v);
+  aplicaPin();
+  setSide(larga()&&pin);
+}
+function aplicaPin(){document.body.classList.toggle("side-pin",pin);$("pinBtn").classList.toggle("on",pin);$("pinBtn").title=pin?"Desafixar menu":"Fixar menu"}
+$("sideTg").onclick=()=>setSide(!document.body.classList.contains("side-open"));
+$("pinBtn").onclick=()=>{pin=!pin;try{localStorage.setItem("vc-pin",pin?"1":"0")}catch(e){}aplicaPin();setSide(true)};
+document.addEventListener("click",e=>{if(document.body.classList.contains("side-open")&&!(larga()&&pin)&&!e.target.closest("#side,#sideTg"))setSide(false)});
+function ir(v){["vLogin","vReg","vReg2","vHub","vProc","vAgenda","vPac","vExam","vVac","vFin","vPrL","vPront","vCfg"].forEach(x=>$(x).hidden=x!==v);window.scrollTo(0,0);atualizaSide(v);montaTabs(v)}
+
+const TABS=[["vPac","Pacientes",()=>$("fnPac").click()],["vExam","Exames",()=>$("fnEx").click()],["vVac","Vacinas",()=>abrirVac()]];
+function montaTabs(v){document.querySelectorAll(".tabs").forEach(t=>t.replaceChildren(...TABS.map(([id,n,f])=>{const b=document.createElement("button");b.type="button";b.textContent=n;if(id===v)b.className="on";b.onclick=()=>{if(id!==v)f()};return b})))}
+const libJs=u=>new Promise((ok,er)=>{const s=document.createElement("script");s.src=u;s.onload=ok;s.onerror=er;document.head.appendChild(s)});
+
+async function salvarHorariosFuncionamento(c){
+  const{error:eClin}=await sb.from("clinicas").update({horario_variavel:!!c.var}).eq("id",sess.clinicaId);
+  if(eClin)throw eClin;
+  const rows=[];
+  for(let d=0;d<7;d++){
+    const fechado=!c.dias.includes(d);
+    const sc=c.var&&c.porDia&&c.porDia[d]?c.porDia[d]:c;
+    rows.push({
+      clinica_id:sess.clinicaId,
+      dia_semana:d,
+      fechado,
+      abre:fechado?null:sc.ini,
+      fecha:fechado?null:sc.fim
+    });
+  }
+  const{error}=await sb.from("horarios_funcionamento").upsert(rows,{onConflict:"clinica_id,dia_semana"});
+  if(error)throw error;
+}
+
+async function carregarTudo(){
+  if(!sess)return;
+  const cid=sess.clinicaId;
+
+  const[rClin,rHor,rProf,rPH,rEsp,rProc,rTut,rPac,rAg,rFin,rPr,rVac]=await Promise.all([
+    sb.from("clinicas").select("*").eq("id",cid).single(),
+    sb.from("horarios_funcionamento").select("*").eq("clinica_id",cid),
+    sb.from("profissionais").select("*").eq("clinica_id",cid).eq("ativo",true),
+    sb.from("profissional_horarios").select("*").eq("clinica_id",cid),
+    sb.from("especies").select("*").eq("clinica_id",cid),
+    sb.from("procedimentos").select("*").eq("clinica_id",cid).eq("ativo",true),
+    sb.from("tutores").select("*").eq("clinica_id",cid),
+    sb.from("pacientes").select("*").eq("clinica_id",cid),
+    sb.from("agendamentos").select("*").eq("clinica_id",cid),
+    sb.from("financeiro").select("*").eq("clinica_id",cid),
+    sb.from("prontuarios").select("*").eq("clinica_id",cid),
+    sb.from("vacinas").select("*").eq("clinica_id",cid)
+  ]);
+
+  if(rClin.data){
+    const cl=rClin.data;
+    sess.neg=cl.nome||sess.neg;
+    sess.info={
+      tel:cl.telefone||"",
+      end:{cep:cl.cep||"",uf:cl.estado||"",cidade:cl.cidade||"",bairro:cl.bairro||"",rua:cl.rua||"",num:cl.numero||""},
+      local:cl.rua?`${cl.rua}, ${cl.numero||"S/N"} - ${cl.bairro||""}, ${cl.cidade||""}/${cl.estado||""}`:""
+    };
+    $("hubNeg").textContent=sess.neg;
+    const hRows=rHor.data||[];
+    const diasAtivos=hRows.filter(x=>!x.fechado).map(x=>x.dia_semana);
+    const porDia={};
+    hRows.forEach(x=>{
+      if(!x.fechado&&x.abre&&x.fecha){
+        porDia[x.dia_semana]={ini:x.abre.slice(0,5),fim:x.fecha.slice(0,5),pIni:"",pFim:""};
+      }
+    });
+    const baseDia=porDia[diasAtivos[0]]||{ini:"08:00",fim:"18:00",pIni:"",pFim:""};
+    cfg={
+      ini:baseDia.ini,
+      fim:baseDia.fim,
+      pIni:"",
+      pFim:"",
+      dias:diasAtivos.length?diasAtivos:[1,2,3,4,5],
+      var:!!cl.horario_variavel,
+      porDia
+    };
+  }
+
+  profHorarios={};
+  (rPH.data||[]).forEach(h=>{
+    if(!profHorarios[h.profissional_id])profHorarios[h.profissional_id]=[];
+    profHorarios[h.profissional_id].push(h);
+  });
+  profs={};
+  (rProf.data||[]).forEach(p=>{
+    const hs=profHorarios[p.id]||[];
+    let horario=null;
+    if(hs.length){
+      const dias=[...new Set(hs.map(x=>x.dia_semana))];
+      const pd={};
+      hs.forEach(x=>{pd[x.dia_semana]={ini:x.inicio.slice(0,5),fim:x.fim.slice(0,5),pIni:"",pFim:""}});
+      const b=pd[dias[0]]||{ini:cfg.ini,fim:cfg.fim,pIni:"",pFim:""};
+      horario={ini:b.ini,fim:b.fim,pIni:"",pFim:"",dias,var:dias.length>1,porDia:pd};
+    }
+    profs[p.id]={id:p.id,nome:p.nome,cargo:p.cargo||"",usaEmpresa:!horario,horario};
+  });
+
+  esps={};
+  (rEsp.data||[]).forEach(e=>{esps[e.id]={id:e.id,nome:e.nome}});
+
+  procs={};
+  (rProc.data||[]).forEach(p=>{
+    const durMin=Math.round(Number(p.duracao_horas||0.5)*60);
+    procs[p.id]={id:p.id,nome:p.nome,tipo:p.tipo||"",dur:durMin,preco:Number(p.preco||0),cor:p.cor||""};
+  });
+
+  tutores={};
+  (rTut.data||[]).forEach(t=>{tutores[t.id]=t});
+
+  const espById=Object.fromEntries(Object.values(esps).map(e=>[e.id,e.nome]));
+  pacs={};
+  (rPac.data||[]).forEach(p=>{
+    const t=tutores[p.tutor_id]||{};
+    pacs[p.id]={
+      id:p.id,
+      tutorId:p.tutor_id,
+      nome:p.nome,
+      esp:espById[p.especie_id]||"",
+      especieId:p.especie_id||"",
+      sexo:p.sexo==="macho"?"M":p.sexo==="femea"?"F":"",
+      cast:!!p.castrado,
+      reg:p.registro||"",
+      nasc:p.data_nascimento||"",
+      raca:p.raca||"",
+      pel:p.pelagem_cor||"",
+      obito:!!p.obito,
+      tutor:t.nome||"",
+      cpf:t.cpf?cpfFmt(t.cpf):"",
+      tel:t.telefone||"",
+      email:"",
+      end:t.endereco||"",
+      obsCartao:p.observacoes_cartao||""
+    };
+  });
+
+  exs={};
+  marcados={};
+  (rAg.data||[]).forEach(a=>{
+    const pc=pacs[a.paciente_id]||{};
+    const pr=procs[a.procedimento_id]||{};
+    const dtIni=new Date(a.inicio);
+    const localDt=new Date(dtIni.getTime()-dtIni.getTimezoneOffset()*60000);
+    const dataStr=localDt.toISOString().slice(0,10);
+    const horaStr=localDt.toISOString().slice(11,16);
+    const durMin=pr.dur||30;
+    const presenca=a.status==="presente"?"sim":a.status==="faltou"?"nao":"";
+    if(a.status==="cancelado")return;
+    marcados[a.id]={
+      id:a.id,
+      prof:a.profissional_id||"",
+      data:dataStr,
+      hora:horaStr,
+      nome:pc.nome||"Paciente",
+      tel:pc.tel||"",
+      pacId:a.paciente_id,
+      tutor:pc.tutor||"",
+      proc:pr.nome||"Consulta",
+      procId:a.procedimento_id||"",
+      cor:pr.cor||"",
+      tipo:pr.tipo||"",
+      dur:durMin,
+      preco:pr.preco||0,
+      slots:nSlots(durMin),
+      presenca
+    };
+  });
+
+  cobs={};
+  (rFin.data||[]).forEach(c=>{
+    const ag=marcados[c.agendamento_id]||{};
+    const pc=pacs[ag.pacId]||{};
+    const tu=tutores[c.tutor_id]||{};
+    cobs[c.id]={
+      id:c.id,
+      agKey:c.agendamento_id,
+      pacId:ag.pacId||"",
+      paciente:ag.nome||pc.nome||"Paciente",
+      tutor:tu.nome||pc.tutor||"",
+      cpf:tu.cpf?cpfFmt(tu.cpf):(pc.cpf||""),
+      tel:tu.telefone||pc.tel||"",
+      proc:ag.proc||"Consulta",
+      prof:(profs[ag.prof]||{}).nome||ag.prof||"",
+      data:ag.data||(c.criado_em||"").slice(0,10),
+      hora:ag.hora||"",
+      valor:Number(c.valor||0),
+      forma:FORMA_DB_TO_UI[c.forma_pagamento]||c.forma_pagamento||"Pix",
+      parcelas:c.parcelas||1,
+      status:c.status==="pago"?"pago":"pendente",
+      pagoEm:c.pago_em||null
+    };
+  });
+
+  pronts={};
+  (rPr.data||[]).forEach(pr=>{
+    pronts[pr.agendamento_id]={
+      id:pr.id,
+      salvo:true,
+      f:pr.dados&&pr.dados.f?pr.dados.f:{},
+      rx:pr.dados&&Array.isArray(pr.dados.rx)?pr.dados.rx:[],
+      num:pr.dados&&pr.dados.num?pr.dados.num:undefined
+    };
+  });
+
+  vacs={};
+  (rVac.data||[]).forEach(v=>{
+    if(!vacs[v.paciente_id])vacs[v.paciente_id]={f:{},vac:Array.from({length:7},()=>({})),verm:Array.from({length:4},()=>({})),obs:""};
+    const rec=vacs[v.paciente_id];
+    if(v.categoria==="vacina"){
+      const idx=rec.vac.findIndex(x=>!x.v&&!x.d);
+      const item={d:v.data_aplicacao?fmtData(v.data_aplicacao):"",v:v.nome||"",l:v.lote||"",r:v.proxima_dose?fmtData(v.proxima_dose):"",c:v.responsavel||""};
+      if(idx>=0)rec.vac[idx]=item;
+    }else{
+      const idx=rec.verm.findIndex(x=>!x.pr&&!x.d);
+      const item={d:v.data_aplicacao?fmtData(v.data_aplicacao):"",p:v.peso_kg!=null?String(v.peso_kg):"",pr:v.nome||"",n:v.proxima_dose?fmtData(v.proxima_dose):"",vt:v.responsavel||""};
+      if(idx>=0)rec.verm[idx]=item;
+    }
+  });
+
+  aplicaCfg();
+  renderProcs();
+  renderProfSel();
+  renderPfl();
+  renderEsp();
+  renderPac();
+  renderEx();
+  vcOpts();
+  if(!$("vFin").hidden)renderFin();
+  if(!$("vPrL").hidden)renderPrL();
+  if(!$("vPront").hidden&&prA)renderPr();
+  if(!$("vVac").hidden&&vcPend===null&&!$("vcPaper").contains(document.activeElement))renderVac();
+  $("status").textContent="Agenda sincronizada com o Supabase.";
+  $("pstatus").textContent="Procedimentos sincronizados com o Supabase.";
+}
+
+async function abrirSessaoComUsuario(authUser){
+  const{data:perf,error}=await sb.from("perfis").select("*, clinicas(*)").eq("id",authUser.id).single();
+  if(error||!perf)throw new Error("Perfil não encontrado para este usuário.");
+  sess={
+    uid:authUser.id,
+    email:authUser.email||"",
+    clinicaId:perf.clinica_id,
+    papel:perf.papel,
+    neg:perf.clinicas&&perf.clinicas.nome?perf.clinicas.nome:"Clínica",
+    info:{local:"",end:null,tel:""}
+  };
+  $("hubNeg").textContent=sess.neg;
+  await carregarTudo();
+  if(pollTimer)clearInterval(pollTimer);
+  pollTimer=setInterval(()=>carregarTudo().catch(()=>{}),6000);
+}
+
+async function entrar(){
+  const u=$("lUser").value.trim().toLowerCase(),sn=$("lPass").value;
+  const falha=m=>{$("lErr").textContent=m||"E-mail ou senha inválidos.";$("lPass").value=""};
+  if(!u||!sn)return falha("Informe e-mail e senha.");
+  try{
+    const{data,error}=await sb.auth.signInWithPassword({email:u,password:sn});
+    if(error||!data.user)return falha(error&&error.message||"E-mail ou senha inválidos.");
+    $("lErr").textContent="";$("lUser").value="";$("lPass").value="";
+    await abrirSessaoComUsuario(data.user);
+    ir("vHub");
+  }catch(e){falha(e.message)}
+}
+
+$("bReg").onclick=()=>{["rNeg","rEmail","rUser","rPass"].forEach(i=>{$(i).value=""});$("rErr").textContent="";ir("vReg")};
+$("rBack").onclick=()=>ir("vLogin");
+["rNeg","rEmail","rUser","rPass"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key==="Enter")$("rGo").click()}));
+
+$("rGo").onclick=async()=>{
+  const neg=$("rNeg").value.trim(),email=$("rEmail").value.trim().toLowerCase(),usr=$("rUser").value.trim().toLowerCase(),sn=$("rPass").value;
+  const E=m=>{$("rErr").textContent=m};
+  if(neg.length<2)return E("Informe o nome do negócio.");
+  if(!email||!email.includes("@"))return E("Informe um e-mail válido.");
+  if(usr&&!/^[a-z0-9._-]{3,30}$/.test(usr))return E("Usuário: de 3 a 30 caracteres, letras minúsculas, números, ponto, hífen ou sublinhado.");
+  if(sn.length<6)return E("A senha precisa ter pelo menos 6 caracteres.");
+  try{
+    const{data,error}=await sb.auth.signUp({
+      email,
+      password:sn,
+      options:{data:{nome_negocio:neg,usuario:usr||email.split("@")[0]}}
+    });
+    if(error)return E(error.message);
+    if(!data.session){
+      E("Cadastro iniciado! Se o Supabase exigir confirmação de e-mail, confirme no seu e-mail e faça login.");
+      return;
+    }
+    E("");
+    await abrirSessaoComUsuario(data.user);
+    escreveLoc("s",null);$("sErr").textContent="";
+    escreveEditor("s",{...CFG0,dias:[1,2,3,4,5]});
+    ir("vReg2");
+  }catch(e){E("Não foi possível criar o acesso.")}
+};
+
+$("sGo").onclick=async()=>{
+  const L=lerLoc("s"),E=m=>{$("sErr").textContent=m};
+  if(L.erro)return E(L.erro);
+  const r=lerEditor("s");
+  if(r.erro)return E(r.erro);
+  try{
+    const{error}=await sb.from("clinicas").update({
+      cep:L.end.cep,estado:L.end.uf,cidade:L.end.cidade,bairro:L.end.bairro,rua:L.end.rua,numero:L.end.num
+    }).eq("id",sess.clinicaId);
+    if(error)throw error;
+    await salvarHorariosFuncionamento(r.c);
+    await carregarTudo();
+    ir("vHub");
+  }catch(e){E("Não foi possível salvar os dados iniciais.")}
+};
+
+$("bLogin").onclick=entrar;
+["lUser","lPass"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key==="Enter")entrar()}));
+$("bLogout").onclick=async()=>{
+  if(pollTimer){clearInterval(pollTimer);pollTimer=null}
+  await sb.auth.signOut().catch(()=>{});
+  sess=null;marcados={};procs={};pacs={};exs={};profs={};esps={};vacs={};cobs={};pronts={};tutores={};
+  $("lErr").textContent="";ir("vLogin");
+};
+$("fnAgenda").onclick=()=>{ir("vAgenda");render()};
+$("fnProc").onclick=()=>{ir("vProc");renderProcs()};
+document.querySelectorAll("[data-back]").forEach(b=>{b.textContent="← Dashboard";b.onclick=()=>ir("vHub")});
+
+const procList=()=>Object.values(procs).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt-BR"));
+const corOk=c=>/^#[0-9a-f]{6}$/i.test(c||"")?c:"";
+const corDe=a=>corOk((procs[a.procId]||{}).cor)||corOk(a.cor);
+const PALETA=["#0f766e","#2563eb","#9333ea","#db2777","#ea580c","#ca8a04","#16a34a","#dc2626"];
+
+const profList=()=>Object.values(profs).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt-BR"));
+const nomeProf=id=>{const p=profs[id];return p?p.nome+(p.cargo?" – "+p.cargo:""):id};
+const profNome=id=>(profs[id]||{}).nome||id;
+function horarioDe(id){const p=profs[id];if(p&&!p.usaEmpresa&&p.horario&&p.horario.ini&&p.horario.fim)return p.horario;return cfg}
+function renderProfSel(){
+  const s=$("prof"),cur=s.value,arr=profList();
+  s.innerHTML=arr.map(p=>'<option value="'+p.id+'">'+escapar(p.nome+(p.cargo?" – "+p.cargo:""))+"</option>").join("");
+  if(arr.some(p=>p.id===cur))s.value=cur;
+  render();
+}
+function resumoHor(p){if(p.usaEmpresa||!p.horario)return"Horário da empresa";const h=p.horario;return(h.dias||[]).map(i=>DIAS[i]).join(", ")+(h.var?" · horários por dia":" · "+h.ini+"–"+h.fim)}
+function renderPfl(){
+  const l=$("pfl"),arr=profList();
+  l.innerHTML=arr.length?"":'<div class="note">Nenhum profissional cadastrado.</div>';
+  arr.forEach(p=>{
+    const c=document.createElement("div");c.className="card pi";c.style.margin="0 0 8px";
+    c.innerHTML="<div><b>"+escapar(p.nome)+"</b><small>"+escapar(p.cargo||"Sem cargo")+" · "+escapar(resumoHor(p))+"</small></div><div class='row' style='gap:6px'><button class='s'>Editar</button><button class='s'>Excluir</button></div>";
+    const[be,bd]=c.querySelectorAll("button");
+    be.onclick=()=>abrirPf(p.id);
+    bd.onclick=()=>confirma(bd,"Excluir",()=>delPf(p.id));
+    l.appendChild(c);
+  });
+}
+function abrirPf(id){
+  editPf=id||null;const p=id?profs[id]:{},usa=!id||p.usaEmpresa!==false;
+  $("pfTitle").textContent=id?"Editar profissional":"Novo profissional";
+  $("pfN").value=p.nome||"";$("pfC").value=p.cargo||"";
+  escreveEditor("pf",p.horario||{...cfg,dias:cfg.dias.slice()});
+  $("pfUsa").checked=usa;$("pfEd").hidden=usa;$("pfErr").textContent="";
+  $("dlgPf").showModal();
+}
+$("bNewPf").onclick=()=>abrirPf();
+$("pfClose").onclick=()=>$("dlgPf").close();
+$("pfUsa").onchange=()=>{$("pfEd").hidden=$("pfUsa").checked};
+$("pfOk").onclick=async()=>{
+  const nome=$("pfN").value.trim(),cargo=$("pfC").value.trim(),usa=$("pfUsa").checked,E=m=>{$("pfErr").textContent=m};
+  if(!nome)return E("Informe o nome do profissional.");
+  if(!cargo)return E("Informe o cargo.");
+  let r=null;
+  if(!usa){r=lerEditor("pf");if(r.erro)return E(r.erro)}
+  try{
+    let pfId=editPf;
+    if(pfId){
+      const{error}=await sb.from("profissionais").update({nome,cargo}).eq("id",pfId);
+      if(error)throw error;
+      await sb.from("profissional_horarios").delete().eq("profissional_id",pfId);
+    }else{
+      const{data,error}=await sb.from("profissionais").insert({clinica_id:sess.clinicaId,nome,cargo,ativo:true}).select("id").single();
+      if(error)throw error;
+      pfId=data.id;
+    }
+    if(!usa&&r){
+      const rows=r.c.dias.map(d=>{
+        const sc=r.c.var&&r.c.porDia&&r.c.porDia[d]?r.c.porDia[d]:r.c;
+        return{clinica_id:sess.clinicaId,profissional_id:pfId,dia_semana:d,inicio:sc.ini,fim:sc.fim};
+      });
+      const{error:eh}=await sb.from("profissional_horarios").insert(rows);
+      if(eh)throw eh;
+    }
+    await carregarTudo();
+    $("dlgPf").close();
+  }catch(e){E("Não foi possível salvar o profissional.")}
+};
+async function delPf(id){
+  try{
+    const{error}=await sb.from("profissionais").update({ativo:false}).eq("id",id);
+    if(error)throw error;
+    await carregarTudo();
+    $("pfMsg").textContent="Profissional removido.";
+  }catch(e){$("pfMsg").textContent="Não foi possível excluir o profissional."}
+}
+
+const espList=()=>Object.values(esps).map(e=>e.nome).sort((a,b)=>a.localeCompare(b,"pt-BR"));
+function espSel(atual){
+  const l=espList();if(atual&&!l.includes(atual))l.push(atual);
+  l.sort((a,b)=>a.localeCompare(b,"pt-BR"));
+  $("paEsp").innerHTML='<option value="">'+(l.length?"Selecione":"Nenhuma espécie cadastrada")+"</option>"+l.map(n=>"<option>"+escapar(n)+"</option>").join("");
+  $("paEsp").value=atual||"";
+}
+function renderEsp(){
+  const l=$("espl"),arr=espList();
+  l.innerHTML=arr.length?"":'<div class="note">Nenhuma espécie cadastrada.</div>';
+  arr.forEach(n=>{
+    const c=document.createElement("span");c.style.cssText="display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--bd);border-radius:999px;background:var(--bg)";
+    c.append(n);
+    const x=document.createElement("button");x.type="button";x.textContent="×";x.title="Remover "+n;x.setAttribute("aria-label","Remover "+n);x.style.cssText="border:0;background:none;color:var(--mu);cursor:pointer;font-size:16px;line-height:1;padding:0 2px";
+    x.onclick=()=>delEsp(n);
+    c.appendChild(x);l.appendChild(c);
+  });
+}
+async function addEsp(nome){
+  const M=$("espMsg");M.textContent="";
+  nome=nome.trim().replace(/\s+/g," ");
+  if(nome.length<2){M.textContent="Informe o nome da espécie.";return}
+  if(/\d/.test(nome)){M.textContent="O nome da espécie não pode conter números.";return}
+  nome=nome[0].toUpperCase()+nome.slice(1);
+  if(espList().some(e=>norm(e)===norm(nome))){M.textContent="Esta espécie já está cadastrada.";return}
+  try{
+    const{error}=await sb.from("especies").insert({clinica_id:sess.clinicaId,nome});
+    if(error)throw error;
+    $("espN").value="";
+    await carregarTudo();
+  }catch(e){M.textContent="Não foi possível salvar a espécie."}
+}
+async function delEsp(n){
+  const M=$("espMsg"),q=pacList().filter(p=>p.esp===n).length;M.textContent="";
+  if(q){M.textContent="Há "+q+" paciente(s) cadastrado(s) como "+n+".";return}
+  const par=Object.values(esps).find(e=>e.nome===n);if(!par)return;
+  try{
+    const{error}=await sb.from("especies").delete().eq("id",par.id);
+    if(error)throw error;
+    await carregarTudo();
+  }catch(e){M.textContent="Não foi possível remover a espécie."}
+}
+$("espAdd").onclick=()=>addEsp($("espN").value);
+$("espN").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();addEsp($("espN").value)}};
+
+function renderProcs(){
+  const l=$("plist"),arr=procList();
+  l.innerHTML=arr.length?"":'<div class="card">Nenhum procedimento cadastrado. Toque em “+ Novo procedimento”.</div>';
+  arr.forEach(p=>{
+    const c=document.createElement("div");c.className="card pi";
+    c.innerHTML="<div><b>"+(corOk(p.cor)?'<i class="dot" style="--c:'+p.cor+'"></i>':"")+escapar(p.nome)+"</b><small>"+escapar(p.tipo||"Sem tipo")+" · "+fmtDur(p.dur)+" · "+brl(p.preco)+"</small></div><div class='row' style='gap:6px'><button class='s'>Editar</button><button class='s'>Excluir</button></div>";
+    const[be,bd]=c.querySelectorAll("button");
+    be.onclick=()=>abrirProc(p.id);
+    bd.onclick=()=>confirma(bd,"Excluir",()=>delProc(p.id));
+    l.appendChild(c);
+  });
+}
+function abrirProc(id){
+  editId=id||null;const p=id?procs[id]:{};
+  $("d3title").textContent=id?"Editar procedimento":"Novo procedimento";
+  $("fNome").value=p.nome||"";$("fTipo").value=p.tipo||"";$("fDur").value=p.dur?p.dur/60:0.5;$("fPreco").value=p.preco!=null?p.preco:"";$("fCor").value=corOk(p.cor)||PALETA[procList().length%PALETA.length];$("d3err").textContent="";
+  $("dlg3").showModal();
+}
+$("bNewProc").onclick=()=>abrirProc();
+$("d3close").onclick=()=>$("dlg3").close();
+$("d3ok").onclick=async()=>{
+  const nome=$("fNome").value.trim(),horas=parseFloat($("fDur").value),preco=parseFloat($("fPreco").value),durHoras=Math.round(horas*2)*0.5;
+  if(!nome){$("d3err").textContent="Informe o nome.";return}
+  if(!(horas>=0.5)){$("d3err").textContent="Informe a duração em horas (mínimo 0,5).";return}
+  if(!(preco>=0)){$("d3err").textContent="Informe o preço.";return}
+  const payload={nome,tipo:$("fTipo").value.trim(),duracao_horas:durHoras,preco:Math.round(preco*100)/100,cor:$("fCor").value,ativo:true};
+  try{
+    if(editId){
+      const{error}=await sb.from("procedimentos").update(payload).eq("id",editId);
+      if(error)throw error;
+    }else{
+      const{error}=await sb.from("procedimentos").insert({...payload,clinica_id:sess.clinicaId});
+      if(error)throw error;
+    }
+    await carregarTudo();
+    $("dlg3").close();
+  }catch(e){$("d3err").textContent="Não foi possível salvar o procedimento."}
+};
+async function delProc(id){
+  try{
+    const{error}=await sb.from("procedimentos").update({ativo:false}).eq("id",id);
+    if(error)throw error;
+    await carregarTudo();
+  }catch(e){}
+}
+
+const pacList=()=>Object.values(pacs).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt-BR"));
+const exList=()=>Object.values(exs).sort((a,b)=>(b.data||"").localeCompare(a.data||""));
+const pacLabel=p=>p.nome+" · Reg. "+(p.reg||"—")+" · Tutor: "+(p.tutor||"—")+(p.cpf?" · CPF "+p.cpf:"");
+function pacMatch(p,q){q=norm(q.trim());if(!q)return true;const qd=q.replace(/\D/g,"");return norm(p.nome).includes(q)||norm(p.reg).includes(q)||norm(p.tutor).includes(q)||(qd.length>=3&&cpfDig(p.cpf).includes(qd))}
+
+function renderPac(){
+  const q=$("pbusca").value.trim().toLowerCase(),l=$("pacl"),arr=pacList().filter(p=>(!!p.obito===($("pFil").value==="obito"))&&(!q||(p.nome||"").toLowerCase().includes(q)||(p.tel||"").includes(q)||(p.reg||"").toLowerCase().includes(q)||(p.esp||"").toLowerCase().includes(q)||(p.tutor||"").toLowerCase().includes(q)||(p.cpf||"").includes(q)));
+  l.innerHTML=arr.length?"":'<div class="card">'+($("pFil").value==="obito"?"Nenhum óbito registrado.":"Nenhum paciente encontrado. Toque em “+ Novo paciente”.")+"</div>";
+  arr.forEach(p=>{
+    const n=exList().filter(x=>x.pacId===p.id).length;
+    const c=document.createElement("div");c.className="card pi";
+    c.innerHTML="<div><b>"+escapar(p.nome)+"</b>"+(p.obito?" <span class='tag'>Óbito</span>":"")+"<small>"+(p.esp?escapar(p.esp)+" · ":"")+"Registro: "+escapar(p.reg||"—")+(p.nasc?" · Nasc.: "+fmtData(p.nasc):"")+"</small><small>Tutor: "+escapar(p.tutor||"—")+(p.cpf?" · CPF "+escapar(p.cpf):"")+(p.tel?" · "+escapar(p.tel):"")+"</small>"+(()=>{const t=[p.sexo==="M"?"Macho":p.sexo==="F"?"Fêmea":"",p.cast?(p.sexo==="F"?"Castrada":p.sexo==="M"?"Castrado":"Castrado(a)"):"",p.raca,p.pel].filter(Boolean);return t.length?"<small>"+escapar(t.join(" · "))+"</small>":""})()+"</div><div class='row' style='gap:6px'><button class='s'>Exames ("+n+")</button><button class='s'>Vacinas</button><button class='s'>Editar</button><button class='s'>Excluir</button></div>";
+    const[bx,bv,be,bd]=c.querySelectorAll("button");
+    bv.onclick=()=>abrirVac(p.id);
+    bx.onclick=()=>{exPac=p.id;$("exBusca").value="";ir("vExam");renderEx()};
+    be.onclick=()=>abrirPac(p.id);
+    bd.onclick=()=>confirma(bd,"Excluir",()=>delPac(p.id));
+    l.appendChild(c);
+  });
+}
+function aba(t){$("tpA").hidden=t!=="A";$("tpT").hidden=t!=="T";$("tbA").className=t==="A"?"p":"s";$("tbT").className=t==="T"?"p":"s"}
+$("tbA").onclick=()=>aba("A");$("tbT").onclick=()=>aba("T");
+$("paC").oninput=e=>{e.target.value=cpfFmt(e.target.value)};
+function abrirPac(id){
+  editPac=id||null;const p=id?pacs[id]:{};
+  $("paTitle").textContent=id?"Editar paciente":"Novo paciente";
+  $("paN").value=p.nome||"";espSel(p.esp);$("paR").value=p.reg||"";$("paTN").value=p.tutor||"";$("paC").value=p.cpf||"";$("paT").value=p.tel||"";$("paD").value=p.nasc||"";$("paE").value=p.email||"";$("paRc").value=p.raca||"";$("paPl").value=p.pel||"";$("paSx").value=p.sexo==="M"?"macho":p.sexo==="F"?"femea":"";$("paCs").checked=!!p.cast;$("paEnd").value=p.end||"";$("paOb").checked=!!p.obito;$("paErr").textContent="";aba("A");
+  $("dlgPac").showModal();
+}
+$("bNewPac").onclick=()=>abrirPac();
+$("paClose").onclick=()=>$("dlgPac").close();
+$("pbusca").oninput=renderPac;
+$("paOk").onclick=async()=>{
+  const nome=$("paN").value.trim(),reg=$("paR").value.trim(),espNome=$("paEsp").value,tutor=$("paTN").value.trim(),cpfLimpo=cpfDig($("paC").value),tel=$("paT").value.trim(),E=m=>{$("paErr").textContent=m};
+  if(!nome){aba("A");return E("Informe o nome do animal.")}
+  if(!espNome){aba("A");return E(espList().length?"Selecione a espécie do animal.":"Cadastre as espécies em Configurações e preferências.")}
+  if(!tutor){aba("T");return E("Informe o nome do tutor.")}
+  if(cpfLimpo&&!cpfOk(cpfLimpo)){aba("T");return E("CPF do tutor inválido.")}
+  if(tel&&(/[^\d\s()+\-]/.test(tel)||tel.replace(/\D/g,"").length<8)){aba("T");return E("Telefone inválido.")}
+  try{
+    let tutorId=editPac&&pacs[editPac]?pacs[editPac].tutorId:null;
+    const tutorPayload={clinica_id:sess.clinicaId,nome:tutor,cpf:cpfLimpo||null,telefone:tel||null,endereco:$("paEnd").value.trim()||null};
+    if(tutorId){
+      const{error:et}=await sb.from("tutores").update(tutorPayload).eq("id",tutorId);
+      if(et)throw et;
+    }else if(cpfLimpo){
+      const{data:exTut}=await sb.from("tutores").select("id").eq("clinica_id",sess.clinicaId).eq("cpf",cpfLimpo).maybeSingle();
+      if(exTut){
+        tutorId=exTut.id;
+        await sb.from("tutores").update(tutorPayload).eq("id",tutorId);
+      }
+    }
+    if(!tutorId){
+      const{data:nt,error:et2}=await sb.from("tutores").insert(tutorPayload).select("id").single();
+      if(et2)throw et2;
+      tutorId=nt.id;
+    }
+
+    const espObj=Object.values(esps).find(x=>x.nome===espNome);
+    const sexoDb=$("paSx").value||null;
+    const obitoVal=$("paOb").checked;
+    const pacPayload={
+      clinica_id:sess.clinicaId,
+      tutor_id:tutorId,
+      nome,
+      registro:reg||null,
+      especie_id:espObj?espObj.id:null,
+      raca:$("paRc").value.trim()||null,
+      pelagem_cor:$("paPl").value.trim()||null,
+      sexo:sexoDb,
+      castrado:$("paCs").checked,
+      data_nascimento:$("paD").value||null,
+      obito:obitoVal,
+      data_obito:obitoVal?(editPac&&pacs[editPac]&&pacs[editPac].data_obito||hoje.toISOString().slice(0,10)):null
+    };
+    if(editPac){
+      const{error:ep}=await sb.from("pacientes").update(pacPayload).eq("id",editPac);
+      if(ep)throw ep;
+    }else{
+      const{error:ep2}=await sb.from("pacientes").insert(pacPayload);
+      if(ep2)throw ep2;
+    }
+    await carregarTudo();
+    $("dlgPac").close();
+  }catch(e){E("Não foi possível salvar o paciente.")}
+};
+async function delPac(id){
+  try{
+    const{error}=await sb.from("pacientes").delete().eq("id",id);
+    if(error)throw error;
+    await carregarTudo();
+  }catch(e){}
+}
+
+function renderEx(){
+  const f=$("exFil");
+  const q=$("exBusca").value,ms=pacList().filter(p=>pacMatch(p,q)),ids=new Set(ms.map(p=>p.id));f.innerHTML='<option value="">'+(q.trim()?"Todos os resultados ("+ms.length+")":"Todos os pacientes")+"</option>"+ms.map(p=>'<option value="'+p.id+'">'+escapar(pacLabel(p))+"</option>").join("");
+  f.value=exPac;if(f.value!==exPac)exPac=f.value;
+  $("exInfo").textContent=exPac&&pacs[exPac]?pacLabel(pacs[exPac]):(q.trim()&&!ms.length?"Nenhum paciente encontrado.":"");const l=$("exl"),arr=exList().filter(x=>exPac?x.pacId===exPac:(!q.trim()||ids.has(x.pacId)));
+  l.innerHTML=arr.length?"":'<div class="card">Nenhum exame anexado.</div>';
+}
+$("exFil").onchange=()=>{exPac=$("exFil").value;renderEx()};
+$("exBusca").oninput=()=>{const q=$("exBusca").value,m=pacList().filter(p=>pacMatch(p,q));exPac=q.trim()&&m.length===1?m[0].id:"";renderEx()};
+function exSelInfo(){const p=pacs[$("exP").value];$("exSel").textContent=p?"Selecionado: "+pacLabel(p):($("exQ").value.trim()?"Nenhum paciente encontrado.":"Selecione o paciente na lista.")}
+function listaExP(sel){
+  const q=$("exQ").value,ms=pacList().filter(p=>pacMatch(p,q)),s=$("exP");
+  s.innerHTML=ms.map(p=>'<option value="'+p.id+'">'+escapar(pacLabel(p))+"</option>").join("");
+  s.value=sel&&ms.some(p=>p.id===sel)?sel:(q.trim()&&ms.length===1?ms[0].id:"");
+  exSelInfo();
+}
+$("exQ").oninput=()=>listaExP($("exP").value);
+$("exP").onchange=exSelInfo;
+function abrirEx(){
+  const arr=pacList();
+  $("exQ").value="";listaExP(exPac);
+  $("exT").value="";$("exD").value=$("date").value;$("exF").value="";$("exN").value="";
+  $("exErr").textContent=arr.length?"":"Cadastre um paciente antes de anexar exames.";
+  $("dlgEx").showModal();
+}
+$("bNewEx").onclick=abrirEx;
+$("exClose").onclick=()=>$("dlgEx").close();
+$("exOk").onclick=async()=>{
+  const E=m=>{$("exErr").textContent=m},pac=$("exP").value;
+  if(!pac)return E("Pesquise e selecione o paciente.");
+  try{
+    const{error}=await sb.from("exames").insert({
+      clinica_id:sess.clinicaId,
+      paciente_id:pac,
+      nome:$("exT").value.trim()||"Exame",
+      data_exame:$("exD").value||null,
+      observacoes:$("exN").value.trim()||null
+    });
+    if(error)throw error;
+    await carregarTudo();
+    $("dlgEx").close();
+  }catch(e){E("Não foi possível salvar o registro do exame.")}
+};
+$("fnPac").onclick=()=>{$("pFil").value="vivos";ir("vPac");renderPac()};
+$("pFil").onchange=renderPac;
+$("fnEx").onclick=()=>{exPac="";$("exBusca").value="";ir("vExam");renderEx()};
+
+function calcOcc(){
+  occ={};
+  for(const[k,a]of Object.entries(marcados)){
+    for(let i=0;i<(a.slots||1);i++)occ[a.prof+"_"+a.data+"_"+toH(toMin(a.hora)+30*i).replace(":","")]={k,a,start:i===0};
+  }
+}
+function render(){
+  calcOcc();
+  const p=$("prof").value,d=$("date").value,g=$("grid"),H=horarioDe(p);
+  g.innerHTML="";
+  if(!d)return;
+  if(!p){g.innerHTML='<div class="note">Nenhum profissional cadastrado. Cadastre em Configurações e preferências.</div>';return}
+  if(!H.dias.includes(new Date(d+"T12:00:00").getDay())){g.innerHTML='<div class="note">Sem atendimento deste profissional neste dia da semana.</div>';return}
+  const agora=new Date();
+  horasDia(d,H).forEach(h=>{
+    const o=occ[p+"_"+d+"_"+h.replace(":","")];
+    const passado=new Date(d+"T"+h+":00")<agora;
+    const b=document.createElement("button");
+    const cor=o?corDe(o.a):"";
+    b.className="slot "+(o?"busy"+(cor?" cor":""):passado?"past free":"free");
+    if(cor)b.style.setProperty("--c",cor);
+    b.innerHTML="<b>"+h+"</b><span>"+(o?(o.start?(o.a.presenca==="sim"?"✓ ":o.a.presenca==="nao"?"✗ ":(new Date(o.a.data+"T"+o.a.hora+":00")-30*60000<=agora?"⏳ ":""))+escapar(o.a.nome)+(o.a.proc?" · "+escapar(o.a.proc):""):"↳ "+escapar(o.a.nome)):passado?"Encerrado":"Livre")+"</span>";
+    if(o)b.onclick=()=>abrirCancelar(o.k,o.a);
+    else if(!passado)b.onclick=()=>abrirNovo(h);
+    g.appendChild(b);
+  });
+  $("leg").innerHTML=procList().filter(p=>corOk(p.cor)).map(p=>'<span><i class="dot" style="--c:'+p.cor+'"></i>'+escapar(p.nome)+'</span>').join("");
+}
+function atualizaFim(){
+  const pr=procs[$("pproc").value],dur=pr?pr.dur:30;
+  $("dend").textContent="Ocupa "+fmtDur(nSlots(dur)*30)+" · término previsto às "+toH(toMin(sel.h)+nSlots(dur)*30);
+}
+function infoAg(){const p=pacs[$("pselp").value];$("pinfo").textContent=p?"Tutor: "+(p.tutor||"—")+(p.tel?" · "+p.tel:""):($("pbq").value.trim()?"Nenhum paciente encontrado.":(pacList().length?"Selecione o paciente na lista.":"Nenhum paciente cadastrado. Cadastre em Pacientes antes de agendar."))}
+function listaAg(sId){
+  const q=$("pbq").value,ms=pacList().filter(p=>!p.obito&&pacMatch(p,q)),s=$("pselp");
+  s.innerHTML=ms.map(p=>'<option value="'+p.id+'">'+escapar(pacLabel(p))+"</option>").join("");
+  s.value=sId&&ms.some(p=>p.id===sId)?sId:(q.trim()&&ms.length===1?ms[0].id:"");
+  infoAg();
+}
+$("pbq").oninput=()=>listaAg($("pselp").value);
+$("pselp").onchange=infoAg;
+function abrirNovo(h){
+  sel={h};
+  $("dtitle").textContent=nomeProf($("prof").value)+" · "+fmtData($("date").value)+" às "+h;
+  const pl=procList();
+  $("pproc").innerHTML=pl.map(p=>`<option value="${p.id}">${escapar(p.nome)} · ${fmtDur(p.dur)} · ${brl(p.preco)}</option>`).join("");
+  $("pbq").value="";listaAg();$("derr").textContent=pl.length?"":"Cadastre um procedimento antes de agendar.";
+  $("dok").disabled=!pl.length;
+  atualizaFim();$("dlg").showModal();$("pbq").focus();
+}
+$("pproc").onchange=atualizaFim;
+$("dcancel").onclick=()=>$("dlg").close();
+$("dok").onclick=async()=>{
+  const pid=$("pselp").value,pc=pacs[pid],procId=$("pproc").value;
+  if(!pc){$("derr").textContent="Selecione um paciente da lista.";return}
+  if(!procId){$("derr").textContent="Selecione um procedimento.";return}
+  const profId=$("prof").value,d=$("date").value;
+  const inicioIso=new Date(d+"T"+sel.h+":00").toISOString();
+  try{
+    const{error}=await sb.from("agendamentos").insert({
+      clinica_id:sess.clinicaId,
+      paciente_id:pid,
+      procedimento_id:procId,
+      profissional_id:profId||null,
+      inicio:inicioIso,
+      fim:inicioIso,
+      status:"agendado"
+    });
+    if(error){
+      $("derr").textContent=error.message.includes("agendamentos_sem_conflito")?"Este horário conflita com outro agendamento do profissional.":error.message;
+      return;
+    }
+    await carregarTudo();
+    $("dlg").close();
+  }catch(e){$("derr").textContent="Não foi possível agendar."}
+};
+
+const iniAg=a=>new Date(a.data+"T"+a.hora+":00");
+const pacDe=a=>pacs[a.pacId]||pacList().find(p=>p.nome===a.nome)||{};
+const lerValor=s=>{const t=String(s).trim();const n=t.includes(",")?parseFloat(t.replace(/\./g,"").replace(",",".")):parseFloat(t);return isNaN(n)?NaN:Math.round(n*100)/100};
+const formaTxt=c=>c.forma==="Crédito parcelado"?"Crédito parcelado em "+c.parcelas+"x de "+brl(c.valor/c.parcelas):c.forma;
+
+function abrirCancelar(k,a){
+  cancelKey=k;
+  const fim=toH(toMin(a.hora)+(a.slots||1)*30);
+  $("d2info").innerHTML="<b>"+escapar(a.nome)+"</b><br>"+nomeProf(a.prof)+"<br>"+fmtData(a.data)+" das "+a.hora+" às "+fim+"<br>"+escapar(a.proc||"Consulta")+(a.tipo?" ("+escapar(a.tipo)+")":"")+" · "+brl(a.preco)+(a.tel?"<br>Tel: "+escapar(a.tel):"");
+  renderPres(k,a);$("dlg2").showModal();
+}
+$("d2close").onclick=()=>$("dlg2").close();
+$("d2del").onclick=async()=>{
+  try{
+    const{error}=await sb.from("agendamentos").update({status:"cancelado"}).eq("id",cancelKey);
+    if(error)throw error;
+    await carregarTudo();
+  }catch(e){}
+  $("dlg2").close();
+};
+
+async function setPres(k,a,v){
+  try{
+    const stDb=v==="sim"?"presente":v==="nao"?"faltou":"agendado";
+    const{error}=await sb.from("agendamentos").update({status:stDb}).eq("id",k);
+    if(error)throw error;
+    await carregarTudo();
+  }catch(e){}
+  $("dlg2").close();
+}
+function renderPres(k,a){
+  const D=$("d2pres");D.innerHTML="";$("d2del").style.display=a.presenca==="sim"?"none":"";
+  const pb=$("d2pr"),lib=iniAg(a)-30*60000<=Date.now();pb.disabled=!lib;pb.title=lib?"":"O prontuário só fica disponível a partir de 30 minutos antes da consulta.";
+  const mk=(t,cls,fn)=>{const b=document.createElement("button");b.type="button";b.className=cls;b.textContent=t;b.onclick=fn;return b};
+  const linha=(txt,bold)=>{const d=document.createElement("div");d.style.cssText="margin-top:12px;padding-top:10px;border-top:1px solid var(--bd);"+(bold?"font-weight:600":"color:var(--mu);font-size:13px");d.textContent=txt;D.appendChild(d)};
+  const bts=(...b)=>{const r=document.createElement("div");r.className="btns";r.style.cssText="justify-content:flex-start;margin-top:8px";b.forEach(x=>r.appendChild(x));D.appendChild(r)};
+  if(a.presenca==="sim"){linha("✓ Paciente compareceu. A cobrança foi gerada no Financeiro.");bts(mk("Ver no Financeiro","s",()=>{$("dlg2").close();$("fnFin").click()}))}
+  else if(a.presenca==="nao"){linha("✗ Paciente não compareceu.");bts(mk("Desfazer","s",()=>setPres(k,a,"")))}
+  else if(iniAg(a)-30*60000<=Date.now()){linha("O paciente esteve presente?",true);bts(mk("Sim, compareceu","p",()=>{$("dlg2").close();abrirPg({k,a})}),mk("Não compareceu","s",()=>setPres(k,a,"nao")))}
+  else{const t=new Date(iniAg(a)-30*60000),z=x=>String(x).padStart(2,"0");linha("A confirmação de presença fica disponível a partir de "+z(t.getDate())+"/"+z(t.getMonth()+1)+"/"+t.getFullYear()+" às "+z(t.getHours())+":"+z(t.getMinutes())+" (30 minutos antes da consulta).")}
+}
+
+function updPg(){
+  const par=$("pgForma").value==="Crédito parcelado";$("pgParW").hidden=!par;
+  const v=lerValor($("pgVal").value),n=+$("pgPar").value;
+  $("pgParNote").textContent=par&&!isNaN(v)?n+"x de "+brl(v/n):"";
+}
+function abrirPg(ctx){
+  pgCtx=ctx;const c=ctx.edit?ctx.c:null,a=ctx.a,p=a?pacDe(a):{};
+  const i=c?c:{paciente:a.nome,tutor:p.tutor||a.tutor||"",cpf:p.cpf||"",tel:p.tel||a.tel||"",proc:a.proc||"Consulta",prof:profNome(a.prof),data:a.data,hora:a.hora};
+  $("pgTitle").textContent=c?"Editar cobrança":"Confirmar presença e cobrança";
+  $("pgResumo").innerHTML="<b>"+escapar(i.paciente)+"</b><br>Tutor: "+escapar(i.tutor||"—")+"<br>CPF: "+escapar(i.cpf||"—")+" · Tel: "+escapar(i.tel||"—")+"<br>"+escapar(i.proc)+" · "+escapar(i.prof)+"<br>"+fmtData(i.data)+" às "+i.hora;
+  $("pgVal").value=Number(c?c.valor:(a.preco||0)).toFixed(2).replace(".",",");
+  $("pgForma").value=c?c.forma:"Pix";
+  $("pgPar").value=c&&c.parcelas>1?String(c.parcelas):"2";
+  $("pgPago").checked=c?c.status==="pago":true;
+  $("pgErr").textContent="";$("pgOk").textContent=c?"Salvar":"Confirmar presença";$("pgOk").disabled=false;
+  updPg();$("dlgPg").showModal();
+}
+$("pgForma").onchange=updPg;$("pgPar").onchange=updPg;$("pgVal").oninput=updPg;
+$("pgClose").onclick=()=>$("dlgPg").close();
+$("pgOk").onclick=async()=>{
+  const E=m=>{$("pgErr").textContent=m},v=lerValor($("pgVal").value),forma=$("pgForma").value;
+  if(isNaN(v)||v<0)return E("Informe um valor válido.");
+  if(!forma)return E("Escolha a forma de pagamento.");
+  const par=forma==="Crédito parcelado"?+$("pgPar").value:1,pago=$("pgPago").checked,ctx=pgCtx;
+  $("pgOk").disabled=true;
+  try{
+    const formaDb=FORMA_UI_TO_DB[forma]||"pix";
+    const statusDb=pago?"pago":"pendente";
+    if(ctx.edit){
+      const{error}=await sb.from("financeiro").update({
+        valor:v,forma_pagamento:formaDb,parcelas:par,status:statusDb,pago_em:pago?new Date().toISOString():null
+      }).eq("id",ctx.edit);
+      if(error)throw error;
+    }else{
+      const{k}=ctx;
+      const{error:ea}=await sb.from("agendamentos").update({status:"presente"}).eq("id",k);
+      if(ea)throw ea;
+      const{error:ef}=await sb.from("financeiro").update({
+        valor:v,forma_pagamento:formaDb,parcelas:par,status:statusDb,pago_em:pago?new Date().toISOString():null
+      }).eq("agendamento_id",k);
+      if(ef)throw ef;
+    }
+    await carregarTudo();
+    $("dlgPg").close();
+  }catch(e){E(e.message||"Não foi possível salvar a cobrança.")}
+  $("pgOk").disabled=false;
+};
+
+async function setPago(id,pago){
+  try{
+    const{error}=await sb.from("financeiro").update({status:pago?"pago":"pendente",pago_em:pago?new Date().toISOString():null}).eq("id",id);
+    if(error)throw error;
+    await carregarTudo();
+  }catch(e){}
+}
+function renderFin(){
+  const q=norm($("finBusca").value.trim()),qd=q.replace(/\D/g,""),per=$("finPer").value,st=$("finSt").value;
+  const n=new Date(),p2=x=>String(x).padStart(2,"0"),hj=n.getFullYear()+"-"+p2(n.getMonth()+1)+"-"+p2(n.getDate());
+  const base=Object.values(cobs).filter(c=>(per==="todos"||(per==="hoje"?c.data===hj:(c.data||"").startsWith(hj.slice(0,7))))&&(!q||norm(c.paciente).includes(q)||norm(c.tutor).includes(q)||(qd.length>=3&&String(c.cpf||"").replace(/\D/g,"").includes(qd))));
+  const soma=a=>a.reduce((t,c)=>t+(+c.valor||0),0),pend=base.filter(c=>c.status!=="pago"),pagas=base.filter(c=>c.status==="pago");
+  const card=(t,v,sub)=>'<div class="card" style="margin:0"><small style="color:var(--mu)">'+t+'</small><div style="font-size:20px;font-weight:600">'+brl(v)+'</div><small style="color:var(--mu)">'+sub+"</small></div>";
+  $("finRes").innerHTML=card("A receber",soma(pend),pend.length+" cobrança(s)")+card("Recebido",soma(pagas),pagas.length+" cobrança(s)")+card("Total cobrado",soma(base),base.length+" cobrança(s)");
+  const arr=base.filter(c=>!st||(st==="pago")===(c.status==="pago")).sort((a,b)=>((b.data||"")+(b.hora||"")).localeCompare((a.data||"")+(a.hora||"")));
+  const l=$("finl");l.innerHTML=arr.length?"":'<div class="card">Nenhuma cobrança encontrada.</div>';
+  arr.forEach(c=>{
+    const pg=c.status==="pago",d=document.createElement("div");d.className="card";
+    d.innerHTML="<div style='display:flex;justify-content:space-between;gap:10px;align-items:flex-start'><div><b>"+escapar(c.paciente)+"</b><small style='display:block;color:var(--mu)'>Tutor: "+escapar(c.tutor||"—")+(c.cpf?" · CPF "+escapar(c.cpf):"")+(c.tel?" · "+escapar(c.tel):"")+"</small><small style='display:block;color:var(--mu)'>"+escapar(c.proc)+" · "+escapar(c.prof)+" · "+fmtData(c.data)+" "+escapar(c.hora)+"</small><small style='display:block;color:var(--mu)'>"+escapar(formaTxt(c))+(pg&&c.pagoEm?" · pago em "+new Date(c.pagoEm).toLocaleDateString("pt-BR"):"")+"</small></div><div style='text-align:right'><b>"+brl(c.valor)+"</b><br><span class='tag"+(pg?" on":"")+"'>"+(pg?"Pago":"Pendente")+"</span></div></div><div class='row' style='gap:6px;margin-top:10px'><button class='"+(pg?"s":"p")+"'>"+(pg?"Voltar para pendente":"Marcar como pago")+"</button><button class='s'>Editar</button></div>";
+    const[b1,b2]=d.querySelectorAll("button");
+    b1.onclick=()=>setPago(c.id,!pg);
+    b2.onclick=()=>abrirPg({edit:c.id,c:{...cobs[c.id]}});
+    l.appendChild(d);
+  });
+}
+$("fnFin").onclick=()=>{ir("vFin");renderFin()};
+["finBusca"].forEach(i=>$(i).oninput=renderFin);["finPer","finSt"].forEach(i=>$(i).onchange=renderFin);
+
+const pad4=n=>String(n).padStart(4,"0");
+const prNext=()=>Math.max(0,...Object.entries(pronts).filter(([k,x])=>x&&x.salvo).map(([,x])=>+x.num||0))+1;
+function prRec(){
+  const r=pronts[prKey]||(pronts[prKey]={});
+  r.f=r.f||{};r.rx=r.rx||[];while(r.rx.length<7)r.rx.push({});
+  if(r.num===undefined)r.num=prNext();
+  return r;
+}
+function prDef(){
+  const a=prA||{},p=pacs[a.pacId]||pacList().find(x=>x.nome===a.nome)||{},e=p.esp||"";
+  return{
+    data:a.data?fmtData(a.data):"",hora:a.hora||"",
+    tutor:p.tutor||a.tutor||"",cpf:p.cpf||"",cpfAss:p.cpf||"",end:p.end||"",tel:p.tel||a.tel||"",email:p.email||"",
+    nome:p.nome||a.nome||"",esp:e==="Caninos"?"can":e==="Felinos"?"fel":e?"out":"",outra:e&&e!=="Caninos"&&e!=="Felinos"?e:"",
+    reg:p.reg||"",raca:p.raca||"",sexo:p.sexo==="M"||p.sexo==="F"?p.sexo:"",repro:p.cast?"cas":"",pel:p.pel||"",
+    nasc:p.nasc?fmtData(p.nasc):"",vet:profNome(a.prof||"")
+  };
+}
+function prVal(k){const r=prRec(),d=prDef();d.ficha=pad4(r.num);return r.f[k]!==undefined?r.f[k]:(d[k]??"")}
+function prCur(path){const a=path.split(".");if(a[0]==="rx")return prRec().rx[+a[1]][a[2]]||"";return prVal(a[1])}
+function prPut(path,val){
+  const a=path.split("."),r=prRec();
+  if(a[0]==="rx")r.rx[+a[1]][a[2]]=val;else r.f[a[1]]=val;
+  r.salvo=true;
+  prSalva();
+}
+function prSalva(){
+  if(prPend!==null&&prPend!==prKey)prGrava();
+  prPend=prKey;clearTimeout(prT);$("prSt").textContent="Salvando…";prT=setTimeout(prGrava,700);
+}
+async function prGrava(){
+  clearTimeout(prT);prT=null;const id=prPend;prPend=null;if(!id||!pronts[id])return;
+  const r=pronts[id];
+  try{
+    const payload={
+      clinica_id:sess.clinicaId,
+      agendamento_id:id,
+      profissional_id:(prA&&prA.prof)||null,
+      dados:{f:r.f,rx:r.rx,num:r.num}
+    };
+    const{data,error}=await sb.from("prontuarios").upsert(payload,{onConflict:"agendamento_id"}).select("id").single();
+    if(error)throw error;
+    r.id=data.id;
+    $("prSt").textContent="Prontuário salvo no Supabase.";
+  }catch(e){$("prSt").textContent=e.message||"Não foi possível salvar o prontuário."}
+}
+const SIS=[
+ ["dig","Digestório",[["n","Normal"],["hip","Hiporexia/Anorexia"],["vom","Vômito"],["dia","Diarreia"],["mel","Melena/Hematoquezia"],["dis","Disfagia"]]],
+ ["car","Cardiorrespiratório",[["n","Normal"],["tos","Tosse"],["esp","Espirros"],["sec","Secreção nasal"],["dsp","Dispneia"],["int","Intolerância ao exercício"]]],
+ ["gen","Geniturinário",[["n","Normal"],["pol","Poliúria/Polidipsia"],["dis","Disúria"],["hem","Hematúria"],["sec","Secreção vaginal/prepucial"]]],
+ ["neu","Neurológico / Locomotor",[["n","Normal"],["cla","Claudicação"],["dor","Dor à manipulação"],["con","Convulsões"],["ata","Ataxia"],["apa","Apatia"]]],
+ ["teg","Tegumentar / Otológico / Oftalmológico",[["n","Normal"],["pru","Prurido"],["alo","Alopecia/Lesões"],["oti","Otite"],["sec","Secreção ocular"],["ble","Blefaroespasmo"]]]
+];
+function renderPr(){
+  const r=prRec(),d=prDef();d.ficha=pad4(r.num);
+  const v=k=>r.f[k]!==undefined?r.f[k]:(d[k]??""),vm=k=>{const x=v(k);return Array.isArray(x)?x:(x?[x]:[])};
+  const raw=(path,val,st)=>'<input data-k="'+path+'" value="'+aE(val)+'" placeholder=" "'+(st?' style="'+st+'"':"")+">";
+  const RI=(k,st)=>raw("f."+k,v(k),st);
+  const pfi=(l,path,val)=>'<div class="pf"><small>'+l+"</small>"+raw(path,val)+"</div>";
+  const F=(l,k)=>pfi(l,"f."+k,v(k));
+  const LG=(l,h)=>'<div class="pf"><small>'+l+"</small>"+h+"</div>";
+  const ckb=(path,val,label,on,multi)=>'<span class="ck" data-ck="'+path+"|"+val+'" data-multi="'+(multi?1:0)+'"><span class="bx'+(on?" on":"")+'"></span>'+label+"</span>";
+  const grp=(path,opts,cur,multi,vert)=>'<div class="cks'+(vert?" v":"")+'">'+opts.map(([val,label])=>ckb(path,val,label,multi?(Array.isArray(cur)?cur:[]).includes(val):cur===val,multi)).join("")+"</div>";
+  const G=(k,opts,multi,vert)=>grp("f."+k,opts,multi?vm(k):v(k),multi,vert);
+  const TA=(l,k,h)=>'<div class="pf" style="border:1px solid #b8c2cc;border-radius:4px;padding:5px 7px;height:'+h+'px"><small>'+l+'</small><textarea data-k="f.'+k+'" placeholder=" " style="font-size:12px;height:'+(h-26)+'px">'+escapar(v(k))+"</textarea></div>";
+  const S=t=>'<div class="sec">'+t+"</div>";
+  const foot=n=>'<div class="pfoot">Prontuário de Atendimento Veterinário — Documento Clínico · Página '+n+" de 4</div>";
+  const TI=k=>raw("f."+k,v(k));
+  const sisRows=SIS.map(([k,nm,op])=>'<tr><td class="pd" style="font-weight:600">'+nm+'</td><td class="pd">'+G("sis_"+k,op,true)+'<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;margin-top:3px">Obs.: '+RI("obs_"+k)+"</div></td></tr>").join("");
+  const rxRows=Array.from({length:7},(_,i)=>{const g=x=>raw("rx."+i+"."+x,(r.rx[i]&&r.rx[i][x])||"");return "<tr><td>"+g("f")+"</td><td>"+g("d")+"</td><td>"+g("v")+"</td><td>"+g("q")+"</td><td>"+g("t")+'</td><td class="pd">'+grp("rx."+i+".l",[["amb","Ambulatorial"],["casa","Casa"]],(r.rx[i]&&r.rx[i].l)||"",false,true)+"</td></tr>"}).join("");
+  const p1=`<div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #2CB199;padding-bottom:6px"><h2 style="text-align:left;font-size:18px">PRONTUÁRIO DE ATENDIMENTO VETERINÁRIO</h2><div style="font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:6px">FICHA Nº <input data-k="f.ficha" value="${aE(v("ficha"))}" placeholder=" " style="width:70px;border-bottom:1px solid #9aa7b5"></div></div>
+<div class="pg" style="grid-template-columns:1fr .6fr 3fr">${F("Data","data")}${F("Hora","hora")}${LG("Modalidade",G("mod",[["cons","Consulta Clínica"],["ret","Retorno"],["eme","Emergência"],["vac","Vacinação"],["cir","Cirurgia/Internação"]],false))}</div>
+${S("1. Identificação do responsável (tutor)")}
+<div class="pg" style="grid-template-columns:1.4fr 1fr">${F("Nome completo","tutor")}${F("CPF / RG","cpf")}</div>
+<div class="pg" style="grid-template-columns:1.4fr 1fr">${F("Endereço completo","end")}${LG("Telefone / WhatsApp e e-mail",'<div style="display:flex;gap:8px">'+RI("tel")+RI("email")+"</div>")}</div>
+${S("2. Identificação do paciente")}
+<div class="pg" style="grid-template-columns:1fr 1.2fr 1fr">${F("Nome do animal","nome")}${LG("Espécie",G("esp",[["can","Canina"],["fel","Felina"],["out","Outra:"]],false)+RI("outra"))}${F("Nº do microchip / registro","reg")}${F("Raça","raca")}${LG("Sexo",G("sexo",[["M","Macho"],["F","Fêmea"]],false))}${LG("Condição reprodutiva",G("repro",[["int","Inteiro(a)"],["cas","Castrado(a)"]],false))}${F("Pelagem / cor","pel")}${F("Data de nascimento","nasc")}${LG("Peso atual (kg)",RI("peso"))}</div>
+${S("3. Histórico sanitário e manejo")}
+<div class="pg" style="grid-template-columns:1fr 1fr">${TA("Alergias conhecidas","alerg",130)}${TA("Doenças prévias e medicações em uso","doencas",130)}</div>${foot(1)}`;
+  const p2=`${S("4. Anamnese e queixa principal")}${TA("Queixa principal","queixa",120)}<table><colgroup><col style="width:24%"><col style="width:76%"></colgroup><thead><tr><th>Sistema</th><th>Alterações relatadas pelo tutor</th></tr></thead><tbody>${sisRows}</tbody></table>${S("5. Exame físico geral e parâmetros vitais")}<table><colgroup><col style="width:22%"><col style="width:18%"><col style="width:22%"><col style="width:38%"></colgroup><thead><tr><th>Parâmetro</th><th>Valor</th><th>Parâmetro</th><th>Avaliação</th></tr></thead><tbody><tr><td class="pd">Temperatura (°C)</td><td>${TI("temp")}</td><td class="pd">Estado mental</td><td class="pd">${G("mental",[["al","Alerta"],["ap","Apático"],["es","Estupor/Coma"]],false)}</td></tr><tr><td class="pd">FC (bpm)</td><td>${TI("fc")}</td><td class="pd">Hidratação</td><td class="pd">${G("hid",[["n","Normohidratado"],["d","Desidratado"]],false)}</td></tr><tr><td class="pd">FR (mpm)</td><td>${TI("fr")}</td><td class="pd">Mucosas</td><td class="pd">${G("muc",[["nc","Normocoradas"],["pa","Pálidas"],["ic","Ictéricas"],["ci","Cianóticas"]],true)}</td></tr></tbody></table>${TA("Achados do exame físico específico","achados",180)}${foot(2)}`;
+  const p3=`${S("6. Diagnóstico e exames complementares")}<div class="pg" style="grid-template-columns:1fr 1fr">${TA("Suspeitas diagnósticas","susp",160)}${TA("Diagnóstico definitivo","diag",160)}</div>${TA("Principais resultados e laudos","laudos",240)}${S("7. Conduta terapêutica e prescrição")}<table><colgroup><col style="width:28%"><col style="width:15%"><col style="width:9%"><col style="width:14%"><col style="width:16%"><col style="width:18%"></colgroup><thead><tr><th>Fármaco</th><th>Dose</th><th>Via</th><th>Frequência</th><th>Duração</th><th>Local</th></tr></thead><tbody>${rxRows}</tbody></table>${foot(3)}`;
+  const p4=`${TA("Procedimentos realizados no atendimento","proc",200)}${S("8. Orientações gerais, retorno e encerramento")}<div class="pg" style="grid-template-columns:1.4fr 1fr">${TA("Orientações ao tutor","orient",300)}<div style="display:flex;flex-direction:column;gap:8px">${LG("Desfecho",G("desf",[["alta","Alta clínica"],["int","Internação"],["esp","Especialista"],["obi","Óbito"]],false,true))}${F("Data de retorno","retorno")}</div></div><div class="pg" style="grid-template-columns:1fr 1fr;gap:40px;margin-top:24px"><div><div style="height:46px"></div><div style="border-top:1px solid #1A2029;padding-top:4px;text-align:center;font-size:11px">Tutor</div>${F("CPF","cpfAss")}</div><div><div style="height:46px"></div><div style="border-top:1px solid #1A2029;padding-top:4px;text-align:center;font-size:11px">Veterinário(a) responsável</div>${F("Nome","vet")}${F("CRMV-UF nº","crmv")}</div></div>${foot(4)}`;
+  $("prPages").innerHTML=[p1,p2,p3,p4].map(h=>'<div class="paper">'+h+"</div>").join("");
+  $("prTit").textContent="Prontuário — "+(prA.nome||"")+" · "+fmtData(prA.data)+" "+prA.hora;
+}
+$("prPages").addEventListener("input",e=>{
+  const t=e.target,k=t.dataset&&t.dataset.k;if(!k)return;
+  if(k==="f.retorno"||k==="f.data")t.value=mData(t.value);
+  prPut(k,t.value);
+});
+$("prPages").addEventListener("click",e=>{
+  const c=e.target.closest("[data-ck]");if(!c)return;
+  const[g,val]=c.dataset.ck.split("|"),multi=c.dataset.multi==="1",cur=prCur(g);
+  let nv;
+  if(multi){const a=Array.isArray(cur)?cur.slice():[],i=a.indexOf(val);if(i>=0)a.splice(i,1);else a.push(val);nv=a}
+  else nv=cur===val?"":val;
+  prPut(g,nv);
+  document.querySelectorAll('#prPages [data-ck^="'+g+'|"]').forEach(x=>{const w=x.dataset.ck.split("|")[1];x.querySelector(".bx").classList.toggle("on",multi?nv.includes(w):nv===w)});
+});
+function abrirPr(k){
+  const a=marcados[k];if(!a)return;if(iniAg(a)-30*60000>Date.now())return;
+  prKey=k;prA=a;$("prSt").textContent="";$("prMsg").textContent="";
+  ir("vPront");renderPr();
+}
+function renderPrL(){
+  const q=norm($("prBusca").value.trim()),qd=q.replace(/\D/g,""),per=$("prPer").value;
+  const n=new Date(),z=x=>String(x).padStart(2,"0"),hj=n.getFullYear()+"-"+z(n.getMonth()+1)+"-"+z(n.getDate());
+  const arr=Object.entries(marcados).map(([k,a])=>({k,a})).filter(({a})=>{
+    if(per==="hoje"&&a.data!==hj)return false;
+    if(per==="mes"&&!(a.data||"").startsWith(hj.slice(0,7)))return false;
+    if(!q)return true;
+    const pc=pacDe(a);
+    return norm(a.nome).includes(q)||norm(a.tutor||pc.tutor||"").includes(q)||(qd.length>=3&&String(pc.cpf||"").replace(/\D/g,"").includes(qd));
+  }).sort((x,y)=>(y.a.data+y.a.hora).localeCompare(x.a.data+x.a.hora));
+  const l=$("prLista");l.innerHTML=arr.length?"":'<div class="card">Nenhum atendimento encontrado neste período.</div>';
+  arr.forEach(({k,a})=>{
+    const feito=!!(pronts[k]&&pronts[k].salvo),c=document.createElement("div");c.className="card pi";
+    c.innerHTML="<div><b>"+escapar(a.nome)+"</b><small>"+fmtData(a.data)+" "+escapar(a.hora)+" · "+escapar(a.proc||"Consulta")+" · "+escapar(profNome(a.prof))+"</small><small>Tutor: "+escapar(a.tutor||pacDe(a).tutor||"—")+"</small></div><div class='row' style='gap:8px;align-items:center'><span class='tag"+(feito?" on":"")+"'>"+(feito?"Preenchido":"Sem prontuário")+"</span><button class='p'>"+(feito?"Abrir":"Preencher")+"</button></div>";
+    if(iniAg(a)-30*60000>Date.now()){const t=new Date(iniAg(a)-30*60000),z2=x=>String(x).padStart(2,"0"),bt=c.querySelector("button"),tg=c.querySelector(".tag");bt.disabled=true;bt.textContent="Indisponível";tg.className="tag";tg.textContent="Libera em "+z2(t.getDate())+"/"+z2(t.getMonth()+1)+" às "+z2(t.getHours())+":"+z2(t.getMinutes())}
+    c.querySelector("button").onclick=()=>abrirPr(k);
+    l.appendChild(c);
+  });
+}
+$("fnPr").onclick=()=>{ir("vPrL");renderPrL()};
+$("prBusca").oninput=renderPrL;$("prPer").onchange=renderPrL;
+$("prBack").onclick=()=>{ir("vPrL");renderPrL()};
+$("d2pr").onclick=()=>{const k=cancelKey;$("dlg2").close();if(k)abrirPr(k)};
+$("prPdf").onclick=()=>window.print();
+
+function vcRec(){
+  const r=vcSel?(vacs[vcSel]||(vacs[vcSel]={})):vcTmp;
+  r.f=r.f||{};r.vac=r.vac||Array.from({length:7},()=>({}));r.verm=r.verm||Array.from({length:4},()=>({}));
+  return r;
+}
+function vcPadrao(p){
+  const e=p.esp||"",out=e&&e!=="Caninos"&&e!=="Felinos";
+  return{nome:p.nome||"",sexo:p.sexo||"",cast:p.cast?"1":"",end:p.end||"",raca:p.raca||"",pel:p.pel||"",reg:p.reg||"",tutor:p.tutor||"",tel:p.tel||"",nasc:p.nasc?fmtData(p.nasc):"",esp:e==="Caninos"?"Canina":e==="Felinos"?"Felina":e?"Outra":"",outra:out?e:""};
+}
+function vcVal(k){const r=vcRec(),d=vcPadrao(pacs[vcSel]||{});return r.f[k]!==undefined?r.f[k]:(d[k]||"")}
+function vcSet(k,val){
+  const a=k.split(".");
+  const r=vcRec();if(a[0]==="f")r.f[a[1]]=val;else if(a[0]==="obs")r.obs=val;else r[a[0]][+a[1]][a[2]]=val;
+  vcSalva();
+}
+function vcSalva(){
+  if(!vcSel){$("vcSt").textContent="Cartão em branco: o que você preencher serve só para imprimir.";return}
+  vcPend=vcSel;clearTimeout(vcT);$("vcSt").textContent="Salvando…";vcT=setTimeout(vcGrava,700);
+}
+async function vcGrava(){
+  clearTimeout(vcT);vcT=null;const pid=vcPend;vcPend=null;if(!pid)return;
+  const r=vacs[pid];if(!r)return;
+  try{
+    await sb.from("vacinas").delete().eq("paciente_id",pid);
+    const rows=[];
+    (r.vac||[]).forEach(x=>{
+      if(x.v||x.d||x.l||x.r||x.c){
+        rows.push({clinica_id:sess.clinicaId,paciente_id:pid,categoria:"vacina",nome:x.v||"Vacina",lote:x.l||null,responsavel:x.c||null});
+      }
+    });
+    (r.verm||[]).forEach(x=>{
+      if(x.pr||x.d||x.p||x.n||x.vt){
+        rows.push({clinica_id:sess.clinicaId,paciente_id:pid,categoria:"vermifugo",nome:x.pr||"Vermífugo",peso_kg:parseFloat(String(x.p||"").replace(",","."))||null,responsavel:x.vt||null});
+      }
+    });
+    if(rows.length){const{error}=await sb.from("vacinas").insert(rows);if(error)throw error}
+    $("vcSt").textContent="Cartão salvo no Supabase.";
+  }catch(e){$("vcSt").textContent="Não foi possível salvar o cartão."}
+}
+function vcOpts(){
+  const q=$("vcBusca").value,ms=pacList().filter(p=>pacMatch(p,q)),f=$("vcPac");
+  f.innerHTML='<option value="">'+(q.trim()?"Todos os resultados ("+ms.length+")":"Cartão em branco (selecione um paciente)")+"</option>"+ms.map(p=>'<option value="'+p.id+'">'+escapar(pacLabel(p))+"</option>").join("");
+  f.value=vcSel;if(f.value!==vcSel)vcSel=f.value;
+}
+function renderVac(){
+  vcOpts();
+  const r=vcRec(),v=vcVal,esp=v("esp"),sexo=v("sexo"),cast=v("cast");
+  const fl=(l,k,val)=>'<div class="pf"><small>'+l+'</small><input data-k="'+k+'" value="'+aE(val)+'" placeholder=" "></div>';
+  const ck=(g,val,on,t)=>'<span class="ck" data-ck="'+g+":"+val+'" style="margin-right:12px;white-space:nowrap"><span class="bx'+(on?" on":"")+'"></span>'+t+"</span>";
+  const txI=(g,i,k,h)=>'<input data-k="'+g+"."+i+"."+k+'" value="'+aE(r[g][i][k]||"")+'" placeholder=" ">'+(h?'<span class="hint">'+h+"</span>":"");
+  const rows=(g,n,fn)=>Array.from({length:n},(_,i)=>"<tr>"+fn(g,i).map(x=>"<td>"+x+"</td>").join("")+"</tr>").join("");
+  $("vcPaper").innerHTML=`<h2>Cartão de Vacinação e Controle Sanitário</h2>
+<div class="sub2">Registro Clínico de Imunização e Profilaxia Antiparasitária</div>
+<div class="sec">1. Identificação do paciente e do tutor</div>
+<div class="pg" style="grid-template-columns:1fr 1.1fr">${fl("Nome do animal","f.nome",v("nome"))}<div class="pf"><small>Espécie</small><div style="display:flex;align-items:center;padding-top:3px">${ck("esp","Canina",esp==="Canina","Canina")}${ck("esp","Felina",esp==="Felina","Felina")}${ck("esp","Outra",esp==="Outra","Outra:")}<input data-k="f.outra" value="${aE(v("outra"))}" placeholder=" " style="flex:1;min-width:0"></div></div></div>
+<div class="pg"><div class="pf"><small>Sexo / Estado reprodutivo</small><div style="padding-top:3px">${ck("sexo","M",sexo==="M","M")}${ck("sexo","F",sexo==="F","F")}${ck("cast","1",!!cast,"Castrado(a)")}</div></div></div>
+<div class="pg" style="grid-template-columns:1fr 1fr 1.2fr">${fl("Raça","f.raca",v("raca"))}${fl("Pelagem / Cor","f.pel",v("pel"))}${fl("Data de nascimento","f.nasc",v("nasc"))}</div>
+<div class="pg" style="grid-template-columns:1fr 1.3fr">${fl("Nº do microchip / RGA","f.reg",v("reg"))}${fl("Nome completo do tutor(a)","f.tutor",v("tutor"))}</div>
+<div class="pg" style="grid-template-columns:1fr 1.3fr">${fl("Telefone / WhatsApp","f.tel",v("tel"))}${fl("Endereço / Cidade","f.end",v("end"))}</div>
+<div class="sec">2. Registro de imunizações (vacinas)</div>
+<table><colgroup><col style="width:15%"><col style="width:27%"><col style="width:24%"><col style="width:15%"><col style="width:19%"></colgroup><thead><tr><th>Data</th><th>Vacina / Protocolo</th><th>Etiqueta / Lote e validade</th><th>Revacinar em</th><th>Carimbo e CRMV</th></tr></thead><tbody>${rows("vac",7,(g,i)=>[txI(g,i,"d"),txI(g,i,"v"),txI(g,i,"l","Colar etiqueta do frasco"),txI(g,i,"r"),txI(g,i,"c")])}</tbody></table>
+<div class="sec">3. Controle de vermifugação e ectoparasitas</div>
+<table><colgroup><col style="width:15%"><col style="width:12%"><col style="width:33%"><col style="width:15%"><col style="width:25%"></colgroup><thead><tr><th>Data</th><th>Peso (kg)</th><th>Produto / Princípio ativo e dose</th><th>Próxima dose</th><th>Veterinário / CRMV</th></tr></thead><tbody>${rows("verm",4,(g,i)=>[txI(g,i,"d"),txI(g,i,"p"),txI(g,i,"pr"),txI(g,i,"n"),txI(g,i,"vt")])}</tbody></table>`;
+}
+$("vcPaper").addEventListener("input",e=>{
+  const t=e.target,k=t.dataset&&t.dataset.k;if(!k)return;
+  if(/^(vac|verm)\.\d+\.(d|r|n)$/.test(k))t.value=mData(t.value);
+  vcSet(k,t.value);
+});
+$("vcPaper").addEventListener("click",e=>{
+  const c=e.target.closest("[data-ck]");if(!c)return;
+  const[g,val]=c.dataset.ck.split(":"),cur=vcVal(g),nv=g==="cast"?(cur?"":"1"):(cur===val?"":val);
+  vcSet("f."+g,nv);
+  document.querySelectorAll('#vcPaper [data-ck^="'+g+':"]').forEach(x=>x.querySelector(".bx").classList.toggle("on",g==="cast"?!!nv:x.dataset.ck===g+":"+nv));
+});
+function abrirVac(id){vcSel=typeof id==="string"?id:"";vcTmp={};$("vcBusca").value="";$("vcMsg").textContent="";$("vcSt").textContent="";ir("vVac");renderVac()}
+$("vcBusca").oninput=()=>{const q=$("vcBusca").value,m=pacList().filter(p=>pacMatch(p,q));vcSel=q.trim()&&m.length===1?m[0].id:"";renderVac()};
+$("vcPac").onchange=()=>{vcSel=$("vcPac").value;renderVac()};
+$("vcPdf").onclick=()=>window.print();
+
+function abrirCfg(){
+  const i=sess.info||{};
+  $("cNeg").value=sess.neg||"";$("cTel").value=i.tel||"";escreveLoc("c",i);
+  ["cdErr","cErr","cpErr"].forEach(x=>$(x).textContent="");$("cpN").value="";
+  let s="";try{s=localStorage.getItem("vc-tema")||""}catch(e){}
+  $("cTema").value=s==="light"||s==="dark"?s:"auto";
+  ir("vCfg");
+}
+$("fnCfg").onclick=abrirCfg;
+$("cTema").onchange=()=>{
+  const v=$("cTema").value;
+  if(v==="auto"){delete document.documentElement.dataset.theme;try{localStorage.removeItem("vc-tema")}catch(e){}}
+  else{document.documentElement.dataset.theme=v;try{localStorage.setItem("vc-tema",v)}catch(e){}}
+  iconeTema();
+};
+$("cdOk").onclick=async()=>{
+  const nome=$("cNeg").value.trim(),tel=$("cTel").value.trim(),E=m=>{$("cdErr").textContent=m};
+  if(nome.length<2)return E("Informe o nome do negócio.");
+  if(tel&&(/[^\d\s()+\-]/.test(tel)||tel.replace(/\D/g,"").length<8))return E("Telefone inválido.");
+  const L=lerLoc("c");
+  if(L.erro)return E(L.erro);
+  try{
+    const{error}=await sb.from("clinicas").update({
+      nome,telefone:tel||null,cep:L.end.cep,estado:L.end.uf,cidade:L.end.cidade,bairro:L.end.bairro,rua:L.end.rua,numero:L.end.num
+    }).eq("id",sess.clinicaId);
+    if(error)throw error;
+    await carregarTudo();
+    E("Dados salvos.");
+  }catch(e){E("Não foi possível salvar os dados.")}
+};
 $("cSave").onclick=async()=>{
   const r=lerEditor("c");
   if(r.erro){$("cErr").textContent=r.erro;return}
-  try{if(cfgRef)await cfgRef.set(r.c);else{cfg=r.c;aplicaCfg()}$("cErr").textContent="Horário salvo."}catch(e){$("cErr").textContent="Não foi possível salvar."}
+  try{
+    await salvarHorariosFuncionamento(r.c);
+    await carregarTudo();
+    $("cErr").textContent="Horário salvo.";
+  }catch(e){$("cErr").textContent="Não foi possível salvar o horário."}
 };
-montaEditor("c");montaEditor("s");
-aplicaCfg();renderProcs();
-const dbPronto=(async()=>{
-  try{DB=await Promise.race([window.claude.use("db"),new Promise(r=>setTimeout(()=>r(null),10000))])}catch(e){DB=null}
-  try{ASSETS=await window.claude.use("assets")}catch(e){ASSETS=null}
-})();
-function okDias(a){return Array.isArray(a)?a.filter(x=>Number.isInteger(x)&&x>=0&&x<=6):CFG0.dias.slice()}
-function desconectar(){uns.forEach(f=>{try{f()}catch(e){}});uns=[]}
-async function abrirSessao(u,neg){
-  await dbPronto;
-  sess={u,neg,base:u==="123"?"":"negocios/"+u+"/"};
-  marcados={};procs={};pacs={};exs={};profs={};esps={};vacs={};cobs={};pronts={};cfg={...CFG0,dias:CFG0.dias.slice()};
-  sess.info={local:"",end:null};
-  if(DB){try{const x=await DB.doc("negocios/"+u).get();if(x.exists){const d=x.data();sess.info={local:d.local||"",end:d.end||null,tel:d.tel||""};if(d.nome)sess.neg=d.nome}}catch(e){}}
-  $("hubNeg").textContent=sess.neg;
-  conectar();
-}
-function conectar(){
-  desconectar();
-  const L="Modo local: os dados não são compartilhados.";
-  if(!DB){colRef=colProc=cfgRef=colPac=colEx=colProf=colEsp=colVac=colCob=colPr=null;$("status").textContent=L;$("pstatus").textContent=L;aplicaCfg();renderProcs();renderProfSel();renderPfl();renderEsp();renderFin();return}
-  const b=sess.base;
-  colRef=DB.collection(b+"agendamentos");colProc=DB.collection(b+"procedimentos");colPac=DB.collection(b+"pacientes");colEx=DB.collection(b+"exames");colProf=DB.collection(b+"profissionais");colEsp=DB.collection(b+"especies");colVac=DB.collection(b+"vacinas");colCob=DB.collection(b+"cobrancas");colPr=DB.collection(b+"prontuarios");cfgRef=DB.doc(b+"config/horario");
-  uns.push(cfgRef.onSnapshot(x=>{
-    const d=x.exists?x.data():null;
-    cfg=d&&okH(d.ini)&&okH(d.fim)&&toMin(d.fim)>toMin(d.ini)?{ini:d.ini,fim:d.fim,pIni:okH(d.pIni)?d.pIni:"",pFim:okH(d.pFim)?d.pFim:"",dias:okDias(d.dias),var:d.var===true,porDia:okPorDia(d.porDia)}:{...CFG0,dias:CFG0.dias.slice()};
-    aplicaCfg();
-  },()=>{}));
-  uns.push(colRef.onSnapshot(x=>{
-    const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});
-    marcados=n;$("status").textContent="Agenda compartilhada e atualizada em tempo real.";render();
-  },()=>{$("status").textContent="Não foi possível carregar a agenda."}));
-  uns.push(colProc.onSnapshot(x=>{
-    const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});
-    procs=n;$("pstatus").textContent="Lista compartilhada e atualizada em tempo real.";renderProcs();
-  },()=>{$("pstatus").textContent="Não foi possível carregar os procedimentos."}));
-  uns.push(colPac.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});pacs=n;renderPac();renderEx();vcOpts()},()=>{}));
-  uns.push(colEx.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});exs=n;renderEx();renderPac()},()=>{}));
-  uns.push(colProf.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});profs=n;renderProfSel();renderPfl()},()=>{}));
-  uns.push(colEsp.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});esps=n;renderEsp()},()=>{}));
-  uns.push(colVac.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});const cur=vcPend!==null&&vcPend!==""?vacs[vcPend]:null,cc=vcCfgSujo?vacs._clinica:null;vacs=n;if(cur)vacs[vcPend]=cur;if(cc)vacs._clinica=cc;vcOpts();if(!$("vVac").hidden&&vcPend===null&&!$("vcPaper").contains(document.activeElement))renderVac()},()=>{}));
-  uns.push(colCob.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});cobs=n;renderFin()},()=>{}));
-  uns.push(colPr.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});const cur=prPend!==null&&prPend!==""?pronts[prPend]:null,cc=prCSujo?pronts._clinica:null;pronts=n;if(cur)pronts[prPend]=cur;if(cc)pronts._clinica=cc;if(!$("vPrL").hidden)renderPrL();if(!$("vPront").hidden&&prPend===null&&!$("prPages").contains(document.activeElement)&&prA)renderPr()},()=>{}));
-}
+$("cpOk").onclick=async()=>{
+  const n=$("cpN").value,E=m=>{$("cpErr").textContent=m};
+  if(n.length<6)return E("A nova senha precisa ter pelo menos 6 caracteres.");
+  try{
+    const{error}=await sb.auth.updateUser({password:n});
+    if(error)throw error;
+    $("cpN").value="";E("Senha alterada.");
+  }catch(e){E(e.message||"Não foi possível alterar a senha.")}
+};
+
+$("prof").onchange=render;
+$("date").onchange=render;
+aplicaCfg();
+renderProcs();
 </script>
 </body>
 </html>
