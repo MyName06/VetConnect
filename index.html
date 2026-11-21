@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>VetConnect</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>try{var t=localStorage.getItem("vc-tema");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1492,6 +1493,64 @@ function conectar(){
   uns.push(colCob.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});cobs=n;renderFin()},()=>{}));
   uns.push(colPr.onSnapshot(x=>{const n={};x.docs.forEach(y=>{if(y.exists)n[y.id]=y.data()});const cur=prPend!==null&&prPend!==""?pronts[prPend]:null,cc=prCSujo?pronts._clinica:null;pronts=n;if(cur)pronts[prPend]=cur;if(cc)pronts._clinica=cc;if(!$("vPrL").hidden)renderPrL();if(!$("vPront").hidden&&prPend===null&&!$("prPages").contains(document.activeElement)&&prA)renderPr()},()=>{}));
 }
+</script>
+<script>
+/* Integração Supabase: as chaves publishable podem ficar no navegador; a service_role nunca deve ser usada aqui. */
+const SUPABASE_URL="https://sgpvsdavzkwugozdsmhw.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_SHKN4la5jcucQVoXtfExFA_8ZiLDmdn";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const loginEmail=u=>u+"@vetconnect.local";
+const sbErro=e=>(e&&e.message)||"Não foi possível concluir a operação.";
+
+/* Mantém a interface atual e converte os seus objetos para as tabelas do schema. */
+const sbTable={agendamentos:"agendamentos",procedimentos:"procedimentos",profissionais:"profissionais",especies:"especies",financeiro:"financeiro",exames:"exames",vacinas:"vacinas",prontuarios:"prontuarios"};
+function sbRow(tipo,id,d){
+  if(tipo==="procedimentos")return {id,nome:d.nome,tipo:d.tipo||null,preco:+d.preco||0,duracao_horas:(+d.dur||30)/60,cor:d.cor||null};
+  if(tipo==="profissionais")return {id,nome:d.nome,cargo:d.cargo||null,ativo:true};
+  if(tipo==="especies")return {id,nome:d.nome};
+  if(tipo==="agendamentos")return {id,paciente_id:d.pacId,procedimento_id:d.procId,profissional_id:d.prof||null,inicio:new Date(d.data+"T"+d.hora+":00").toISOString(),status:d.presenca==="sim"?"presente":d.presenca==="nao"?"faltou":"agendado",observacoes:d.observacoes||null};
+  if(tipo==="financeiro")return {id,agendamento_id:d.agKey,tutor_id:d.tutorId||null,valor:+d.valor||0,forma_pagamento:{"PIX":"pix","Dinheiro":"dinheiro","Débito":"debito","Crédito":"credito","Crédito parcelado":"credito_parcelado"}[d.forma]||null,parcelas:+d.parcelas||1,status:d.status||"pendente",pago_em:d.pagoEm?new Date(d.pagoEm).toISOString():null};
+  if(tipo==="exames")return {id,paciente_id:d.pacId,nome:d.tipo||"Exame",data_exame:d.data||null,arquivo_path:d.asset||null,observacoes:d.obs||null};
+  if(tipo==="vacinas")return {id,paciente_id:d.paciente_id,categoria:d.categoria||"vacina",nome:d.nome||"Registro",data_aplicacao:d.data_aplicacao||null,proxima_dose:d.proxima_dose||null,lote:d.lote||null,peso_kg:d.peso_kg||null,responsavel:d.responsavel||null,observacoes:d.observacoes||null};
+  if(tipo==="prontuarios")return {id,agendamento_id:d.agendamento_id,profissional_id:d.profissional_id||null,dados:d.dados||d};
+  return d;
+}
+function sbData(tipo,r){
+  if(tipo==="procedimentos")return {...r,dur:Math.round((+r.duracao_horas||.5)*60),preco:+r.preco||0};
+  if(tipo==="profissionais")return {...r,usaEmpresa:true};
+  if(tipo==="agendamentos"){const x=new Date(r.inicio),p=r.pacientes||{},q=r.procedimentos||{};return {id:r.id,prof:r.profissional_id,data:x.toISOString().slice(0,10),hora:x.toTimeString().slice(0,5),pacId:r.paciente_id,nome:p.nome||"",procId:r.procedimento_id,proc:q.nome||"Consulta",tipo:q.tipo||"",dur:Math.round((+q.duracao_horas||.5)*60),preco:+q.preco||0,cor:q.cor||"",slots:Math.max(1,Math.ceil((+q.duracao_horas||.5)*2)),presenca:r.status==="presente"?"sim":r.status==="faltou"?"nao":""};}
+  if(tipo==="financeiro"){const a=r.agendamentos||{},p=a.pacientes||{},t=p.tutores||{};const rev={pix:"PIX",dinheiro:"Dinheiro",debito:"Débito",credito:"Crédito",credito_parcelado:"Crédito parcelado"};return {id:r.id,agKey:r.agendamento_id,pacId:a.paciente_id,paciente:p.nome||"",tutor:t.nome||"",cpf:t.cpf||"",tel:t.telefone||"",valor:+r.valor||0,forma:rev[r.forma_pagamento]||"",parcelas:r.parcelas,status:r.status,data:a.inicio?new Date(a.inicio).toISOString().slice(0,10):"",hora:a.inicio?new Date(a.inicio).toTimeString().slice(0,5):"",pagoEm:r.pago_em?new Date(r.pago_em).getTime():undefined};}
+  if(tipo==="exames")return {id:r.id,pacId:r.paciente_id,tipo:r.nome,data:r.data_exame,asset:r.arquivo_path,arq:r.arquivo_path?String(r.arquivo_path).split("/").pop():"",obs:r.observacoes||""};
+  return {...r};
+}
+async function sbPacSet(id,d){
+  let tutorId=d.tutorId;
+  const cpf=(d.cpf||"").replace(/\D/g,"");
+  if(!tutorId){let q=sb.from("tutores").select("id").eq("cpf",cpf).limit(1);const {data}=await q;if(data&&data[0])tutorId=data[0].id;}
+  const tutor={nome:d.tutor,cpf:cpf||null,telefone:d.tel||null,endereco:d.end||null};
+  if(tutorId)await sb.from("tutores").update(tutor).eq("id",tutorId);else{const {data,error}=await sb.from("tutores").insert(tutor).select("id").single();if(error)throw error;tutorId=data.id;}
+  const esp=(await sb.from("especies").select("id").eq("nome",d.esp).limit(1)).data||[];
+  const row={id,nome:d.nome,registro:d.reg||null,tutor_id:tutorId,especie_id:esp[0]?.id||null,raca:d.raca||null,pelagem_cor:d.pel||null,sexo:d.sexo==="M"?"macho":d.sexo==="F"?"femea":null,castrado:!!d.cast,data_nascimento:d.nasc||null,obito:!!d.obito};
+  const {error}=await sb.from("pacientes").upsert(row);if(error)throw error;
+}
+function sbCollection(tipo){return {doc(id){return {async get(){const {data,error}=await sbLoad(tipo,id);if(error)throw error;return {exists:!!data,data:()=>data};},async set(d){if(tipo==="pacientes")return sbPacSet(id,d);const row=sbRow(tipo,id,d);const {error}=await sb.from(sbTable[tipo]).upsert(row);if(error)throw error;},async delete(){const {error}=await sb.from(sbTable[tipo]).delete().eq("id",id);if(error)throw error;}}},onSnapshot(ok,bad){let ativo=true;const load=async()=>{try{const {data,error}=await sbLoad(tipo);if(error)throw error;if(ativo)ok({docs:(data||[]).map(x=>({id:x.id,exists:true,data:()=>x}))});}catch(e){if(ativo&&bad)bad(e)}};load();const n=setInterval(load,5000);return ()=>{ativo=false;clearInterval(n)}}};}
+function sbConfigDoc(){return {async get(){const {data,error}=await sb.from("horarios_funcionamento").select("*").order("dia_semana");if(error)throw error;const r=data||[],a=r.find(x=>!x.fechado)||{};return {exists:r.length>0,data:()=>({ini:(a.abre||"08:00").slice(0,5),fim:(a.fecha||"18:00").slice(0,5),pIni:"",pFim:"",dias:r.filter(x=>!x.fechado).map(x=>x.dia_semana),var:false,porDia:{}})}} ,async set(c){const linhas=[0,1,2,3,4,5,6].map(d=>({dia_semana:d,abre:(c.ini||"08:00")+":00",fecha:(c.fim||"18:00")+":00",fechado:!(c.dias||[]).includes(d)}));const {error}=await sb.from("horarios_funcionamento").upsert(linhas,{onConflict:"clinica_id,dia_semana"});if(error)throw error;},onSnapshot(ok,bad){let ativo=true;const load=async()=>{try{const x=await this.get();if(ativo)ok(x)}catch(e){if(ativo&&bad)bad(e)}};load();const n=setInterval(load,5000);return ()=>{ativo=false;clearInterval(n)}}};}
+async function sbLoad(tipo,id){
+  if(tipo==="pacientes"){let q=sb.from("pacientes").select("*,tutores(*),especies(*)");if(id)q=q.eq("id",id).maybeSingle();const z=await q;return {error:z.error,data:id&&z.data?{...z.data,tutor:z.data.tutores?.nome||"",cpf:z.data.tutores?.cpf||"",tel:z.data.tutores?.telefone||"",end:z.data.tutores?.endereco||"",esp:z.data.especies?.nome||"",reg:z.data.registro||"",nasc:z.data.data_nascimento||"",pel:z.data.pelagem_cor||"",cast:z.data.castrado,sexo:z.data.sexo==="macho"?"M":z.data.sexo==="femea"?"F":""}:id?z.data:(z.data||[]).map(r=>({...r,tutor:r.tutores?.nome||"",cpf:r.tutores?.cpf||"",tel:r.tutores?.telefone||"",end:r.tutores?.endereco||"",esp:r.especies?.nome||"",reg:r.registro||"",nasc:r.data_nascimento||"",pel:r.pelagem_cor||"",cast:r.castrado,sexo:r.sexo==="macho"?"M":r.sexo==="femea"?"F":""}))};}
+  let sel="*";if(tipo==="agendamentos")sel="*,pacientes(nome),procedimentos(nome,tipo,preco,duracao_horas,cor)";if(tipo==="financeiro")sel="*,agendamentos(inicio,paciente_id,pacientes(nome,tutores(nome,cpf,telefone)))";
+  let q=sb.from(sbTable[tipo]).select(sel);if(id)q=q.eq("id",id).maybeSingle();const z=await q;return {error:z.error,data:id?(z.data?sbData(tipo,z.data):null):(z.data||[]).map(r=>sbData(tipo,r))};
+}
+
+async function sbAbrirSessao(){
+  const {data:{user}}=await sb.auth.getUser();if(!user)return;
+  const {data:perfil,error}=await sb.from("perfis").select("clinica_id,clinicas(nome,telefone,cep,estado,cidade,bairro,rua,numero)").eq("id",user.id).single();if(error)throw error;
+  sess={u:user.id,neg:perfil.clinicas.nome,info:{tel:perfil.clinicas.telefone||"",end:{cep:perfil.clinicas.cep||"",uf:perfil.clinicas.estado||"",cidade:perfil.clinicas.cidade||"",bairro:perfil.clinicas.bairro||"",rua:perfil.clinicas.rua||"",num:perfil.clinicas.numero||""}}};
+  DB={collection:sbCollection,doc:path=>path.endsWith("config/horario")?sbConfigDoc():{async get(){return {exists:false,data:()=>({})}},async set(){}}};conectar();$("hubNeg").textContent=sess.neg;ir("vHub");
+}
+$("bLogin").onclick=async()=>{const u=$("lUser").value.trim().toLowerCase(),p=$("lPass").value;$("lErr").textContent="";const {error}=await sb.auth.signInWithPassword({email:loginEmail(u),password:p});if(error){$("lErr").textContent="Usuário ou senha inválidos.";return}try{await sbAbrirSessao()}catch(e){$("lErr").textContent=sbErro(e)}};
+$("rGo").onclick=async()=>{const n=$("rNeg").value.trim(),u=$("rUser").value.trim().toLowerCase(),p=$("rPass").value,E=m=>$("rErr").textContent=m;if(n.length<2)return E("Informe o nome do negócio.");if(!/^[a-z0-9._-]{3,30}$/.test(u))return E("Usuário inválido.");if(p.length<6)return E("A senha precisa ter pelo menos 6 caracteres.");const {data,error}=await sb.auth.signUp({email:loginEmail(u),password:p,options:{data:{nome_negocio:n,usuario:u}}});if(error)return E(sbErro(error));if(!data.session)return E("Confira o e-mail de confirmação antes de entrar.");try{await sbAbrirSessao()}catch(e){E(sbErro(e))}};
+$("bLogout").onclick=async()=>{desconectar();await sb.auth.signOut();sess=null;ir("vLogin")};
+(async()=>{const {data:{session}}=await sb.auth.getSession();if(session)try{await sbAbrirSessao()}catch(e){console.error(e)}})();
 </script>
 </body>
 </html>
